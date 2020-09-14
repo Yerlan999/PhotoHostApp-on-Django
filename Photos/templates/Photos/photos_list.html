@@ -1,0 +1,138 @@
+{% extends 'BlogApp/base.html' %}
+{% load static %}
+
+
+{% block head %}
+  <title>Our Photos</title>
+  <link rel="stylesheet" type="text/css" href="{% static 'Photos/photo.css' %}">
+ {% endblock head %}
+
+
+{% block content %}
+
+    {% if photos.freshman %}
+      <h1>Freshman Years</h1>
+
+      <div class="row">
+      {% for photo in photos.freshman %}
+
+          <div class="col-lg-4 col-sm-6 mb-4">
+            <div class="card h-100 boxShad">
+              <a href="{% url 'photo-detail' photo.pk %}"><img class="card-img-top" src="{{photo.image.url}}" alt=""></a>
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a href="{% url 'photo-detail' photo.pk %}">{{ photo.title }}</a>
+                </h4>
+                <p class="card-text">{{ photo.description }}</p>
+              </div>
+            </div>
+          </div>
+
+      {% endfor %}
+      </div>
+    {% endif %}
+
+
+
+    {% if photos.sophomore %}
+      <h1>Freshman Sophomore</h1>
+
+      <div class="row">
+      {% for photo in photos.sophomore %}
+
+          <div class="col-lg-4 col-sm-6 mb-4">
+            <div class="card h-100">
+              <a href="{% url 'photo-detail' photo.pk %}"><img class="card-img-top" src="{{photo.image.url}}" alt=""></a>
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a href="{% url 'photo-detail' photo.pk %}">{{ photo.title }}</a>
+                </h4>
+                <p class="card-text">{{ photo.description }}</p>
+              </div>
+            </div>
+          </div>
+
+      {% endfor %}
+      </div>
+    {% endif %}
+
+
+
+    {% if photos.junion %}
+      <h1>Junior Years</h1>
+
+      <div class="row">
+      {% for photo in photos.junion %}
+
+          <div class="col-lg-4 col-sm-6 mb-4">
+            <div class="card h-100">
+              <a href="{% url 'photo-detail' photo.pk %}"><img class="card-img-top" src="{{photo.image.url}}" alt=""></a>
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a href="{% url 'photo-detail' photo.pk %}">{{ photo.title }}</a>
+                </h4>
+                <p class="card-text">{{ photo.description }}</p>
+              </div>
+            </div>
+          </div>
+
+      {% endfor %}
+      </div>
+    {% endif %}
+
+
+
+    {% if photos.senior %}
+      <h1>Senior Years</h1>
+
+      <div class="row">
+      {% for photo in photos.senior %}
+
+          <div class="col-lg-4 col-sm-6 mb-4">
+            <div class="card h-100">
+              <a href="{% url 'photo-detail' photo.pk %}"><img class="card-img-top" src="{{photo.image.url}}" alt=""></a>
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a href="{% url 'photo-detail' photo.pk %}">{{ photo.title }}</a>
+                </h4>
+                <p class="card-text">{{ photo.description }}</p>
+              </div>
+            </div>
+          </div>
+
+      {% endfor %}
+      </div>
+    {% endif %}
+
+
+    {% if photos.post_graduate %}
+      <h1>Post Graduate Years</h1>
+
+      <div class="row">
+      {% for photo in photos.post_graduate %}
+
+          <div class="col-lg-4 col-sm-6 mb-4">
+            <div class="card h-100">
+              <a href="{% url 'photo-detail' photo.pk %}"><img class="card-img-top" src="{{photo.image.url}}" alt=""></a>
+              <div class="card-body">
+                <h4 class="card-title">
+                  <a href="{% url 'photo-detail' photo.pk %}">{{ photo.title }}</a>
+                </h4>
+                <p class="card-text">{{ photo.description }}</p>
+              </div>
+            </div>
+          </div>
+
+      {% endfor %}
+      </div>
+    {% endif %}
+
+
+{% endblock content %}
+
+
+
+{% block for_scripts %}
+    <script type="text/javascript" src="{% static 'Photos/script.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+{% endblock for_scripts %}

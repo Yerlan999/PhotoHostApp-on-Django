@@ -1,0 +1,64 @@
+{% extends 'BlogApp/base.html' %}
+{% load static %}
+
+{% block head %}
+    <title>Photos Details</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'Photos/photo.css' %}">
+{% endblock head %}
+
+
+{% block content %}
+
+    <h1>Description of the Photo</h1>
+    <p>{{ object.image.height }}</p>
+    <img class="photo" src="{{object.image.url}}" style="width:16em;height:16em;">
+    <p>Author: {{ object.author }}</p>
+    <p>Date Taken: {{ object.date_taken|date:"d F Y" }}</p>
+
+
+    {% if request.user == object.author %}
+        <a class="btn btn-warning btn-md" href="{% url 'photo-delete' object.pk %}">Delete</a>
+    {% endif %}
+
+
+    <p>Description of this Photo!</p>
+    <p>Title: {{ object.title }}</p>
+    <p>Description: {{ object.description }}</p>
+
+    {% if request.user == object.author %}
+        <form method="post" class="col-form-label-lg">
+            {% csrf_token %}
+            <input class="form-control" placeholder='{{ object.title }}' type="text" name="title">
+            <input class="form-control" placeholder='{{ object.description }}' type="text" name="description">
+            <button type="submit" class="btn btn-secondary btn-md btn-block">Update</button>
+        </form>
+    {% endif %}
+
+
+    {% if comments %}
+        {% for comment in comments %}
+
+            <div class="">
+                <h5 class="d-inline badge badge-secondary"><small style="font-weight:italic;">{{ comment.author }}: </small> {{ comment.content }}</h6>
+                {% if request.user == comment.author %}
+                    <a class="badge badge-danger badge-sm d-inline" href="#">Delete</a>
+                    <a class="badge badge-info badge-sm d-inline" href="#">Update</a>
+                {% endif %}
+            </div>
+
+        {% endfor %}
+    {% endif %}
+
+
+    <form action="" method="post" class="col-form-label-lg">
+        {% csrf_token %}
+        <input class="form-control" type="text" name="comment" placeholder="Comment here">
+        <button type="submit" class="btn btn-primary btn-md btn-block">Comment</button>
+    </form>
+
+
+{% endblock content %}
+
+{% block for_scripts %}
+    <script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+{% endblock for_scripts %}

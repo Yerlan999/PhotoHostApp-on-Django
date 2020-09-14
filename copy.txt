@@ -1,0 +1,24 @@
+### FOR TEMPLATES ###
+
+{% extends 'Simple/base.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+
+{% block head %}
+{% endblock head %}
+
+{% block content %}
+{% endblock content %}
+
+====================================================================================================
+
+def get_queryset(self):
+        queryset = {
+
+        'comments': Comments.objects.all().filter(image=Photo.objects.get(id=self.kwargs.get('pk'))),
+}
+
+
+class="rounded-circle z-depth-2"
+
+
