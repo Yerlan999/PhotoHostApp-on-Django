@@ -10,31 +10,49 @@
 {% block content %}
 
     <h1>Description of the Photo</h1>
-    <p>{{ object.image.height }}</p>
-    <img class="photo" src="{{object.image.url}}" style="width:16em;height:16em;">
-    <p>Author: {{ object.author }}</p>
-    <p>Date Taken: {{ object.date_taken|date:"d F Y" }}</p>
 
 
-    {% if request.user == object.author %}
-        <a class="btn btn-warning btn-md" href="{% url 'photo-delete' object.pk %}">Delete</a>
-    {% endif %}
+    <div class="card">
+      <h3 class="card-header">{{ object.title }}</h3>
+      <div class="card-body">
+        <button id="90" type="button" class="btn btn-secondary">90</button>
+        <button id="-90" type="button" class="btn btn-secondary">-90</button>
+        <div class="d-flex justify-content-center" style="background-color:#f0efeb">
+            <img class="photo img-thumbnail align-self-center" src="{{object.image.url}}" style="width:16em;height:16em;display:inline-block;">
+        </div>
 
 
-    <p>Description of this Photo!</p>
-    <p>Title: {{ object.title }}</p>
-    <p>Description: {{ object.description }}</p>
+        <div class="media mt-3">
+            <img class="rounded-circle img-thumbnail" src="{{object.author.profile.image.url}}" style="width:5em;height:5em;display:inline-block;">
+            <div class="media-body">
+                <h5 class="mt-0">Author: {{ object.author }}</h5>
+                <h5 class="mt-0">{{ object.date_taken|date:"d F Y" }}</h5>
+            </div>
+        </div>
 
-    {% if request.user == object.author %}
-        <form method="post" class="col-form-label-lg">
-            {% csrf_token %}
-            <input class="form-control" placeholder='{{ object.title }}' type="text" name="title">
-            <input class="form-control" placeholder='{{ object.description }}' type="text" name="description">
-            <button type="submit" class="btn btn-secondary btn-md btn-block">Update</button>
-        </form>
-    {% endif %}
+        <p class="card-text border-top mt-3">{{ object.description }}</p>
 
 
+
+        {% if request.user == object.author %}
+            <a class="btn btn-warning btn-md" href="{% url 'photo-delete' object.pk %}">Delete</a>
+        {% endif %}
+
+
+        {% if request.user == object.author %}
+            <form method="post" class="col-form-label-lg">
+                {% csrf_token %}
+                <input class="form-control" placeholder='{{ object.title }}' type="text" name="title">
+                <input class="form-control" placeholder='{{ object.description }}' type="text" name="description">
+                <button type="submit" class="btn btn-secondary btn-md btn-block">Update</button>
+            </form>
+        {% endif %}
+
+
+      </div>
+    </div>
+
+    <h1>Comments</h1>
     {% if comments %}
         {% for comment in comments %}
 
@@ -60,5 +78,6 @@
 {% endblock content %}
 
 {% block for_scripts %}
-    <script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'Photos/script_photo_detail.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 {% endblock for_scripts %}
