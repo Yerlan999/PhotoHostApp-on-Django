@@ -31,18 +31,21 @@ class ImageFieldView(FormView):
         files = request.FILES.getlist('image')
         if form.is_valid():
             for image in files:
-                try:
-                    pil_image = Image.open(image)
-                    info = pil_image._getexif()
 
+                pil_image = Image.open(image)
+                if pil_image._getexif():
+                    info = pil_image._getexif()
+                else:
+                    continue
+                if info.get(36867):
                     photo_datetime = info[36867]
                     converted_dt = datetime.strptime(photo_datetime, sample)
 
                     image_object = Photo.objects.create(author=request.user, image=image, date_taken=converted_dt)
                     image_object.save()
-                except:
-                    messages.warning(request, "Upload only JPEG images with Date Created!")
-                    return redirect("photo-list")
+                else:
+                    continue
+
             messages.success(request, "Photos have been uploaded!")
             return self.form_valid(form)
         else:

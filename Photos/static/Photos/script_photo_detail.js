@@ -1,14 +1,13 @@
 $(document).ready(function(){
-
+    console.log("Heyyy");
 
     $("#90").click(function(){
-      $('#90').rotate({
-      angle: 0,
-      animateTo:180
-      });
+        console.log("Heyyy");
+      $(".photo").css({'transform': 'rotate(90deg)'});
     });
 
     $("#-90").click(function(){
+        console.log("Heyyy");
       $(".photo").css({'transform': 'rotate(-90deg)'});
     });
 

@@ -11,6 +11,7 @@
 
     <link rel="stylesheet" type="text/css" href="{% static 'BlogApp/main.css' %}">
 
+
     {% block head %}
     {% endblock head %}
     <title>Default Django Title</title>
@@ -28,6 +29,7 @@
               <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'blog-home' %}">News</a>
               <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'blog-about' %}">About</a>
               <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'photo-list' %}">Photos</a>
+              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'users-list' %}">Graduates</a>
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
