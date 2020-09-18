@@ -17,7 +17,7 @@
       <div class="card-body">
         <button id="90" type="button" class="btn btn-secondary">90</button>
         <button id="-90" type="button" class="btn btn-secondary">-90</button>
-        <div class="d-flex justify-content-center" style="background-color:#f0efeb">
+        <div class="d-flex justify-content-center photoDetail" style="background-color:#f0efeb">
             <img class="photo img-thumbnail align-self-center" src="{{object.image.url}}" style="width:16em;height:16em;display:inline-block;">
         </div>
 
@@ -57,7 +57,9 @@
         {% for comment in comments %}
 
             <div class="">
-                <h5 class="d-inline badge badge-secondary"><small style="font-weight:italic;">{{ comment.author }}: </small> {{ comment.content }}</h6>
+                <a href="#com" style="text-decoration:none;">
+                    <h5 class="d-inline badge badge-secondary comment"><small style="font-weight:italic;">{{ comment.author }}: </small> {{ comment.content }}</h6>
+                </a>
                 {{ comment.date_added }}
                 {% if request.user == comment.author %}
                     <a class="badge badge-danger badge-sm d-inline" href="#">Delete</a>
@@ -71,7 +73,7 @@
 
     <form action="" method="post" class="col-form-label-lg">
         {% csrf_token %}
-        <input class="form-control" type="text" name="comment" placeholder="Comment here">
+        <input id="com" class="form-control" type="text" name="comment" placeholder="Comment here">
         <button type="submit" class="btn btn-primary btn-md btn-block">Comment</button>
     </form>
 

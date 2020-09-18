@@ -142,6 +142,4 @@ class PhotoDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 
-class CommentDetailView(DetailView):
-    pass
 

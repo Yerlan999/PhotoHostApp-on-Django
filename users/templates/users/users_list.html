@@ -8,6 +8,14 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'BlogApp/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'users/css/graduates.css' %}">
+
+
+<style type="text/css">
+  body{
+    background-color: #111224;
+  }
+</style>
 
     <title>Graduates</title>
 </head>
@@ -59,24 +67,33 @@
 
 
 <!-- +++++++++++++++++++++++++++++++ MAIN BLOCK +++++++++++++++++++++++++++++++++++++ -->
-    <img class="img-fluid mx-auto d-block" src="{% static 'users/helper_images/cap.png' %}" alt="Oppps">
 
-    <div class="">
-        <h1 class="display-4 text-center">ATT Graduation 2018</h1>
+    <img class="img-fluid mx-auto d-block" src="{% static 'users/helper_images/grad.jpg' %}" alt="Oppps">
+
+    <div>
+        <h1 class="display-4 text-center text-white">ATT Graduation 2018</h1>
 
         {% for user in users %}
-            <div class="d-inline-block m-3">
-                <img class="rounded-circle z-depth-2 mx-auto d-block mb-3" src="{{ user.profile.image.url }}" width="130" height="170">
-                <h2 class="list-group-item list-group-item-action list-group-item-info rounded text-center">{{ user.username }}</h2>
-                <p class="list-group-item disabled text-center shadow">{{ user.profile.nickname }}</p>
+            <div id="mate" class="d-inline-block Grad">
+
+                {# <img class="img" src="{% static 'users/css/frame4.jpg' %}" alt="Iooos"> #}
+                <img class="rounded-circle z-depth-2 mx-auto d-block mb-0 gradImg img-thumbnail" src="{{ user.profile.image.url }}">
+                <br><br><br>
+                <div>
+                  <h1 id="hh" class="list-group-item list-group-item-action list-group-item-dark rounded text-center">{{ user.username }}</h2>
+                  <p id="pp" class="a list-group-item disabled text-center">{{ user.profile.nickname }}</p>
+                </div>
             </div>
         {% endfor %}
     </div>
+
 <!-- +++++++++++++++++++++++++++++++ MAIN BLOCK +++++++++++++++++++++++++++++++++++++ -->
 
-        </div>
-      </div>
+
+    </div>
+  </div>
 </main>
+
 
 
     <!-- Optional JavaScript -->

@@ -1,4 +1,6 @@
 {% extends "BlogApp/base.html" %}
+{% load static %}
+
 {% block content %}
     <article class="media content-section">
         <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}">
@@ -17,5 +19,34 @@
         <p class="article-content">{{ object.content }}</p>
       </div>
     </article>
+
+
+    <h1>Comments</h1>
+    {% if comments %}
+        {% for comment in comments %}
+
+            <div class="">
+                <a href="#com" style="text-decoration:none;">
+                  <h5 class="d-inline badge badge-secondary comment"><small style="font-weight:italic;">{{ comment.author }}: </small> {{ comment.content }}</h6>
+                </a>
+                <small>{{ comment.date_added }}</small>
+                {% if request.user == comment.author %}
+                    <a class="badge badge-danger badge-sm d-inline" href="#">Delete</a>
+                    <a class="badge badge-info badge-sm d-inline" href="#">Update</a>
+                {% endif %}
+            </div>
+
+        {% endfor %}
+    {% endif %}
+
+
+    <form action="" method="post" class="col-form-label-lg">
+        {% csrf_token %}
+        <input id="com" class="form-control" type="text" name="comment" placeholder="Comment here">
+        <button type="submit" class="btn btn-primary btn-md btn-block">Comment</button>
+    </form>
 {% endblock content %}
 
+{% block for_scripts %}
+      <script type="text/javascript" src="{% static 'BlogApp/script_post_detail.js' %}"></script>
+{% endblock for_scripts %}

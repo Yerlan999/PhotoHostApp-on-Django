@@ -1,6 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
+from django.contrib import messages
 from django.views.generic import (
     ListView,
     DetailView,
@@ -8,7 +9,7 @@ from django.views.generic import (
     UpdateView,
     DeleteView,
 )
-from .models import Post
+from .models import Post, CommentsOnPost
 
 # Create your views here.
 
@@ -35,6 +36,35 @@ class UserPostListView(ListView):
 
 class PostDetailView(DetailView):
     model = Post
+
+    def post(self, request, *args, **kwargs):
+
+        this_post = Post.objects.get(pk=kwargs["pk"])
+
+        if request.POST.get("comment"):
+            this_post = Post.objects.get(pk=kwargs["pk"])
+            comment_context = request.POST["comment"]
+            comment = CommentsOnPost.objects.create(
+                author=self.request.user,
+                content=comment_context,
+                post=this_post)
+
+            comment.save()
+
+        messages.success(request, "Post comment have been added!")
+        return redirect('post-detail', **kwargs)
+
+    def test_func(self):
+        post = self.get_object()
+        if self.request.user == post.author:
+            return True
+        return False
+
+    def get_context_data(self, **kwargs):
+        context = super(PostDetailView, self).get_context_data(**kwargs)
+        context['comments'] = CommentsOnPost.objects.all().filter(post=Post.objects.get(id=self.kwargs.get('pk')))
+        return context
+
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post

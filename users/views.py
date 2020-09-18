@@ -12,15 +12,12 @@ def register(request):
     if request.method == "POST":
         form = UserRegisterForm(request.POST)
         if form.is_valid():
-            keyword = form.cleaned_data.get("key_word")
-            if keyword == 'JohnDeere':
-                form.save()
-                username = form.cleaned_data.get("username")
-                messages.success(request, f"Account is created for {username}!")
-                return redirect("login")
-            else:
-                messages.success(request, "Enter proper KeyWord")
-                return render(request, "users/register.html", {"form": form})
+            form.save()
+            username = form.cleaned_data.get("username")
+            messages.success(request, f"Account is created for {username}!")
+            return redirect("login")
+        else:
+            return render(request, "users/register.html", {"form": form})
     else:
         form = UserRegisterForm()
     return render(request, "users/register.html", {"form": form})

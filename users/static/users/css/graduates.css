@@ -1,0 +1,30 @@
+.gradImg{
+    width: 100px;
+    height: 130px;
+    position: relative;
+    top: 60px;
+}
+
+#mate{
+    width: 160px;
+    height: 230px;
+    background-image: url("frame4.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    margin: 50px 10px 50px 10px;
+}
+
+#hh{
+    font-size: 12px;
+    background-color: #f9f3c0;
+}
+
+#pp{
+    font-size: 10px;
+}
+
+.img{
+    width: 150px;
+    height: 250px;
+}
+

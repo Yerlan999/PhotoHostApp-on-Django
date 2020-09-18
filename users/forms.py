@@ -12,6 +12,21 @@ class UserRegisterForm(UserCreationForm):
         model = User
         fields = ["username", "email", "password1", "password2"]
 
+    def clean(self):
+
+        # data from the form is fetched using super function
+        super(UserCreationForm, self).clean()
+
+        # extract the username and text field from the data
+        keyword = self.cleaned_data.get('key_word')
+
+        # conditions to be met for the username length
+        if keyword != 'JohnDeere':
+            self._errors['key_word'] = self.error_class([
+                'Remember the tractor'])
+
+        # return any errors if found
+        return self.cleaned_data
 
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField()
