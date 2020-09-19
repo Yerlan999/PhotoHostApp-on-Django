@@ -60,10 +60,10 @@
                 <a href="#com" style="text-decoration:none;">
                     <h5 class="d-inline badge badge-secondary comment"><small style="font-weight:italic;">{{ comment.author }}: </small> {{ comment.content }}</h6>
                 </a>
-                {{ comment.date_added }}
+                <small>{{ comment.date_added }}</small>
                 {% if request.user == comment.author %}
-                    <a class="badge badge-danger badge-sm d-inline" href="#">Delete</a>
-                    <a class="badge badge-info badge-sm d-inline" href="#">Update</a>
+                    <a class="badge badge-danger badge-sm d-inline" href="{% url 'comment-delete' comment.pk %}">Delete</a>
+                    <a class="badge badge-info badge-sm d-inline" href="{% url 'comment-update' comment.pk %}">Update</a>
                 {% endif %}
             </div>
 

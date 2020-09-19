@@ -142,4 +142,41 @@ class PhotoDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return False
 
 
+class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Comments
+    template_name = 'Photos/comments_delete.html'
+    context_object_name = 'comment'
+
+    def test_func(self):
+        comment = self.get_object()
+        if self.request.user == comment.author:
+            return True
+        return False
+
+    def get_success_url(self, *args, **kwargs):
+        photo = self.get_object().image_id
+        if  kwargs != None:
+            return reverse_lazy('photo-detail', kwargs={'pk': photo})
+
+
+class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    template_name = 'Photos/comments_update.html'
+    model = Comments
+    context_object_name = 'comment'
+    fields = ["content"]
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        comment = self.get_object()
+        if self.request.user == comment.author:
+            return True
+        return False
+
+    def get_success_url(self, *args, **kwargs):
+        photo = self.get_object().image_id
+        if  kwargs != None:
+            return reverse_lazy('photo-detail', kwargs={'pk': photo})
 

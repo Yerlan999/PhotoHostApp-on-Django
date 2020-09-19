@@ -28,6 +28,7 @@ class Photo(models.Model):
             img.thumbnail((500, 500))
             img.save(self.image.path)
 
+
 class Comments(models.Model):
     author = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     image = models.ForeignKey(Photo, on_delete=models.CASCADE)

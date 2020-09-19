@@ -41,6 +41,8 @@ INSTALLED_APPS = [
     'BlogApp.apps.BlogappConfig',
     'Photos.apps.PhotosConfig',
     'crispy_forms',
+    'bootstrap_modal_forms',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [

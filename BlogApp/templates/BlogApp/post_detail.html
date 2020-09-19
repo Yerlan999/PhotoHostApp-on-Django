@@ -31,8 +31,8 @@
                 </a>
                 <small>{{ comment.date_added }}</small>
                 {% if request.user == comment.author %}
-                    <a class="badge badge-danger badge-sm d-inline" href="#">Delete</a>
-                    <a class="badge badge-info badge-sm d-inline" href="#">Update</a>
+                    <a class="badge badge-danger badge-sm d-inline" href="{% url 'commentOnPost-delete' comment.pk %}">Delete</a>
+                    <a class="badge badge-info badge-sm d-inline" href="{% url 'commentOnPost-update' comment.pk %}">Update</a>
                 {% endif %}
             </div>
 

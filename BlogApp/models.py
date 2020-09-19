@@ -29,4 +29,4 @@ class CommentsOnPost(models.Model):
         return self.content
 
     def get_absolute_url(self):
-        return reverse('comment-detail', kwargs={'pk': self.pk})
+        return reverse('commentPost-detail', kwargs={'pk': self.pk})

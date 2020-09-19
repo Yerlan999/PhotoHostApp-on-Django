@@ -1,0 +1,14 @@
+{% extends 'BlogApp/base.html' %}
+
+{% block head %}
+{% endblock head %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <input type="submit" value="Submit">
+</form>
+{% endblock content %}
+
+{% block for_scripts %}
+{% endblock for_scripts %}
