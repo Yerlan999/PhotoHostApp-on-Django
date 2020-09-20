@@ -108,6 +108,21 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     template_name = 'BlogApp/comments_delete.html'
     context_object_name = 'comment'
 
+
+    def post(self, *args, **kwargs):
+
+        post = self.get_object().post_id
+        comment_id = kwargs.get('pk')
+
+        deleted_comment = CommentsOnPost.objects.get(pk=comment_id)
+        deleted_comment.delete()
+
+        return redirect('post-detail', pk=post)
+
+
+
+
+
     def test_func(self):
         comment = self.get_object()
         if self.request.user == comment.author:
@@ -125,6 +140,20 @@ class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = CommentsOnPost
     context_object_name = 'comment'
     fields = ["content"]
+
+
+    def post(self, *args, **kwargs):
+
+        post = self.get_object().post_id
+        comment_id = kwargs.get('pk')
+        comments_new_content = self.request.POST.get('newcontent')
+
+        updated_comment = CommentsOnPost.objects.get(pk=comment_id)
+        updated_comment.content = comments_new_content
+        updated_comment.save()
+
+        return redirect('post-detail', pk=post)
+
 
     def form_valid(self, form):
         form.instance.author = self.request.user

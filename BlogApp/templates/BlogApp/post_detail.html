@@ -31,8 +31,67 @@
                 </a>
                 <small>{{ comment.date_added }}</small>
                 {% if request.user == comment.author %}
-                    <a class="badge badge-danger badge-sm d-inline" href="{% url 'commentOnPost-delete' comment.pk %}">Delete</a>
-                    <a class="badge badge-info badge-sm d-inline" href="{% url 'commentOnPost-update' comment.pk %}">Update</a>
+
+                    <!-- DELETE MODAL -->
+                    <a class="badge badge-danger badge-sm d-inline" data-toggle="modal" href="#exampleModal2">Delete</a>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModal2Label" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModal3Label">Delete your comment</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">×</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+
+                            <form method="post" action="{% url 'commentOnPost-delete' comment.pk %}">
+                                {% csrf_token %}
+                                <h5 class="d-inline badge badge-secondary comment"><small style="font-weight:italic;">{{ comment.author }}: </small> {{ comment.content }}</h6>
+
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <input class="btn btn-danger" type="submit" value="Delete">
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                    <!-- UPDATE MODAL -->
+                    <a class="badge badge-info badge-sm d-inline" data-toggle="modal" href="#exampleModal3">Update</a>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModal3Label">Update your comment</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">×</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+
+                            <form method="post" action="{% url 'commentOnPost-update' comment.pk %}">
+                                {% csrf_token %}
+                                <textarea class="form-control form-control-lg" type="text-area" name="newcontent">{{ comment.content }}</textarea>
+
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                            <input class="btn btn-primary" type="submit" value="Update">
+                            </form>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
                 {% endif %}
             </div>
 
