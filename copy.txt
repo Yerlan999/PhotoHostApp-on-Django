@@ -10,9 +10,9 @@
 {% block content %}
 {% endblock content %}
 
-<form action="POST">
+<form method="POST" action="" enctype="multipart/form-data">
     {% csrf_token %}
-    {{ form }}
+    {{ form|crispy }}
     <input type="submit" value="Submit">
 </form>
 
@@ -21,30 +21,38 @@
 
 ====================================================================================================
 
-def get_queryset(self):
-        queryset = {
-
-        'comments': Comments.objects.all().filter(image=Photo.objects.get(id=self.kwargs.get('pk'))),
-}
-
-
-class="rounded-circle z-depth-2"
 
 =============================================================================================================
 
 
 ### FOR MODALS AJAX ###
 
+<!-- DELETE MODAL -->
+<!-- USE A or BUTTON or ANY ELEMENT -->
+<a class="badge badge-danger badge-sm d-inline" data-toggle="modal" href="#exampleModal2">Delete</a>
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#exampleModal2">Open Modal</button>
+<p data-toggle="modal" data-target="#exampleModal2">Open Modal</p>
 
 
-<head>
-    <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
-</head>
+<!-- Modal -->
+<div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModal2Label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModal3Label">Delete your comment</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
 
-<body>
-    <script src="{% static 'assets/js/bootstrap.js' %}"></script>
-    <script src="{% static 'assets/js/jquery.js' %}"></script>
-    <script src="{% static 'js/jquery.bootstrap.modal.forms.js' %}"></script>
-    <!-- You can alternatively load the minified version -->
-    <script src="{% static 'js/jquery.bootstrap.modal.forms.min.js' %}"></script>
-</body>
+        <!-- CODE HERE -->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+

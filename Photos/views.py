@@ -22,13 +22,19 @@ sample = "%Y:%m:%d %H:%M:%S"
 
 class ImageFieldView(FormView):
     form_class = PhotoForm
-    template_name = 'Photos/photo_add.html'  # Replace with your template.
+    template_name = 'Photos/photos_list.html'  # Replace with your template.
     success_url = reverse_lazy('photo-list')  # Replace with your URL or reverse().
 
     def post(self, request, *args, **kwargs):
         form_class = self.get_form_class()
         form = self.get_form(form_class)
         files = request.FILES.getlist('image')
+
+        if len(files) > 1:
+            message = 'Photos have been uploaded!'
+        else:
+            message = 'Photo has been uploaded!'
+
         if form.is_valid():
             for image in files:
 
@@ -46,7 +52,7 @@ class ImageFieldView(FormView):
                 else:
                     continue
 
-            messages.success(request, "Photos have been uploaded!")
+            messages.success(request, message)
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
@@ -93,16 +99,19 @@ class PhotoDetailView(LoginRequiredMixin, DetailView):
             this_photo.description = new_description
             this_photo.title = new_title
             this_photo.save()
+            message = 'Description and Title of the photo has been updated'
 
         elif request.POST.get("title"):
             new_title = request.POST["title"]
             this_photo.title = new_title
             this_photo.save()
+            message = 'Title of the photo has been updated'
 
         elif request.POST.get("description"):
             new_description = request.POST["description"]
             this_photo.description = new_description
             this_photo.save()
+            message = 'Description of the photo has been updated'
 
         if request.POST.get("comment"):
             this_photo = Photo.objects.get(pk=kwargs["pk"])
@@ -113,8 +122,10 @@ class PhotoDetailView(LoginRequiredMixin, DetailView):
                 image=this_photo)
 
             comment.save()
+            message = 'Comment on the photo has been added'
 
-        messages.success(request, "Photos details have been updated!")
+
+        messages.success(request, message)
         return redirect('photo-detail', **kwargs)
 
     def test_func(self):
