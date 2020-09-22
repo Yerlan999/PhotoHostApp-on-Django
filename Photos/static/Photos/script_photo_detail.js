@@ -8,4 +8,11 @@ $(document).ready(function(){
          $('#com').focus()
     });
 
+
+    $('#90').click(function(){
+
+        $('img').first().toggleClass('flip')
+
+    });
+
 });

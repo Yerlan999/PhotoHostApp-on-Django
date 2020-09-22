@@ -13,7 +13,7 @@
 
 <style type="text/css">
   body{
-    background-color: #111224;
+    background-color: #e8dcce;
   }
 </style>
 
@@ -70,12 +70,11 @@
     <img class="img-fluid mx-auto d-block" src="{% static 'users/helper_images/grad.jpg' %}" alt="Oppps">
 
     <div>
-        <h1 class="display-4 text-center text-white">ATT Graduation 2018</h1>
+        <h1 class="display-4 mt-3 text-center text-black" style="text-shadow: 4px 0px 6px rgba(56,24,15,0.36);font-weight:400;">ATT Graduation 2018</h1>
 
         {% for user in users %}
             <div id="mate" class="d-inline-block Grad">
 
-                {# <img class="img" src="{% static 'users/css/frame4.jpg' %}" alt="Iooos"> #}
                 <img class="rounded-circle z-depth-2 mx-auto d-block mb-0 gradImg img-thumbnail" src="{{ user.profile.image.url }}">
                 <br><br><br>
                 <div>
@@ -85,6 +84,18 @@
             </div>
         {% endfor %}
     </div>
+
+
+    <div id="mate" class="d-inline-block Grad">
+
+        <img class="rounded-circle z-depth-2 mx-auto d-block mb-0 gradImg img-thumbnail" src="{% static 'users/helper_images/djadich.jpg' %}">
+        <br><br><br>
+        <div>
+          <h1 id="hh" class="list-group-item list-group-item-action list-group-item-dark rounded text-center mb-0">Advisor: Kairat Djadigerovich</h2>
+          <h1 id="pp" class="a list-group-item disabled rounded text-center mt-0">Only in English "Djadich"</h1>
+        </div>
+    </div>
+
 
 <!-- +++++++++++++++++++++++++++++++ MAIN BLOCK +++++++++++++++++++++++++++++++++++++ -->
 

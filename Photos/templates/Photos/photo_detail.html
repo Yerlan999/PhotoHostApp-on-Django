@@ -14,12 +14,12 @@
     <div class="card">
       <h3 class="card-header">{{ object.title }}</h3>
       <div class="card-body">
-        <button id="90" type="button" class="btn btn-secondary">+90</button>
-        <button id="-90" type="button" class="btn btn-secondary">-90</button>
+
         <div class="d-flex justify-content-center" style="background-color:#f0efeb">
             <img class="card-img-top img-thumbnail align-self-center" src="{{object.image.url}}" style="display:inline-block;">
         </div>
 
+        <button id="90" type="button" class="mt-3 btn btn-outline-info btn-block">Rotate over</button>
 
         <div class="media mt-3">
             <img class="rounded-circle img-thumbnail" src="{{object.author.profile.image.url}}" style="width:5em;height:5em;display:inline-block;">
@@ -52,7 +52,7 @@
       </div>
     </div>
 
-    <h1>Comments</h1>
+    <h1 class="mt-4">Comments</h1>
     {% if comments %}
         {% for comment in comments %}
 

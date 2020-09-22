@@ -12,37 +12,13 @@ body{
   0 100px 80px rgba(0, 0, 0, 0.12);
 }
 
-/*
-.followMeBar {
-  position: relative;
-  z-index: 1;
+
+img:first-of-type {
+  -moz-transition: transform 1s;
+  -webkit-transition: transform 1s;
+  transition: transform 1s;
 }
 
-.followMeBar.fixed {
-  position: fixed;
-  top: 25;
-  width: 100%;
-  box-sizing: border-box;
-  z-index: 0;
+.flip {
+  transform: rotate(-180deg);
 }
-
-.followMeBar.fixed.absolute {
-  position: absolute;
-}
-
-*/
-
-
-
-
-
-
-
-
-/*.photoDetail{
-    background-image: url("table.jpeg");
-    background-repeat: repeat-x;
-    background-size: contain;
-}*/
-
-
