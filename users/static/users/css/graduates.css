@@ -14,13 +14,31 @@
     margin: 50px 10px 50px 10px;
 }
 
+#prof{
+    width: 160px;
+    height: 230px;
+    background-image: url("frame4prof.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    margin: 50px 10px 50px 10px;
+}
+
+
+#cap{
+    width: 160px;
+    height: 230px;
+    background-image: url("frame4cap.jpg");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    margin: 50px 10px 50px 10px;
+}
 #hh{
-    font-size: 12px;
+    font-size: 14px;
     background-color: #f9f3c0;
 }
 
 #pp{
-    font-size: 10px;
+    font-size: 12px;
 }
 
 .img{

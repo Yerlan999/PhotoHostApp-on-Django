@@ -50,3 +50,4 @@ class UserListView(ListView):
     model = User
     template_name = 'users/users_list.html'
     context_object_name = 'users'
+    ordering = ['username']

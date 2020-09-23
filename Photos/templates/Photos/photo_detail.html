@@ -4,6 +4,16 @@
 {% block head %}
     <title>Photos Details</title>
     <link rel="stylesheet" type="text/css" href="{% static 'Photos/photo.css' %}">
+
+
+<style>
+h5.comment:hover{
+  cursor: pointer;
+}
+</style>
+
+
+
 {% endblock head %}
 
 
@@ -35,7 +45,7 @@
 
 
         {% if request.user == object.author %}
-            <a class="btn btn-warning btn-md" href="{% url 'photo-delete' object.pk %}">Delete</a>
+            <a class="btn btn-danger btn-md" href="{% url 'photo-delete' object.pk %}">Delete</a>
         {% endif %}
 
 
@@ -57,10 +67,19 @@
         {% for comment in comments %}
 
             <div class="">
-                <a href="#com" style="text-decoration:none;">
-                    <h5 class="d-inline badge badge-secondary comment"><small style="font-weight:italic;">{{ comment.author }}: </small> {{ comment.content }}</h6>
-                </a>
-                <small>{{ comment.date_added }}</small>
+
+
+                <div class="media border rounded p-2 mb-4" style="background-color:#e9ecef">
+                  <div class="media-body">
+                    <div class="d-flex justify-content-between">
+                      <h5 class="mb-1 d-inline badge badge-secondary comment" style="font-size:15px;">{{ comment.author }}</h5>
+                      <small class="ml-4 d-inline">{{ comment.date_added|date:"F d, Y H:i" }}</small>
+                    </div>
+
+                    <div class="container">
+                      <p class="border-top">{{ comment.content }}</p>
+                    </div>
+                    <div class="justify-content-start">
                 {% if request.user == comment.author %}
 
 
@@ -81,9 +100,23 @@
 
                             <form method="post" action="{% url 'comment-delete' comment.pk %}">
                                 {% csrf_token %}
-                                <h5 class="d-inline badge badge-secondary comment"><small style="font-weight:italic;">{{ comment.author }}: </small> {{ comment.content }}</h6>
+                                <div class="">
+
+
+                                <div class="media border rounded p-2 mb-4" style="background-color:#e9ecef">
+                                  <div class="media-body">
+                                    <div class="d-flex justify-content-between">
+                                      <h5 class="mb-1 d-inline badge badge-secondary comment" style="font-size:15px;">{{ comment.author }}</h5>
+                                      <small class="ml-4 d-inline">{{ comment.date_added|date:"F d, Y H:i" }}</small>
+                                    </div>
+
+                                    <div class="container">
+                                      <p class="border-top">{{ comment.content }}</p>
+                                    </div>
+                                </div>
 
                           </div>
+                        </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
                             <input class="btn btn-danger" type="submit" value="Delete">
@@ -92,6 +125,7 @@
                         </div>
                       </div>
                     </div>
+                  </div>
 
 
                     <!-- UPDATE MODAL -->
@@ -126,6 +160,9 @@
 
                 {% endif %}
             </div>
+          </div>
+        </div>
+    </div>
 
         {% endfor %}
     {% endif %}
@@ -133,7 +170,7 @@
 
     <form action="" method="post" class="col-form-label-lg">
         {% csrf_token %}
-        <input id="com" class="form-control" type="text" name="comment" placeholder="Comment here">
+        <textarea class="form-control" name="comment" cols="30" rows="2" placeholder="Comment here"></textarea>
         <button type="submit" class="btn btn-primary btn-md btn-block">Comment</button>
     </form>
 
@@ -141,6 +178,6 @@
 {% endblock content %}
 
 {% block for_scripts %}
-    <script type="text/javascript" src="{% static 'Photos/script_photo_detail.js' %}"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'Photos/script_photo_detail.js' %}"></script>
 {% endblock for_scripts %}

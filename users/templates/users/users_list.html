@@ -12,8 +12,16 @@
 
 
 <style type="text/css">
+
   body{
-    background-color: #e8dcce;
+    background-color: #f1e1c8;
+  }
+
+  #hh{
+    font-size: 14px;
+  }
+  #pp{
+      font-size: 12px;
   }
 </style>
 
@@ -72,30 +80,46 @@
     <div>
         <h1 class="display-4 mt-3 text-center text-black" style="text-shadow: 4px 0px 6px rgba(56,24,15,0.36);font-weight:400;">ATT Graduation 2018</h1>
 
-        {% for user in users %}
-            <div id="mate" class="d-inline-block Grad">
 
-                <img class="rounded-circle z-depth-2 mx-auto d-block mb-0 gradImg img-thumbnail" src="{{ user.profile.image.url }}">
-                <br><br><br>
-                <div>
-                  <h1 id="hh" class="list-group-item list-group-item-action list-group-item-dark rounded text-center mb-0">{{ user.username }}</h2>
-                  <h1 id="pp" class="a list-group-item disabled rounded text-center mt-0">{{ user.profile.nickname }}</h1>
-                </div>
+        <div class="d-flex justify-content-center mb-3">
+        <div id="prof" class="d-inline-block Grad">
+
+            <img class="rounded-circle z-depth-2 mx-auto d-block mb-0 gradImg img-thumbnail" src="{% static 'users/helper_images/djadich.jpg' %}">
+            <br><br><br>
+            <div>
+              <h1 id="hh" class="list-group-item list-group-item-action list-group-item-dark rounded text-center mb-0" style="background-color:#aacc00;">Advisor: Kairat Djadigerovich</h2>
+              <h1 id="pp" class="a list-group-item disabled rounded text-center mt-0">Only in English "Djadich"</h1>
             </div>
+        </div>
+        </div>
+
+
+        {% for user in users %}
+            {% if user.profile.cap %}
+              <div id="cap" class="d-inline-block Grad">
+
+
+                  <img class="rounded-circle z-depth-2 mx-auto d-block mb-0 gradImg" style="border:solid #111224 1px;" src="{{ user.profile.image.url }}">
+                  <br><br><br>
+                  <div>
+                    <h1 id="hh" class="list-group-item list-group-item-action list-group-item-dark rounded text-center mb-0">{{ user.username }}</h2>
+                    <h1 id="pp" class="a list-group-item disabled rounded text-center mt-0">{{ user.profile.nickname }}</h1>
+                  </div>
+              </div>
+            {% else %}
+              <div id="mate" class="d-inline-block Grad">
+
+
+                  <img class="rounded-circle z-depth-2 mx-auto d-block mb-0 gradImg" style="border:solid #111224 1px;" src="{{ user.profile.image.url }}">
+                  <br><br><br>
+                  <div>
+                    <h1 id="hh" class="list-group-item list-group-item-action list-group-item-dark rounded text-center mb-0">{{ user.username }}</h2>
+                    <h1 id="pp" class="a list-group-item disabled rounded text-center mt-0">{{ user.profile.nickname }}</h1>
+                  </div>
+              </div>
+            {% endif %}
         {% endfor %}
     </div>
-
-
-    <div id="mate" class="d-inline-block Grad">
-
-        <img class="rounded-circle z-depth-2 mx-auto d-block mb-0 gradImg img-thumbnail" src="{% static 'users/helper_images/djadich.jpg' %}">
-        <br><br><br>
-        <div>
-          <h1 id="hh" class="list-group-item list-group-item-action list-group-item-dark rounded text-center mb-0">Advisor: Kairat Djadigerovich</h2>
-          <h1 id="pp" class="a list-group-item disabled rounded text-center mt-0">Only in English "Djadich"</h1>
-        </div>
-    </div>
-
 
 <!-- +++++++++++++++++++++++++++++++ MAIN BLOCK +++++++++++++++++++++++++++++++++++++ -->
 

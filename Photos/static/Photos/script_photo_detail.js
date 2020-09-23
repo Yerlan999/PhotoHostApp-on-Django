@@ -1,12 +1,14 @@
 $(document).ready(function(){
+    console.log("Hi")
+    $('h5.comment').click(function(){
+        console.log($(this))
+        var name = $(this).text()
+        var nameLog = name.concat(",");
 
-    $('.comment').click(function(){
-        let name = $(this).children().text()
-        let nameLog = name.replace(":", ",");
-
-        $('#com').attr('value', nameLog)
-         $('#com').focus()
+        $('textarea').eq(1).text(nameLog)
+         $('textarea').focus()
     });
+
 
 
     $('#90').click(function(){
@@ -16,3 +18,5 @@ $(document).ready(function(){
     });
 
 });
+
+

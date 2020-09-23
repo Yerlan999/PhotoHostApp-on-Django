@@ -1,11 +1,12 @@
 $(document).ready(function(){
 
-    $('.comment').click(function(){
-        let name = $(this).children().text()
-        let nameLog = name.replace(":", ",");
+    $('h5.comment').click(function(){
 
-        $('#com').attr('value', nameLog)
-         $('#com').focus()
+        var name = $(this).text()
+        var nameLog = name.concat(",");
+
+        $('textarea').eq(1).text(nameLog)
+         $('textarea').focus()
     });
 
 });

@@ -24,8 +24,8 @@ class Photo(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         img = Image.open(self.image.path)
-        if img.height > 400 or img.width > 700:
-            img.thumbnail((500, 500))
+        if img.height > 300 or img.width > 500:
+            img.thumbnail((500, 300))
             img.save(self.image.path)
 
 
