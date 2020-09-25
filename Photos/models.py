@@ -10,8 +10,8 @@ class Photo(models.Model):
     author = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     image = models.ImageField(upload_to='photos')
     date_taken = models.DateTimeField(null=True, blank=True)
-    description = models.TextField(blank=True, default="Description")
-    title = models.CharField(max_length=100, null=True, blank=True, default="Title")
+    description = models.TextField(blank=True, default="Описание")
+    title = models.CharField(max_length=100, null=True, blank=True, default="Заголовок")
 
     def __str__(self):
         return self.title + " " + self.description

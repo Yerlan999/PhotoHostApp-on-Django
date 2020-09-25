@@ -9,39 +9,39 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'BlogApp/main.css' %}">
 
-    <title>Our Photos</title>
+    <title>Наши Фото</title>
     <link rel="stylesheet" type="text/css" href="{% static 'Photos/photo.css' %}">
 </head>
 <body>
     <header class="site-header">
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-steel" style="background-color:#aacc00;">
         <div class="container">
-          <a class="navbar-brand mr-4" href="{% url 'blog-home' %}">GroupMates Blog</a>
+          <a class="navbar-brand mr-4" href="{% url 'blog-home' %}">Главная</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'blog-home' %}">News</a>
-              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'blog-about' %}">About</a>
-              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'photo-list' %}">Photos</a>
-              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'users-list' %}">Graduates</a>
+              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'blog-home' %}">Новости</a>
+              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'blog-about' %}">Инфо</a>
+              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'photo-list' %}">Наши Фото</a>
+              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'users-list' %}">Выпускники</a>
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
                 {% if user.is_authenticated %}
-                <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'post-create' %}">New Post</a>
+                <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'post-create' %}">Добавить новость</a>
 
 
                 <!-- UPLOAD MODAL -->
-                <a class="nav-item nav-link" style="color:#ffffff" data-toggle="modal" data-backdrop="false" href="#exampleModal3">Upload Photos</a>
+                <a class="nav-item nav-link" style="color:#ffffff" data-toggle="modal" data-backdrop="false" href="#exampleModal3">Довавить Фото</a>
 
                 <!-- Modal -->
                 <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label" aria-hidden="true">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
                       <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModal3Label">Upload some photos</h5>
+                        <h5 class="modal-title" id="exampleModal3Label">Загрузить Фотографии</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">×</span>
                         </button>
@@ -50,7 +50,7 @@
 
                         <form method="post" enctype="multipart/form-data" action="{% url 'photo-add' %}">
                             {% csrf_token %}
-                            <h5 class="alert alert-warning">Photos should be in jpeg format only</h5>
+                            <h5 class="alert alert-warning">Фотки должны быть фотмата jpg/jpeg!</h5>
                             <input id="inn" class="form-control-file" type="file" name="image" accept="image/*" multiple required>
 
                             <div class="d-flex justify-content-center mt-3">
@@ -63,8 +63,8 @@
 
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                        <input id="spinBut" class="btn btn-primary" type="submit" value="Upload">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                        <input id="spinBut" class="btn btn-primary" type="submit" value="Загрузить">
                         </form>
                       </div>
                     </div>
@@ -73,12 +73,12 @@
 
 
 
-                <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'profile' %}">Your Profile</a>
-                <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'logout' %}">Log Out</a>
+                <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'profile' %}">Мой Профиль</a>
+                <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'logout' %}">Выйти</a>
 
                 {% else %}
-              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'login' %}">Login</a>
-              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'register' %}">Register</a>
+              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'login' %}">Зайти</a>
+              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'register' %}">Регистрация</a>
                 {% endif %}
             </div>
           </div>
@@ -105,7 +105,7 @@
 
       <div class="card mb-4 p-0 shadow-lg" style="background-color:#bfd200;position:sticky;top:50px;z-index:1;">
         <div class="card-body p-1">
-          <h1 class="pl-4" style="color:#fff;">Freshman Years</h1>
+          <h1 class="pl-4" style="color:#fff;">Перый Курс</h1>
         </div>
       </div>
 
@@ -120,7 +120,7 @@
                   <a href="{% url 'photo-detail' photo.pk %}">{{ photo.title }}</a>
                 </h4>
                 <p class="card-text">{{ photo.description }}</p>
-                <p class="article-content border-top mb-0"><a href="{% url 'photo-detail' photo.id %}">Comments: {{ photo.comments_set.count }}</a></p>
+                <p class="article-content border-top mb-0"><a href="{% url 'photo-detail' photo.id %}">Комментарии: {{ photo.comments_set.count }}</a></p>
 
               </div>
             </div>
@@ -136,7 +136,7 @@
 
       <div class="card mt-5 mb-4 p-0 shadow-lg" style="background-color:#bfd200;position:sticky;top:50px;z-index:2;">
         <div class="card-body p-1">
-          <h1 class="pl-4" style="color:#fff;">Sophomore Years</h1>
+          <h1 class="pl-4" style="color:#fff;">Второй Курс</h1>
         </div>
       </div>
 
@@ -153,7 +153,7 @@
                   <a href="{% url 'photo-detail' photo.pk %}">{{ photo.title }}</a>
                 </h4>
                 <p class="card-text">{{ photo.description }}</p>
-                <p class="article-content border-top mb-0"><a href="{% url 'photo-detail' photo.id %}">Comments: {{ photo.comments_set.count }}</a></p>
+                <p class="article-content border-top mb-0"><a href="{% url 'photo-detail' photo.id %}">Комментарии: {{ photo.comments_set.count }}</a></p>
               </div>
             </div>
           </div>
@@ -167,7 +167,7 @@
 
       <div class="card mt-5 mb-4 p-0 shadow-lg" style="background-color:#bfd200;position:sticky;top:50px;z-index:3;">
         <div class="card-body p-1">
-          <h1 class="pl-4" style="color:#fff;">Junior Years</h1>
+          <h1 class="pl-4" style="color:#fff;">Третий Курс</h1>
         </div>
       </div>
 
@@ -182,7 +182,7 @@
                   <a href="{% url 'photo-detail' photo.pk %}">{{ photo.title }}</a>
                 </h4>
                 <p class="card-text">{{ photo.description }}</p>
-                <p class="article-content border-top mb-0"><a href="{% url 'photo-detail' photo.id %}">Comments: {{ photo.comments_set.count }}</a></p>
+                <p class="article-content border-top mb-0"><a href="{% url 'photo-detail' photo.id %}">Комментарии: {{ photo.comments_set.count }}</a></p>
               </div>
             </div>
           </div>
@@ -197,7 +197,7 @@
 
       <div class="card mt-5 mb-4 p-0 shadow-lg" style="background-color:#bfd200;position:sticky;top:50px;z-index:4;">
         <div class="card-body p-1">
-          <h1 class="pl-4" style="color:#fff;">Senoir Years</h1>
+          <h1 class="pl-4" style="color:#fff;">Четвертый Курс</h1>
         </div>
       </div>
 
@@ -212,7 +212,7 @@
                   <a href="{% url 'photo-detail' photo.pk %}">{{ photo.title }}</a>
                 </h4>
                 <p class="card-text">{{ photo.description }}</p>
-                <p class="article-content border-top mb-0"><a href="{% url 'photo-detail' photo.id %}">Comments: {{ photo.comments_set.count }}</a></p>
+                <p class="article-content border-top mb-0"><a href="{% url 'photo-detail' photo.id %}">Комментарии: {{ photo.comments_set.count }}</a></p>
               </div>
             </div>
           </div>
@@ -226,7 +226,7 @@
 
       <div class="card mt-5 mb-4 p-0 shadow-lg" style="background-color:#bfd200;position:sticky;top:50px;z-index:5;">
         <div class="card-body p-1">
-          <h1 class="pl-4" style="color:#fff;">Post Graduate Years</h1>
+          <h1 class="pl-4" style="color:#fff;">После Выпуска</h1>
         </div>
       </div>
 
@@ -241,7 +241,7 @@
                   <a href="{% url 'photo-detail' photo.pk %}">{{ photo.title }}</a>
                 </h4>
                 <p class="card-text">{{ photo.description }}</p>
-                <p class="article-content border-top mb-0"><a href="{% url 'photo-detail' photo.id %}">Comments: {{ photo.comments_set.count }}</a></p>
+                <p class="article-content border-top mb-0"><a href="{% url 'photo-detail' photo.id %}">Комментарии: {{ photo.comments_set.count }}</a></p>
               </div>
             </div>
           </div>

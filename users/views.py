@@ -1,12 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm, CustomUserLoginForm
 from django.views.generic import ListView
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-
+from django.contrib.auth import views as auth_views
 # Create your views here.
+
 
 def register(request):
     if request.method == "POST":
@@ -14,7 +15,7 @@ def register(request):
         if form.is_valid():
             form.save()
             username = form.cleaned_data.get("username")
-            messages.success(request, f"Account is created for {username}!")
+            messages.success(request, f"Аккаунт был успешно создан для {username}!")
             return redirect("login")
         else:
             return render(request, "users/register.html", {"form": form})
@@ -32,7 +33,7 @@ def profile(request):
         if p_form.is_valid() and u_form.is_valid():
             p_form.save()
             u_form.save()
-            messages.success(request, f"Your profile has been updated!")
+            messages.success(request, f"Профиль был успешно обновлен!")
             return redirect("profile")
 
     else:
@@ -51,3 +52,7 @@ class UserListView(ListView):
     template_name = 'users/users_list.html'
     context_object_name = 'users'
     ordering = ['username']
+
+
+class CustomUserLoginView(auth_views.LoginView):
+    form_class = CustomUserLoginForm

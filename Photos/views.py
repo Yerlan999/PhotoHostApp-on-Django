@@ -31,9 +31,9 @@ class ImageFieldView(FormView):
         files = request.FILES.getlist('image')
 
         if len(files) > 1:
-            message = 'Photos have been uploaded!'
+            message = 'Фотографии были успешно загружены!'
         else:
-            message = 'Photo has been uploaded!'
+            message = 'Фотография была успешна загружена!'
 
         if form.is_valid():
             for image in files:
@@ -99,19 +99,19 @@ class PhotoDetailView(LoginRequiredMixin, DetailView):
             this_photo.description = new_description
             this_photo.title = new_title
             this_photo.save()
-            message = 'Description and Title of the photo has been updated'
+            message = 'Заголовок и Описание фотографии былы успешно обновлены!'
 
         elif request.POST.get("title"):
             new_title = request.POST["title"]
             this_photo.title = new_title
             this_photo.save()
-            message = 'Title of the photo has been updated'
+            message = 'Заголовок фотографии был успешно обновлен!'
 
         elif request.POST.get("description"):
             new_description = request.POST["description"]
             this_photo.description = new_description
             this_photo.save()
-            message = 'Description of the photo has been updated'
+            message = 'Описание фотографии было успешно обновлено!'
 
         if request.POST.get("comment"):
             this_photo = Photo.objects.get(pk=kwargs["pk"])
@@ -122,7 +122,7 @@ class PhotoDetailView(LoginRequiredMixin, DetailView):
                 image=this_photo)
 
             comment.save()
-            message = 'Comment on the photo has been added'
+            message = 'Комментарии к фотографии был успешно добавлен!'
 
 
         messages.success(request, message)

@@ -25,33 +25,33 @@
   }
 </style>
 
-    <title>Graduates</title>
+    <title>Выпускники</title>
 </head>
 <body>
     <header class="site-header">
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-steel" style="background-color:#aacc00;">
         <div class="container">
-          <a class="navbar-brand mr-4" href="{% url 'blog-home' %}">GroupMates Blog</a>
+          <a class="navbar-brand mr-4" href="{% url 'blog-home' %}">Главная</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
-              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'blog-home' %}">News</a>
-              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'blog-about' %}">About</a>
-              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'photo-list' %}">Photos</a>
-              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'users-list' %}">Graduates</a>
+              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'blog-home' %}">Новости</a>
+              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'blog-about' %}">Инфо</a>
+              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'photo-list' %}">Наши Фото</a>
+              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'users-list' %}">Выпускники</a>
             </div>
             <!-- Navbar Right Side -->
             <div class="navbar-nav">
                 {% if user.is_authenticated %}
-                <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'post-create' %}">New Post</a>
-                <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'profile' %}">Your Profile</a>
-                <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'logout' %}">Log Out</a>
+                <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'post-create' %}">Добавить новость</a>
+                <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'profile' %}">Мой Профиль</a>
+                <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'logout' %}">Выйти</a>
 
                 {% else %}
-              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'login' %}">Login</a>
-              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'register' %}">Register</a>
+              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'login' %}">Зайти</a>
+              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'register' %}">Регистрация</a>
                 {% endif %}
             </div>
           </div>
@@ -78,7 +78,7 @@
     <img class="img-fluid mx-auto d-block" src="{% static 'users/helper_images/grad.jpg' %}" alt="Oppps">
 
     <div>
-        <h1 class="display-4 mt-3 text-center text-black" style="text-shadow: 4px 0px 6px rgba(56,24,15,0.36);font-weight:400;">ATT Graduation 2018</h1>
+        <h1 class="display-4 mt-3 text-center text-black" style="text-shadow: 4px 0px 6px rgba(56,24,15,0.36);font-weight:400;">Выпуск 2019 АТТ-401</h1>
 
 
         <div class="d-flex justify-content-center mb-3">
@@ -87,8 +87,8 @@
             <img class="rounded-circle z-depth-2 mx-auto d-block mb-0 gradImg img-thumbnail" src="{% static 'users/helper_images/djadich.jpg' %}">
             <br><br><br>
             <div>
-              <h1 id="hh" class="list-group-item list-group-item-action list-group-item-dark rounded text-center mb-0" style="background-color:#aacc00;">Advisor: Kairat Djadigerovich</h2>
-              <h1 id="pp" class="a list-group-item disabled rounded text-center mt-0">Only in English "Djadich"</h1>
+              <h1 id="hh" class="list-group-item list-group-item-action list-group-item-dark rounded text-center mb-0" style="background-color:#aacc00;">Куратор: Кайрат Джадыгерович</h2>
+              <h1 id="pp" class="a list-group-item disabled rounded text-center mt-0">Only in English "Джадыч"</h1>
             </div>
         </div>
         </div>

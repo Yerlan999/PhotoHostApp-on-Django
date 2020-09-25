@@ -19,8 +19,8 @@ h5.comment:hover{
           <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
             {% if object.author == user %}
             <div>
-                <a class="btn btn-info btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Update</a>
-                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Delete</a>
+                <a class="btn btn-info btn-sm mt-1 mb-1" href="{% url 'post-update' object.id %}">Изменить</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'post-delete' object.id %}">Удалить</a>
             </div>
             {% endif %}
         </div>
@@ -31,7 +31,7 @@ h5.comment:hover{
 
     {% if user.is_authenticated %}
 
-        <h1>Comments</h1>
+        <h1>Комментарии</h1>
         {% if comments %}
             {% for comment in comments %}
 
@@ -52,14 +52,14 @@ h5.comment:hover{
                       {% if request.user == comment.author %}
 
                         <!-- DELETE MODAL -->
-                        <a class="badge badge-danger badge-sm d-inline" data-toggle="modal" href="#exampleModal2">Delete</a>
+                        <a class="badge badge-danger badge-sm d-inline" data-toggle="modal" href="#exampleModal2">Удалить</a>
 
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModal2Label" aria-hidden="true">
                           <div class="modal-dialog" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModal3Label">Delete your comment</h5>
+                                <h5 class="modal-title" id="exampleModal3Label">Удаление коммента</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                   <span aria-hidden="true">×</span>
                                 </button>
@@ -84,8 +84,8 @@ h5.comment:hover{
                               </div>
                             </div>
                               <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                <input class="btn btn-danger" type="submit" value="Delete">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                                <input class="btn btn-danger" type="submit" value="Удалить">
                                 </form>
                               </div>
                             </div>
@@ -94,14 +94,14 @@ h5.comment:hover{
                       </div>
 
                         <!-- UPDATE MODAL -->
-                        <a class="badge badge-info badge-sm d-inline" data-toggle="modal" href="#exampleModal3">Update</a>
+                        <a class="badge badge-info badge-sm d-inline" data-toggle="modal" href="#exampleModal3">Изменить</a>
 
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label" aria-hidden="true">
                           <div class="modal-dialog" role="document">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModal3Label">Update your comment</h5>
+                                <h5 class="modal-title" id="exampleModal3Label">Редактирование коммента</h5>
                                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                   <span aria-hidden="true">×</span>
                                 </button>
@@ -114,8 +114,8 @@ h5.comment:hover{
 
                               </div>
                               <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
-                                <input class="btn btn-primary" type="submit" value="Update">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                                <input class="btn btn-primary" type="submit" value="Изменить">
                                 </form>
                               </div>
                             </div>
@@ -136,8 +136,8 @@ h5.comment:hover{
 
         <form action="" method="post" class="col-form-label-lg">
             {% csrf_token %}
-            <textarea class="form-control" name="comment" cols="30" rows="2" placeholder="Comment here"></textarea>
-            <button type="submit" class="btn btn-primary btn-md btn-block">Comment</button>
+            <textarea class="form-control" name="comment" cols="30" rows="2" placeholder="Комментарий сюда"></textarea>
+            <button type="submit" class="btn btn-primary btn-md btn-block">Комментировать</button>
         </form>
     {% endif %}
 {% endblock content %}

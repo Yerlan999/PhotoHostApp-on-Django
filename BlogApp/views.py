@@ -52,7 +52,7 @@ class PostDetailView(DetailView):
 
             comment.save()
 
-        messages.success(request, "Post comment have been added!")
+        messages.success(request, "Новость была успешно добавлена!")
         return redirect('post-detail', **kwargs)
 
     def test_func(self):
@@ -84,6 +84,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
