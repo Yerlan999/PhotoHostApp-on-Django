@@ -52,7 +52,7 @@ class PostDetailView(DetailView):
 
             comment.save()
 
-        messages.success(request, "Новость была успешно добавлена!")
+        messages.success(request, "Коммент был успешно добавлен!")
         return redirect('post-detail', **kwargs)
 
     def test_func(self):

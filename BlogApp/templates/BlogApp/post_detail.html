@@ -1,5 +1,7 @@
 {% extends "BlogApp/base.html" %}
 {% load static %}
+{% load name_filter %}
+
 
 {% block head %}
 <style>
@@ -15,7 +17,7 @@ h5.comment:hover{
         <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}" style="border:solid #dddddd 1px;">
       <div class="media-body">
         <div class="article-metadata">
-          <a class="mr-2" href="{% url 'user-posts' object.author.username %}">{{ object.author }}</a>
+          <a class="mr-2" href="{% url 'user-posts' object.author.username %}">{{ object.author|cutter }}</a>
           <small class="text-muted">{{ object.date_posted|date:"F d, Y" }}</small>
             {% if object.author == user %}
             <div>
@@ -29,117 +31,119 @@ h5.comment:hover{
       </div>
     </article>
 
-    {% if user.is_authenticated %}
-
-        <h1>Комментарии</h1>
-        {% if comments %}
-            {% for comment in comments %}
-
-                <div class="">
 
 
-                    <div class="media border rounded p-2 mb-4" style="background-color:#e9ecef">
-                      <div class="media-body">
-                        <div class="d-flex justify-content-between">
-                          <h5 class="mb-1 d-inline badge badge-secondary comment" style="font-size:15px;">{{ comment.author }}</h5>
-                          <small class="ml-4 d-inline">{{ comment.date_added|date:"F d, Y H:i" }}</small>
-                        </div>
 
-                        <div class="container">
-                          <p class="border-top">{{ comment.content }}</p>
-                        </div>
-                        <div class="justify-content-start">
-                      {% if request.user == comment.author %}
+{% if comments %}
+  <h1>Комментарии</h1>
+  {% for comment in comments %}
 
-                        <!-- DELETE MODAL -->
-                        <a class="badge badge-danger badge-sm d-inline" data-toggle="modal" href="#exampleModal2">Удалить</a>
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModal2Label" aria-hidden="true">
-                          <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModal3Label">Удаление коммента</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">×</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-
-                                <form method="post" action="{% url 'commentOnPost-delete' comment.pk %}">
-                                    {% csrf_token %}
-                                    <div class="">
-                                      <div class="media border rounded p-2 mb-4" style="background-color:#e9ecef">
-                                        <div class="media-body">
-                                          <div class="d-flex justify-content-between">
-                                            <h5 class="mb-1 d-inline badge badge-secondary comment" style="font-size:15px;">{{ comment.author }}</h5>
-                                            <small class="ml-4 d-inline">{{ comment.date_added|date:"F d, Y H:i" }}</small>
-                                          </div>
-
-                                          <div class="container">
-                                            <p class="border-top">{{ comment.content }}</p>
-                                          </div>
-                                    </div>
-
-                              </div>
-                            </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                                <input class="btn btn-danger" type="submit" value="Удалить">
-                                </form>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-
-                        <!-- UPDATE MODAL -->
-                        <a class="badge badge-info badge-sm d-inline" data-toggle="modal" href="#exampleModal3">Изменить</a>
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label" aria-hidden="true">
-                          <div class="modal-dialog" role="document">
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModal3Label">Редактирование коммента</h5>
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                  <span aria-hidden="true">×</span>
-                                </button>
-                              </div>
-                              <div class="modal-body">
-
-                                <form method="post" action="{% url 'commentOnPost-update' comment.pk %}">
-                                    {% csrf_token %}
-                                    <textarea class="form-control form-control-lg" type="text-area" name="newcontent">{{ comment.content }}</textarea>
-
-                              </div>
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                                <input class="btn btn-primary" type="submit" value="Изменить">
-                                </form>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+      <div class="">
 
 
-                    {% endif %}
+          <div class="media border rounded p-2 mb-4" style="background-color:#e9ecef">
+            <div class="media-body">
+              <div class="d-flex justify-content-between">
+                <h5 class="mb-1 d-inline badge badge-secondary comment" style="font-size:15px;">{{ comment.author|cutter }}</h5>
+                <small class="ml-4 d-inline">{{ comment.date_added|date:"F d, Y H:i" }}</small>
+              </div>
 
-                        </div>
-                      </div>
+              <div class="container">
+                <p class="border-top">{{ comment.content }}</p>
+              </div>
+              <div class="justify-content-start">
+            {% if request.user == comment.author %}
+
+              <!-- DELETE MODAL -->
+              <a class="badge badge-danger badge-sm d-inline" data-toggle="modal" href="#exampleModa{{comment.pk}}delete">Удалить</a>
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModa{{comment.pk}}delete" tabindex="-1" role="dialog" aria-labelledby="exampleModa{{comment.pk}}Labeldelete" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModa{{comment.pk}}Labeldelete">Удаление коммента</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
                     </div>
+                    <div class="modal-body">
+
+                      <form method="post" action="{% url 'commentOnPost-delete' comment.pk %}">
+                          {% csrf_token %}
+                          <div class="">
+                            <div class="media border rounded p-2 mb-4" style="background-color:#e9ecef">
+                              <div class="media-body">
+                                <div class="d-flex justify-content-between">
+                                  <h5 class="mb-1 d-inline badge badge-secondary comment" style="font-size:15px;">{{ comment.author|cutter }}</h5>
+                                  <small class="ml-4 d-inline">{{ comment.date_added|date:"F d, Y H:i" }}</small>
+                                </div>
+
+                                <div class="container">
+                                  <p class="border-top">{{ comment.content }}</p>
+                                </div>
+                          </div>
+
+                    </div>
+                  </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                      <input class="btn btn-danger" type="submit" value="Удалить">
+                      </form>
+                    </div>
+                  </div>
                 </div>
+              </div>
+            </div>
 
-            {% endfor %}
-        {% endif %}
+              <!-- UPDATE MODAL -->
+              <a class="badge badge-info badge-sm d-inline" data-toggle="modal" href="#exampleModa{{comment.pk}}update">Изменить</a>
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModa{{comment.pk}}update" tabindex="-1" role="dialog" aria-labelledby="exampleModa{{comment.pk}}Labelupdate" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModa{{comment.pk}}Labelupdate">Редактирование коммента</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+
+                      <form method="post" action="{% url 'commentOnPost-update' comment.pk %}">
+                          {% csrf_token %}
+                          <textarea class="form-control form-control-lg" type="text-area" name="newcontent">{{ comment.content }}</textarea>
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                      <input class="btn btn-primary" type="submit" value="Изменить">
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
 
-        <form action="" method="post" class="col-form-label-lg">
+          {% endif %}
+
+              </div>
+            </div>
+          </div>
+      </div>
+
+  {% endfor %}
+{% endif %}
+
+    {% if user.is_authenticated %}
+        <form id="commentForm" action="" method="post" class="col-form-label-lg">
             {% csrf_token %}
             <textarea class="form-control" name="comment" cols="30" rows="2" placeholder="Комментарий сюда"></textarea>
             <button type="submit" class="btn btn-primary btn-md btn-block">Комментировать</button>
         </form>
     {% endif %}
+
 {% endblock content %}
 
 {% block for_scripts %}

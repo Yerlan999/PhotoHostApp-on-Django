@@ -86,7 +86,7 @@ class PhotoListView(ListView):
         }
         return queryset
 
-class PhotoDetailView(LoginRequiredMixin, DetailView):
+class PhotoDetailView(DetailView):
     model = Photo
     template_name = 'Photos/photo_detail.html'
 

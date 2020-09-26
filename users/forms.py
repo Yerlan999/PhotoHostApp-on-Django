@@ -9,7 +9,8 @@ from django.forms.widgets import ClearableFileInput
 
 
 class CustomUserLoginForm(AuthenticationForm):
-    username = UsernameField(label='Фамилия и Имя', widget=forms.TextInput(attrs={'autofocus': True}))
+    username = UsernameField(label='Фамилия и Имя', widget=forms.TextInput(attrs={'autofocus': True}),
+        help_text='<strong>Необходимо ввести фамилию и имя через _ (нижний прочерк)</strong>')
     password = forms.CharField(
         label=_("Пароль"),
         strip=False,
@@ -31,9 +32,14 @@ class UserRegisterForm(UserCreationForm):
         'required': _('Надо ввести!'),
         'item_invalid': _('Неправльно сук!'),
         })
-    key_word = forms.CharField(max_length=10, required=True, label='Кодовое слово')
+    key_word = forms.CharField(max_length=10, required=True, label='Кодовое слово', help_text='''
+                    <strong>Марка самого известного трактора</strong>
+                    ''')
     username = forms.CharField(label='Фамилия и Имя', error_messages={'unique': 'Пользователь с таким именем уже существует '},
-                    help_text='Обязательно. Не больше 30 символов. Разрешаются @/./+/-/_ ')
+                    help_text='''
+                    <strong>Обязательно! Введи Фамилию и Имя через _ (нижний прочерк)</strong><br>
+                    <i>Сайт сам заменит _ на пробел</i>
+                    ''')
 
     error_messages = {
         'password_mismatch': _('А пароли не сходятся!'),
