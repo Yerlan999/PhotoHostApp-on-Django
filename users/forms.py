@@ -131,7 +131,7 @@ class ProfileUpdateForm(forms.ModelForm):
         months=MONTHS, empty_label=("Год рождения", "Месяц", "День")), required=False)
     cap = forms.BooleanField(label='Ты был(а) старостой?', help_text='Отметь если ты Жора', required=False)
     nickname = forms.CharField(label='Как тебя все называли?', help_text= _("Пример: Бигсом/Пазик/Герыч"), required=False)
-    image = forms.ImageField(label='Аватарка', widget=MyClearableFileInput(), help_text='Картинка будет переформатированна в целях сохранения памяти')
+    image = forms.ImageField(label='<strong>Аватарка</strong>', widget=MyClearableFileInput(), help_text='Картинка будет переформатированна в целях сохранения памяти')
 
 
     class Meta:

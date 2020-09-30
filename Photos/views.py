@@ -65,23 +65,25 @@ class PhotoListView(ListView):
     context_object_name = 'photos'
     ordering = ['date_taken']
 
+
+
     def get_queryset(self):
         queryset = {
 
         'freshman': Photo.objects.filter(Q(
-            date_taken__gte=datetime(2015, 9, 1)) & Q(date_taken__lt=datetime(2016, 9, 1))),
+            date_taken__gte=datetime(2015, 9, 1)) & Q(date_taken__lt=datetime(2016, 9, 1))).order_by('date_taken'),
 
         'sophomore': Photo.objects.filter(Q(
-            date_taken__gte=datetime(2016, 9, 1)) & Q(date_taken__lt=datetime(2017, 9, 1))),
+            date_taken__gte=datetime(2016, 9, 1)) & Q(date_taken__lt=datetime(2017, 9, 1))).order_by('date_taken'),
 
         'junior': Photo.objects.filter(Q(
-            date_taken__gte=datetime(2017, 9, 1)) & Q(date_taken__lt=datetime(2018, 9, 1))),
+            date_taken__gte=datetime(2017, 9, 1)) & Q(date_taken__lt=datetime(2018, 9, 1))).order_by('date_taken'),
 
         'senior': Photo.objects.filter(Q(
-            date_taken__gte=datetime(2018, 9, 1)) & Q(date_taken__lt=datetime(2020, 7, 1))),
+            date_taken__gte=datetime(2018, 9, 1)) & Q(date_taken__lt=datetime(2019, 7, 1))).order_by('date_taken'),
 
         'post_graduate': Photo.objects.filter(Q(
-            date_taken__gte=datetime(2020, 7, 1))),
+            date_taken__gte=datetime(2019, 7, 1))).order_by('date_taken'),
 
         }
         return queryset
@@ -136,7 +138,7 @@ class PhotoDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(PhotoDetailView, self).get_context_data(**kwargs)
-        context['comments'] = Comments.objects.all().filter(image=Photo.objects.get(id=self.kwargs.get('pk')))
+        context['comments'] = Comments.objects.all().filter(image=Photo.objects.get(id=self.kwargs.get('pk'))).order_by('date_added')
         return context
 
 

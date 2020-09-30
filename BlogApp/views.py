@@ -63,7 +63,7 @@ class PostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super(PostDetailView, self).get_context_data(**kwargs)
-        context['comments'] = CommentsOnPost.objects.all().filter(post=Post.objects.get(id=self.kwargs.get('pk')))
+        context['comments'] = CommentsOnPost.objects.all().filter(post=Post.objects.get(id=self.kwargs.get('pk'))).order_by('date_added')
         return context
 
 
