@@ -96,29 +96,55 @@
 
 
         {% for user in users %}
-            {% if user.profile.cap %}
-              <div id="cap" class="d-inline-block Grad">
+            {% if request.user.username == user.username %}
+                {% if user.profile.cap %}
+                  <a class="nav-item nav-link d-inline-block" style="color:#ffffff;margin:0px;" href="{% url 'profile' %}">
+                  <div id="cap" class="d-inline-block Grad">
 
-
-                  <img class="rounded-circle z-depth-2 mx-auto d-block mb-0 gradImg" style="border:solid #111224 1px;" src="{{ user.profile.image.url }}">
-                  <br><br><br>
-                  <div>
-                    <h1 id="hh" class="list-group-item list-group-item-action list-group-item-dark rounded text-center mb-0">{{ user.username|cutter }}</h2>
-                    <h1 id="pp" class="a list-group-item disabled rounded text-center mt-0">{{ user.profile.nickname }}</h1>
+                      <img class="rounded-circle z-depth-2 mx-auto d-block mb-0 gradImg" style="border:solid #111224 1px;" src="{{ user.profile.image.url }}">
+                      <br><br><br>
+                      <div>
+                        <h1 id="hh" class="list-group-item list-group-item-action list-group-item-dark rounded text-center mb-0">{{ user.username|cutter }}</h2>
+                        <h1 id="pp" class="a list-group-item disabled rounded text-center mt-0">{{ user.profile.nickname }}</h1>
+                      </div>
                   </div>
-              </div>
+                  </a>
+                {% else %}
+                  <a class="nav-item nav-link d-inline-block" style="color:#ffffff;margin:0px;" href="{% url 'profile' %}">
+                  <div id="mate" class="d-inline-block Grad">
+
+                      <img class="rounded-circle z-depth-2 mx-auto d-block mb-0 gradImg" style="border:solid #111224 1px;" src="{{ user.profile.image.url }}">
+                      <br><br><br>
+                      <div>
+                        <h1 id="hh" class="list-group-item list-group-item-action list-group-item-dark rounded text-center mb-0">{{ user.username|cutter }}</h2>
+                        <h1 id="pp" class="a list-group-item disabled rounded text-center mt-0">{{ user.profile.nickname }}</h1>
+                      </div>
+                  </div>
+                  </a>
+                {% endif %}
             {% else %}
-              <div id="mate" class="d-inline-block Grad">
+                {% if user.profile.cap %}
+                  <div id="cap" class="d-inline-block Grad">
 
-
-                  <img class="rounded-circle z-depth-2 mx-auto d-block mb-0 gradImg" style="border:solid #111224 1px;" src="{{ user.profile.image.url }}">
-                  <br><br><br>
-                  <div>
-                    <h1 id="hh" class="list-group-item list-group-item-action list-group-item-dark rounded text-center mb-0">{{ user.username|cutter }}</h2>
-                    <h1 id="pp" class="a list-group-item disabled rounded text-center mt-0">{{ user.profile.nickname }}</h1>
+                      <img class="rounded-circle z-depth-2 mx-auto d-block mb-0 gradImg" style="border:solid #111224 1px;" src="{{ user.profile.image.url }}">
+                      <br><br><br>
+                      <div>
+                        <h1 id="hh" class="list-group-item list-group-item-action list-group-item-dark rounded text-center mb-0">{{ user.username|cutter }}</h2>
+                        <h1 id="pp" class="a list-group-item disabled rounded text-center mt-0">{{ user.profile.nickname }}</h1>
+                      </div>
                   </div>
-              </div>
+                {% else %}
+                  <div id="mate" class="d-inline-block Grad">
+
+                      <img class="rounded-circle z-depth-2 mx-auto d-block mb-0 gradImg" style="border:solid #111224 1px;" src="{{ user.profile.image.url }}">
+                      <br><br><br>
+                      <div>
+                        <h1 id="hh" class="list-group-item list-group-item-action list-group-item-dark rounded text-center mb-0">{{ user.username|cutter }}</h2>
+                        <h1 id="pp" class="a list-group-item disabled rounded text-center mt-0">{{ user.profile.nickname }}</h1>
+                      </div>
+                  </div>
             {% endif %}
+          {% endif %}
         {% endfor %}
     </div>
 

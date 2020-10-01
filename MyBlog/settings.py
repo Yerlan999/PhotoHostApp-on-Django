@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'bootstrap_modal_forms',
     'widget_tweaks',
+    'include_by_ajax',
 ]
 
 MIDDLEWARE = [

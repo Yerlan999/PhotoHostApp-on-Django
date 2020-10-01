@@ -20,6 +20,12 @@ $(document).ready(function(){
         }
     });
 
+
+    $(document).on('include_by_ajax_all_loaded', function() {
+        console.log('Now all placeholders are loaded and replaced with content');
+    });
+
+
 });
 
 

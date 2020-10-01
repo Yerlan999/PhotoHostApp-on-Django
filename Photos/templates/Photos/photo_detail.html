@@ -35,8 +35,8 @@ h5.comment:hover{
         <div class="media mt-3">
             <img class="rounded-circle img-thumbnail" src="{{object.author.profile.image.url}}" style="width:5em;height:5em;display:inline-block;">
             <div class="media-body">
-                <h5 class="mt-0">Поделился: {{ object.author|cutter }}</h5>
-                <h5 class="mt-0">{{ object.date_taken }}</h5>
+                <h5 class="mt-0">Поделился(-ась): {{ object.author|cutter }}</h5>
+                <h5 class="mt-0">{{ object.date_taken|date:"F d. Y" }}</h5>
                 <h6 class="mt-0 text-muted">Общ.кол.фоток: {{ object.author.photo_set.count }}</h6>
             </div>
         </div>

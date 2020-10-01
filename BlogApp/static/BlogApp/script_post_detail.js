@@ -11,13 +11,14 @@ $(document).ready(function(){
         $(window).scrollTop($('#commentForm').position().top)
     }
 
+    console.log("Works");
     $('h5.comment').click(function(){
 
-        var name = $(this).text()
+        var name = $(this)[0].innerText;
         var nameLog = name.concat(",");
 
-        $('textarea').eq(1).text(nameLog)
-         $('textarea').focus()
+        $('textarea').eq(-1).text(nameLog);
+        $('textarea').focus();
     });
 
 
