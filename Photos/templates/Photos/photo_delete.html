@@ -10,11 +10,16 @@
 
 {% block content %}
 
-    <h1>Ты сербезно хочешь удалить это фото?</h1>
-    <h2>Поделился(-ась): {{ photo.author|cutter }}</h2>
-    <form method="post" class="col-form-label-lg">
-        {% csrf_token %}
-        <input type="submit" value="Удалить" class="btn btn-danger btn-md">
-    </form>
+    <div class="jumbotron">
+        <div class="d-flex justify-content-center mb-4">
+            <img class="img-thumbnail" src="{{ photo.image.url }}">
+        </div>
+        <h4 class="border-top">Ты серьезно хочешь удалить эту фотку?</h4>
+        <p>Фото сделано: {{ photo.date_taken|date:"F d, Y" }}</p>
+        <form method="post" class="col-form-label-lg">
+            {% csrf_token %}
+            <input type="submit" value="Удалить" class="btn btn-danger btn-md">
+        </form>
+    </div>
 
 {% endblock content %}

@@ -1,10 +1,13 @@
 $(document).ready(function(){
 
+    $('[data-toggle="tooltip"]').tooltip()
+
     console.log("Hello")
-    $('img').css({"opacity": '0.95', })
+    $('img').css({"opacity": '0.90', })
 
     $('img').hover(function() {
-        $(this).animate({zoom: '101%'}, 'fast')
+
+        $(this).animate({zoom: '110%'}, 'fast')
         $(this).animate({opacity: '1.0'}, 'fast')
     });
 
@@ -16,7 +19,7 @@ $(document).ready(function(){
     $('#spinBut').click(function(){
         let fe = $('#inn').val();
         if(fe !== ''){
-            $('#spin').removeAttr('hidden')
+            $('#spin').removeAttr('hidden');
         }
     });
 
@@ -24,6 +27,13 @@ $(document).ready(function(){
     $(document).on('include_by_ajax_all_loaded', function() {
         console.log('Now all placeholders are loaded and replaced with content');
     });
+
+    $('#photoButton').hover(function(){
+        console.log('Hovered');
+        var size = $('#hiddeninfo').text();
+        var size = 'Свободно памяти: ' + size;
+        $(this).prop('title', size);
+    })
 
 
 });

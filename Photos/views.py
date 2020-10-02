@@ -1,7 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic.edit import FormView
 from django.shortcuts import render, redirect
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.contrib import messages
 from django.db.models import Q
 from datetime import datetime
@@ -15,9 +15,23 @@ from django.views.generic import (
     UpdateView
     )
 from PIL import Image
+import os
 
 #from exif import Image
 sample = "%Y:%m:%d %H:%M:%S"
+
+
+def get_size(start_path = '.'):
+    total_size = 0
+    for dirpath, dirnames, filenames in os.walk(start_path):
+        for f in filenames:
+            fp = os.path.join(dirpath, f)
+            # skip if it is symbolic link
+            if not os.path.islink(fp):
+                total_size += os.path.getsize(fp)
+
+    return 20 - round(total_size/1073741824, 2)
+
 
 
 class ImageFieldView(FormView):
@@ -35,7 +49,18 @@ class ImageFieldView(FormView):
         else:
             message = 'Фотография была успешна загружена!'
 
-        if form.is_valid():
+        starting_point = os.getcwd()
+        try:
+            os.chdir('media/photos')
+            media = os.getcwd()
+            absMedia = os.path.abspath(media)
+            size_in_GB = get_size(absMedia)
+        except:
+            print('Error happeded')
+        finally:
+            os.chdir(starting_point)
+
+        if form.is_valid() and size_in_GB > 0:
             for image in files:
 
                 pil_image = Image.open(image)
@@ -55,7 +80,8 @@ class ImageFieldView(FormView):
             messages.success(request, message)
             return self.form_valid(form)
         else:
-            return self.form_invalid(form)
+            messages.warning(request, 'Мы загрузили слишком много фоток. Лимит превысил 20 ГБ')
+            return redirect(reverse('photo-list'))
 
 
 
@@ -66,8 +92,21 @@ class PhotoListView(ListView):
     ordering = ['date_taken']
 
 
-
     def get_queryset(self):
+
+
+        starting_point = os.getcwd()
+        try:
+            os.chdir('media/photos')
+            media = os.getcwd()
+            absMedia = os.path.abspath(media)
+            size_in_GB = get_size(absMedia)
+        except:
+            print('Error happeded')
+        finally:
+            os.chdir(starting_point)
+
+
         queryset = {
 
         'freshman': Photo.objects.filter(Q(
@@ -84,6 +123,8 @@ class PhotoListView(ListView):
 
         'post_graduate': Photo.objects.filter(Q(
             date_taken__gte=datetime(2019, 7, 1))).order_by('date_taken'),
+
+        'size': str(size_in_GB) + ' ГБ',
 
         }
         return queryset
@@ -167,7 +208,8 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
         deleted_comment = Comments.objects.get(pk=comment_id)
         deleted_comment.delete()
-
+        messages.success()
+        messages.success(request, 'Комментарий был успешно удален!')
         return redirect('photo-detail', pk=image)
 
 
@@ -190,7 +232,7 @@ class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     context_object_name = 'comment'
     fields = ["content"]
 
-    def post(self, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
 
         image = self.get_object().image_id
         comment_id = kwargs.get('pk')
@@ -200,6 +242,7 @@ class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         updated_comment.content = comments_new_content
         updated_comment.save()
 
+        messages.info(request, f'Комментарий #{comment_id} был успешно обновлен!')
         return redirect('photo-detail', pk=image)
 
 

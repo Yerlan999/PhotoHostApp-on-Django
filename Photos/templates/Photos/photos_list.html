@@ -38,43 +38,9 @@
 
 
                 <!-- UPLOAD MODAL -->
-                <a class="nav-item nav-link" style="color:#ffffff" data-toggle="modal" data-backdrop="false" href="#exampleModal3">Довавить Фото</a>
+                <a id="photoButton" class="nav-item nav-link" style="color:#ffffff" data-toggle="modal" href="#exampleModal3">Довавить Фото</a>
 
                 <!-- Modal -->
-                <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModal3Label" aria-hidden="true">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModal3Label">Загрузить Фотографии</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">×</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-
-                        <form method="post" enctype="multipart/form-data" action="{% url 'photo-add' %}">
-                            {% csrf_token %}
-                            <h5 class="alert alert-warning">Фотки должны быть фотмата jpg/jpeg!</h5>
-                            <input id="inn" class="form-control-file" type="file" name="image" accept="image/*" multiple required>
-
-                            <div class="d-flex justify-content-center mt-3">
-                              <div id="spin" class="spinner-border text-primary align-self-center" role="status" hidden>
-                                <span class="sr-only"></span>
-                              </div>
-                            </div>
-
-
-
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                        <input id="spinBut" class="btn btn-primary" type="submit" value="Загрузить">
-                        </form>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
 
 
                 <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'profile' %}">Мой Профиль</a>
@@ -84,11 +50,49 @@
               <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'login' %}">Зайти</a>
               <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'register' %}">Регистрация</a>
                 {% endif %}
-            </div>
           </div>
         </div>
       </nav>
 </header>
+
+
+<div class="modal fade" id="exampleModal3" data-backdrop="true" role="dialog" aria-labelledby="exampleModal3Label" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModal3Label">Загрузить Фотографии</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="post" enctype="multipart/form-data" action="{% url 'photo-add' %}">
+              {% csrf_token %}
+              <h5 class="alert alert-warning">Фотки должны быть фотмата jpg/jpeg!</h5>
+              <input id="inn" class="form-control-file" type="file" name="image" accept="image/*" multiple required>
+
+              <div class="d-flex justify-content-center mt-3">
+                <div id="spin" class="spinner-border text-primary align-self-center" role="status" hidden>
+                  <span class="sr-only"></span>
+                </div>
+              </div>
+        </div>
+        <div class="modal-footer d-flex justify-content-between">
+          <div class="">
+            <button type="button" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Свободно: {{ photos.size }}">
+              ?
+            </button>
+          </div>
+          <div>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+            <input id="spinBut" class="btn btn-primary" type="submit" value="Загрузить">
+          </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
     <main role="main" class="container">
@@ -118,7 +122,7 @@
 
           <div class="col-lg-4 col-sm-6 mb-4">
             <div class="card h-100 boxShad">
-              <a href="{% url 'photo-detail' photo.pk %}"><img class="card-img-top" src="{{photo.image.url}}" alt=""></a>
+              <a href="{% url 'photo-detail' photo.pk %}"><img id="Test01" class="card-img-top" src="{{photo.image.url}}" alt=""></a>
               <div class="card-body">
                 <h4 class="card-title">
                   <a href="{% url 'photo-detail' photo.pk %}">{{ photo.title }}</a>
@@ -134,7 +138,7 @@
       </div>
     {% endif %}
 
-
+    <h1 id='hiddeninfo' hidden="true">{{ photos.size }}</h1>
 
     {% if photos.sophomore %}
 
@@ -266,13 +270,11 @@
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script type="text/javascript" src="{% static 'Photos/script_photos_list.js' %}"></script>
     <script src="{% static 'Photos/include_by_ajax/js/include_by_ajax.js' %}" defer></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 </body>
 </html>
 

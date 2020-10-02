@@ -33,21 +33,25 @@ h5.comment:hover{
         <button id="90" type="button" class="mt-3 btn btn-outline-info btn-block">Перевернуть</button>
 
         <div class="media mt-3">
+
             <img class="rounded-circle img-thumbnail" src="{{object.author.profile.image.url}}" style="width:5em;height:5em;display:inline-block;">
             <div class="media-body">
                 <h5 class="mt-0">Поделился(-ась): {{ object.author|cutter }}</h5>
                 <h5 class="mt-0">{{ object.date_taken|date:"F d. Y" }}</h5>
                 <h6 class="mt-0 text-muted">Общ.кол.фоток: {{ object.author.photo_set.count }}</h6>
             </div>
+
+            {% if request.user == object.author %}
+              <a class="btn btn-danger btn-md" href="{% url 'photo-delete' object.pk %}">Удалить</a>
+            {% endif %}
+
         </div>
 
         <p class="card-text border-top mt-3">{{ object.description }}</p>
 
 
 
-        {% if request.user == object.author %}
-            <a class="btn btn-danger btn-md" href="{% url 'photo-delete' object.pk %}">Удалить</a>
-        {% endif %}
+
 
 
         {% if request.user == object.author %}
@@ -72,7 +76,7 @@ h5.comment:hover{
 
 
                 <div class="media border rounded p-2 mb-4" style="background-color:#e9ecef">
-                  <div class="media-body">
+                  <div id="comment{{ comment.pk }}" class="media-body">
                     <div class="d-flex justify-content-between">
                       <h5 class="mb-1 d-inline badge badge-secondary comment" style="font-size:15px;">{{ comment.author|cutter }}</h5>
                       <small class="ml-4 d-inline">{{ comment.date_added|date:"F d, Y H:i" }}</small>
