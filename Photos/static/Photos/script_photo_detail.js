@@ -7,24 +7,13 @@ $(document).ready(function(){
         var flag = undefined;
     }
 
-    try {
-        var flag2 = $('div.alert-info').get(0).innerText;
-        var num = flag2.match(/[0-9]+/)[0];
-        var com_num = '#comment' + num
-    }
-    catch(TypeError) {
-        var flag2 = undefined;
-    }
-
-
-
 
     if (flag === 'Комментарии к фотографии был успешно добавлен!'){
         $(window).scrollTop($('#commentForm').position().top);
     }
 
-    if (flag2 === 'Комментарий был успешно обновлен!'){
-        $(window).scrollTop($(com_num).position().top);
+    if (flag === 'Комментарий был успешно обновлен!'){
+        $(window).scrollTop($('#commentForm').position().top);
     }
 
     if (flag === 'Комментарий был успешно удален!'){

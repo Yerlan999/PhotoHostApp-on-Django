@@ -28,7 +28,7 @@
             <div class="navbar-nav mr-auto">
               <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'blog-home' %}">Новости</a>
               <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'blog-about' %}">Инфо</a>
-              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'photo-list' %}">Наши Фото</a>
+              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'photo-list' %}">Наши фотоки</a>
               <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'users-list' %}">Выпускники</a>
             </div>
             <!-- Navbar Right Side -->
@@ -109,6 +109,12 @@
 
 <!-- +++++++++++++++++++++++++++++++ MAIN BLOCK +++++++++++++++++++++++++++++++++++++ -->
 
+
+    <button id="loadMoreButton" type="button">Show More</button>
+    <div class="img-hover-zoom img-hover-zoom--xyz">
+      <img src="/path/to/image/" alt="Another Image zoom-on-hover effect">
+    </div>
+
     {% if photos.freshman %}
 
       <div class="card mb-4 p-0 shadow" style="background-color:#bfd200;position:sticky;top:50px;z-index:1;">
@@ -133,6 +139,12 @@
               </div>
             </div>
           </div>
+
+
+          <div id="img-hover-zoom img-hover-zoom--colorize">
+            <img src="{{photo.image.url}}" alt="Another Image zoom-on-hover effect">
+          </div>
+
 
       {% endfor %}
       </div>
@@ -258,9 +270,6 @@
       </div>
     {% endif %}
 
-
-    <button id="buttonNet">SHow</button>
-    {% include_by_ajax "Photos/test.html" placeholder_template_name="Photos/pp.html" %}
 
 <!-- +++++++++++++++++++++++++++++++ MAIN BLOCK +++++++++++++++++++++++++++++++++++++ -->
 

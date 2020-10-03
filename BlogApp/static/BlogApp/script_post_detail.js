@@ -11,6 +11,14 @@ $(document).ready(function(){
         $(window).scrollTop($('#commentForm').position().top)
     }
 
+    if (flag === 'Комментарий был успешно обновлен!'){
+        $(window).scrollTop($('#commentForm').position().top);
+    }
+
+    if (flag === 'Комментарий был успешно удален!'){
+        $(window).scrollTop($('#commentForm').position().top);
+    }
+
     console.log("Works");
     $('h5.comment').click(function(){
 

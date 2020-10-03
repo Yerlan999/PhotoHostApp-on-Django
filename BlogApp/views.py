@@ -110,14 +110,14 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     context_object_name = 'comment'
 
 
-    def post(self, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
 
         post = self.get_object().post_id
         comment_id = kwargs.get('pk')
 
         deleted_comment = CommentsOnPost.objects.get(pk=comment_id)
         deleted_comment.delete()
-
+        messages.success(request, 'Комментарий был успешно удален!')
         return redirect('post-detail', pk=post)
 
 
@@ -143,7 +143,7 @@ class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     fields = ["content"]
 
 
-    def post(self, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
 
         post = self.get_object().post_id
         comment_id = kwargs.get('pk')
@@ -152,7 +152,7 @@ class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         updated_comment = CommentsOnPost.objects.get(pk=comment_id)
         updated_comment.content = comments_new_content
         updated_comment.save()
-
+        messages.success(request, 'Комментарий был успешно обновлен!')
         return redirect('post-detail', pk=post)
 
 

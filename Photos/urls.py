@@ -5,7 +5,9 @@ from .views import (
     PhotoDetailView,
     PhotoDeleteView,
     CommentDeleteView,
-    CommentUpdateView)
+    CommentUpdateView,
+    get_next_photos,
+    )
 
 
 urlpatterns = [
@@ -15,5 +17,6 @@ urlpatterns = [
     path('delete-photo/<int:pk>', PhotoDeleteView.as_view(), name='photo-delete'),
     path('comment-update/<int:pk>', CommentUpdateView.as_view(), name='comment-update'),
     path('comment-delete/<int:pk>', CommentDeleteView.as_view(), name='comment-delete'),
+    path('next-photos/', get_next_photos, name='next-photos'),
 ]
 

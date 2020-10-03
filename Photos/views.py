@@ -2,6 +2,8 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic.edit import FormView
 from django.shortcuts import render, redirect
 from django.urls import reverse_lazy, reverse
+from django.http import JsonResponse
+from django.core import serializers
 from django.contrib import messages
 from django.db.models import Q
 from datetime import datetime
@@ -89,11 +91,10 @@ class PhotoListView(ListView):
     model = Photo
     template_name = 'Photos/photos_list.html'
     context_object_name = 'photos'
-    ordering = ['date_taken']
+    # paginate_by = 1
 
 
     def get_queryset(self):
-
 
         starting_point = os.getcwd()
         try:
@@ -127,7 +128,59 @@ class PhotoListView(ListView):
         'size': str(size_in_GB) + ' ГБ',
 
         }
+
         return queryset
+
+
+    # def get_paginator(self, queryset, per_page, orphans=0,
+    #               allow_empty_first_page=True, **kwargs):
+    #     Return an instance of the paginator for this view.
+    #     return self.paginator_class(
+    #         queryset, per_page, orphans=orphans,
+    #         allow_empty_first_page=allow_empty_first_page, **kwargs)
+
+
+    # def paginate_queryset(self, queryset, page_size):
+    #     """Paginate the queryset, if needed."""
+    #     print(list(queryset.keys())[:-1])
+    #     pp = list(queryset.keys())[:-1]
+    #     paginator = self.get_paginator(
+    #         pp, page_size, orphans=self.get_paginate_orphans(),
+    #         allow_empty_first_page=self.get_allow_empty())
+    #     page_kwarg = self.page_kwarg
+    #     page = self.kwargs.get(page_kwarg) or self.request.GET.get(page_kwarg) or 1
+    #     try:
+    #         page_number = int(page)
+    #     except ValueError:
+    #         if page == 'last':
+    #             page_number = paginator.num_pages
+    #         else:
+    #             raise Http404(_('Page is not “last”, nor can it be converted to an int.'))
+    #     try:
+    #         page = paginator.page(page_number)
+    #         return (paginator, page, page.object_list, page.has_other_pages())
+    #     except InvalidPage as e:
+    #         raise Http404(_('Invalid page (%(page_number)s): %(message)s') % {
+    #             'page_number': page_number,
+    #             'message': str(e)
+    #         })
+
+
+def get_next_photos(request, *args, **kwargs):
+
+        if request.is_ajax and request.method == 'GET':
+
+            sophomore = Photo.objects.filter(Q(
+                date_taken__gte=datetime(2017, 9, 1)) & Q(date_taken__lt=datetime(2018, 9, 1))).order_by('date_taken')
+
+            comments_count = []
+            for photo in sophomore:
+                comments_count.append(photo.comments_set.count())
+
+            ser_sophomore = serializers.serialize('json', sophomore)
+            return JsonResponse({'sophomore': ser_sophomore,
+                                'comments_count': comments_count}, status=200)
+
 
 class PhotoDetailView(DetailView):
     model = Photo
@@ -201,14 +254,13 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     template_name = 'Photos/comments_delete.html'
     context_object_name = 'comment'
 
-    def post(self, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
 
         image = self.get_object().image_id
         comment_id = kwargs.get('pk')
 
         deleted_comment = Comments.objects.get(pk=comment_id)
         deleted_comment.delete()
-        messages.success()
         messages.success(request, 'Комментарий был успешно удален!')
         return redirect('photo-detail', pk=image)
 
@@ -242,7 +294,7 @@ class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         updated_comment.content = comments_new_content
         updated_comment.save()
 
-        messages.info(request, f'Комментарий #{comment_id} был успешно обновлен!')
+        messages.success(request, 'Комментарий был успешно обновлен!')
         return redirect('photo-detail', pk=image)
 
 
