@@ -17,18 +17,19 @@
     <link rel="shortcut icon" href="#">
 </head>
 <body>
-    <header class="site-header">
+
+  <header class="site-header">
       <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-steel" style="background-color:#aacc00;">
         <div class="container">
           <a class="navbar-brand mr-4" href="{% url 'blog-home' %}">Главная</a>
           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
+            <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarToggle">
             <div class="navbar-nav mr-auto">
               <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'blog-home' %}">Новости</a>
               <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'blog-about' %}">Инфо</a>
-              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'photo-list' %}">Наши фотоки</a>
+              <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'photo-list' %}">Наши фотки</a>
               <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'users-list' %}">Выпускники</a>
             </div>
             <!-- Navbar Right Side -->
@@ -50,6 +51,7 @@
               <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'login' %}">Зайти</a>
               <a class="nav-item nav-link" style="color:#ffffff" href="{% url 'register' %}">Регистрация</a>
                 {% endif %}
+            </div>
           </div>
         </div>
       </nav>
@@ -111,9 +113,7 @@
 
 
     <button id="loadMoreButton" type="button">Show More</button>
-    <div class="img-hover-zoom img-hover-zoom--xyz">
-      <img src="/path/to/image/" alt="Another Image zoom-on-hover effect">
-    </div>
+
 
     {% if photos.freshman %}
 
@@ -127,22 +127,13 @@
       {% for photo in photos.freshman %}
 
           <div class="col-lg-4 col-sm-6 mb-4">
-            <div class="card h-100 boxShad">
-              <a href="{% url 'photo-detail' photo.pk %}"><img id="Test01" class="card-img-top" src="{{photo.image.url}}" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="{% url 'photo-detail' photo.pk %}">{{ photo.title }}</a>
-                </h4>
-                <p class="card-text">{{ photo.description }}</p>
-                <p class="article-content border-top mb-0"><a href="{% url 'photo-detail' photo.id %}">Комментарии: {{ photo.comments_set.count }}</a></p>
-
+              <div class="outer boxShad">
+              <a style="text-decoration:none;" href="{% url 'photo-detail' photo.pk %}">
+                <div class="inner" style="background-image: url({{ photo.image.url }})" data-toggle="tooltip" data-placement="bottom" title="Комментарии: {{  photo.comments_set.count  }}">
+                  <span class="titled">{{ photo.title }}</span>
+                </div>
+              </a>
               </div>
-            </div>
-          </div>
-
-
-          <div id="img-hover-zoom img-hover-zoom--colorize">
-            <img src="{{photo.image.url}}" alt="Another Image zoom-on-hover effect">
           </div>
 
 
@@ -165,16 +156,13 @@
       {% for photo in photos.sophomore %}
 
           <div class="col-lg-4 col-sm-6 mb-4">
-            <div class="card h-100 boxShad">
-              <a href="{% url 'photo-detail' photo.pk %}"><img class="card-img-top" src="{{photo.image.url}}" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="{% url 'photo-detail' photo.pk %}">{{ photo.title }}</a>
-                </h4>
-                <p class="card-text">{{ photo.description }}</p>
-                <p class="article-content border-top mb-0"><a href="{% url 'photo-detail' photo.id %}">Комментарии: {{ photo.comments_set.count }}</a></p>
+              <div class="outer boxShad">
+              <a style="text-decoration:none;" href="{% url 'photo-detail' photo.pk %}">
+                <div class="inner" style="background-image: url({{ photo.image.url }})" data-toggle="tooltip" data-placement="bottom" title="Комментарии: {{  photo.comments_set.count  }}">
+                  <span class="titled">{{ photo.title }}</span>
+                </div>
+              </a>
               </div>
-            </div>
           </div>
 
       {% endfor %}
@@ -195,16 +183,13 @@
       {% for photo in photos.junior %}
 
           <div class="col-lg-4 col-sm-6 mb-4">
-            <div class="card h-100 boxShad">
-              <a href="{% url 'photo-detail' photo.pk %}"><img class="card-img-top" src="{{photo.image.url}}" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="{% url 'photo-detail' photo.pk %}">{{ photo.title }}</a>
-                </h4>
-                <p class="card-text">{{ photo.description }}</p>
-                <p class="article-content border-top mb-0"><a href="{% url 'photo-detail' photo.id %}">Комментарии: {{ photo.comments_set.count }}</a></p>
+              <div class="outer boxShad">
+              <a style="text-decoration:none;" href="{% url 'photo-detail' photo.pk %}">
+                <div class="inner" style="background-image: url({{ photo.image.url }})" data-toggle="tooltip" data-placement="bottom" title="Комментарии: {{  photo.comments_set.count  }}">
+                  <span class="titled">{{ photo.title }}</span>
+                </div>
+              </a>
               </div>
-            </div>
           </div>
 
       {% endfor %}
@@ -225,16 +210,13 @@
       {% for photo in photos.senior %}
 
           <div class="col-lg-4 col-sm-6 mb-4">
-            <div class="card h-100 boxShad">
-              <a href="{% url 'photo-detail' photo.pk %}"><img class="card-img-top" src="{{photo.image.url}}" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="{% url 'photo-detail' photo.pk %}">{{ photo.title }}</a>
-                </h4>
-                <p class="card-text">{{ photo.description }}</p>
-                <p class="article-content border-top mb-0"><a href="{% url 'photo-detail' photo.id %}">Комментарии: {{ photo.comments_set.count }}</a></p>
+              <div class="outer boxShad">
+              <a style="text-decoration:none;" href="{% url 'photo-detail' photo.pk %}">
+                <div class="inner" style="background-image: url({{ photo.image.url }})" data-toggle="tooltip" data-placement="bottom" title="Комментарии: {{  photo.comments_set.count  }}">
+                  <span class="titled">{{ photo.title }}</span>
+                </div>
+              </a>
               </div>
-            </div>
           </div>
 
       {% endfor %}
@@ -254,15 +236,12 @@
       {% for photo in photos.post_graduate %}
 
           <div class="col-lg-4 col-sm-6 mb-4">
-            <div class="card h-100 boxShad">
-              <a href="{% url 'photo-detail' photo.pk %}"><img class="card-img-top" src="{{photo.image.url}}" alt=""></a>
-              <div class="card-body">
-                <h4 class="card-title">
-                  <a href="{% url 'photo-detail' photo.pk %}">{{ photo.title }}</a>
-                </h4>
-                <p class="card-text">{{ photo.description }}</p>
-                <p class="article-content border-top mb-0"><a href="{% url 'photo-detail' photo.id %}">Комментарии: {{ photo.comments_set.count }}</a></p>
-              </div>
+            <div class="outer boxShad">
+              <a style="text-decoration:none;" href="{% url 'photo-detail' photo.pk %}">
+                <div class="inner" style="background-image: url({{ photo.image.url }})" data-toggle="tooltip" data-placement="bottom" title="Комментарии: {{  photo.comments_set.count  }}">
+                  <span class="titled">{{ photo.title }}</span>
+                </div>
+              </a>
             </div>
           </div>
 

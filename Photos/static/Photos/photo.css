@@ -33,14 +33,63 @@ img:first-of-type {
 
 
 
-/* Colorize-zoom Container */
-#img-hover-zoom--colorize img {
-  transition: transform .5s, filter 1.5s ease-in-out;
-  filter: grayscale(100%);
+
+
+
+div.outer{
+  width: 350px;
+  height: 220px;
+  overflow: hidden;
+  border-radius: 20px;
+  border-style: solid;
+  border-color: white;
+  border-width: 2px;
 }
 
-/* The Transformation */
-#img-hover-zoom--colorize:hover img {
-  filter: grayscale(0);
-  transform: scale(1.1);
+
+div.inner{
+  background-size: cover;
+  width: 350px;
+  height: 220px;
+  transition: all 2s;
+  background-position: center;
+  opacity: 0.9;
+}
+
+div.inner:hover,
+div.inner:focus{
+  transform: scale(1.2);
+  background-position: center;
+  opacity: 1;
+  cursor: pointer;
+}
+
+.inner::before {
+  content: "";
+  display: none;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: rgba(128, 128, 128, 0.60);
+}
+
+.outer:hover .inner:before,
+.outer:focus .inner:before {
+  display: block;
+}
+
+span.titled {
+  color: white; /* Good thing we set a fallback color! */
+  font-family: sans-serif;
+  padding: 25%;
+  position: absolute;
+  display: none;
+}
+
+.outer:hover span.titled,
+.outer:focus span.titled {
+  display: block;
+  text-shadow: 1px 2px 20px #000000;
 }
