@@ -9,14 +9,6 @@ $(document).ready(function(){
         }
     });
 
-    $('#photoButton').hover(function(){
-        console.log('Hovered');
-        var size = $('#hiddeninfo').text();
-        var size = 'Свободно памяти: ' + size;
-        $(this).prop('title', size);
-    })
-
-
     // ======================================   AJAX TRYING  ============================================
 
 
@@ -35,35 +27,83 @@ $(document).ready(function(){
           </div>
 
         `
-        let ready_template = template.replace('photo.pk', photo_pk)
-
-        return ready_template;
+        return template;
     }
-    $('#loadMoreButton').click(function(){
-        console.log('Loaded');
+
+    $('.loadMoreButton').click(function(){
+        console.log("Triggered")
+        let what_year = $(this).val();
+
         $.ajax({
             type: 'GET',
             url: 'next-photos/',
-            data: {next: 'Sophomore Year'},
+            data: {next: what_year},
             success: function(response){
 
+                var what_year = response['what_year']
+                console.log(what_year)
                 var wholeYearSet_Photos
                 var wholeYear_Module
                 var row_FirstTag = `<div class="row">`
                 var row_LastTag = `</div>`
 
-                var header_of_Year = `
-                    <div class="card mt-5 mb-4 p-0 shadow" style="background-color:#bfd200;position:sticky;top:50px;z-index:5;">
+
+                if (what_year == 'freshman'){
+
+                    var header_of_Year = `
+                    <div class="card mt-5 mb-4 p-0 shadow" style="background-color:#bfd200;position:sticky;top:50px;z-index:2;">
+                        <div class="card-body p-1">
+                          <h1 class="pl-4" style="color:#fff;">Первый Курс</h1>
+                        </div>
+                      </div>
+                `
+                }
+                if (what_year == 'sophomore'){
+
+                    var header_of_Year = `
+                    <div class="card mt-5 mb-4 p-0 shadow" style="background-color:#bfd200;position:sticky;top:50px;z-index:2;">
+                        <div class="card-body p-1">
+                          <h1 class="pl-4" style="color:#fff;">Второй Курс</h1>
+                        </div>
+                      </div>
+                `
+                }
+                if (what_year == 'junior'){
+
+                    var header_of_Year = `
+                    <div class="card mt-5 mb-4 p-0 shadow" style="background-color:#bfd200;position:sticky;top:50px;z-index:2;">
+                        <div class="card-body p-1">
+                          <h1 class="pl-4" style="color:#fff;">Третий Курс</h1>
+                        </div>
+                      </div>
+                `
+                }
+                if (what_year == 'senior'){
+
+                    var header_of_Year = `
+                    <div class="card mt-5 mb-4 p-0 shadow" style="background-color:#bfd200;position:sticky;top:50px;z-index:2;">
+                        <div class="card-body p-1">
+                          <h1 class="pl-4" style="color:#fff;">Четвертый Курс</h1>
+                        </div>
+                      </div>
+                `
+                }
+                if (what_year == 'post_graduate'){
+
+                    var header_of_Year = `
+                    <div class="card mt-5 mb-4 p-0 shadow" style="background-color:#bfd200;position:sticky;top:50px;z-index:2;">
                         <div class="card-body p-1">
                           <h1 class="pl-4" style="color:#fff;">После Выпуска</h1>
                         </div>
-                    </div>
+                      </div>
                 `
+                }
 
-                var photos_array = $.parseJSON(response['sophomore'])
-                console.log(photos_array)
+
+                var photos_array = $.parseJSON(response['requested_year'])
+
                 for (photo of photos_array){
-                    console.log(photo)
+
                     let photo_url = '/media/' + photo['fields']['image']
                     let desctiption = photo['fields']['description']
                     let title = photo['fields']['title']
@@ -78,9 +118,35 @@ $(document).ready(function(){
                 wholeYear_Module = header_of_Year + row_FirstTag + wholeYearSet_Photos + row_LastTag + '<br><br>'
 
                 var output = wholeYear_Module.replace(/undefined/g, "");
-                $('#loadMoreButton').after(
-                    output
-                    )
+
+                if (what_year == 'freshman'){
+                    $('#loadMoreButtonFreshman').hide();
+                    $('#loadMoreButtonFreshman').after(output)
+
+                }
+                if (what_year == 'sophomore'){
+                    $('#loadMoreButtonSophomore').hide();
+                    $('#loadMoreButtonSophomore').after(output)
+
+                }
+                if (what_year == 'junior'){
+                    $('#loadMoreButtonJunior').hide();
+                    $('#loadMoreButtonJunior').after(output)
+
+                }
+                if (what_year == 'senior'){
+                    $('#loadMoreButtonSenior').hide();
+                    $('#loadMoreButtonSenior').after(output)
+
+                }
+                if (what_year == 'post_graduate'){
+                    $('#loadMoreButtonPost_graduate').hide();
+                    $('#loadMoreButtonPost_graduate').after(output)
+                }
+
+
+
+
             },
             error: function (response) {
                 console.log(response);

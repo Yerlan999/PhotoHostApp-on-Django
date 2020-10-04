@@ -135,14 +135,37 @@ class PhotoListView(ListView):
 
 def get_next_photos(request, *args, **kwargs):
 
+
         if request.is_ajax and request.method == 'GET':
 
-            sophomore = Photo.objects.filter(Q(
-            date_taken__gte=datetime(2015, 9, 1)) & Q(date_taken__lt=datetime(2016, 9, 1))).order_by('date_taken')
+            if request.GET.get('next') == 'freshman':
+                requested_year = Photo.objects.filter(Q(
+                date_taken__gte=datetime(2015, 9, 1)) & Q(date_taken__lt=datetime(2016, 9, 1))).order_by('date_taken')
+                year = 'freshman'
 
+            if request.GET.get('next') == 'sophomore':
+                requested_year = Photo.objects.filter(Q(
+                date_taken__gte=datetime(2016, 9, 1)) & Q(date_taken__lt=datetime(2017, 9, 1))).order_by('date_taken')
+                year = 'sophomore'
 
-            ser_sophomore = serializers.serialize('json', sophomore)
-            return JsonResponse({'sophomore': ser_sophomore}, status=200)
+            if request.GET.get('next') == 'junior':
+                requested_year = Photo.objects.filter(Q(
+                date_taken__gte=datetime(2017, 9, 1)) & Q(date_taken__lt=datetime(2018, 9, 1))).order_by('date_taken')
+                year = 'junior'
+
+            if request.GET.get('next') == 'senior':
+                requested_year = Photo.objects.filter(Q(
+                date_taken__gte=datetime(2018, 9, 1)) & Q(date_taken__lt=datetime(2019, 7, 1))).order_by('date_taken')
+                year = 'senior'
+
+            if request.GET.get('next') == 'post_graduate':
+                requested_year = Photo.objects.filter(Q(
+                date_taken__gte=datetime(2019, 7, 1))).order_by('date_taken')
+                year = 'post_graduate'
+
+            ser_requested_year = serializers.serialize('json', requested_year)
+            return JsonResponse({'requested_year': ser_requested_year,
+                                    'what_year': year}, status=200)
 
 
 class PhotoDetailView(DetailView):

@@ -42,7 +42,33 @@ h5.comment:hover{
             </div>
 
             {% if request.user == object.author %}
-              <a class="btn btn-danger btn-md" href="{% url 'photo-delete' object.pk %}">Удалить</a>
+
+              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal2">Удалить</button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModal2Label" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModal3Label">Удаление фото</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <h3>Ты точно хочешь удалить это фото?</h3>
+                      <form method="post" action="{% url 'photo-delete' object.pk %}">
+                          {% csrf_token %}
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                      <input class="btn btn-danger" type="submit" value="Удалить">
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             {% endif %}
 
         </div>

@@ -39,6 +39,7 @@
 
 
                 <!-- UPLOAD MODAL -->
+
                 <a id="photoButton" class="nav-item nav-link" style="color:#ffffff" data-toggle="modal" href="#exampleModal3">Довавить Фото</a>
 
                 <!-- Modal -->
@@ -81,9 +82,11 @@
         </div>
         <div class="modal-footer d-flex justify-content-between">
           <div class="">
-            <button type="button" class="btn btn-outline-secondary" data-toggle="tooltip" data-placement="bottom" title="Свободно: {{ photos.size }}">
-              ?
+
+            <button type="button" class="btn btn-outline-secondary">
+              Свободно: {{ photos.size }}
             </button>
+
           </div>
           <div>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
@@ -109,17 +112,14 @@
                 {% endfor %}
             {% endif %}
 
-<!-- +++++++++++++++++++++++++++++++ MAIN BLOCK +++++++++++++++++++++++++++++++++++++ -->
-
-
-    <button id="loadMoreButton" type="button">Show More</button>
+<!-- ++++++++++++++++++++++++++++++++++++++++++++++ MAIN BLOCK ++++++++++++++++++++++++++++++++++++++++++++++ -->
 
 
     {% if photos.freshman %}
 
       <div class="card mb-4 p-0 shadow" style="background-color:#bfd200;position:sticky;top:50px;z-index:1;">
         <div class="card-body p-1">
-          <h1 class="pl-4" style="color:#fff;">Перый Курс</h1>
+          <h1 class="pl-4" style="color:#fff;">Первый Курс</h1>
         </div>
       </div>
 
@@ -141,7 +141,8 @@
       </div>
     {% endif %}
 
-    <h1 id='hiddeninfo' hidden="true">{{ photos.size }}</h1>
+
+    <!--
 
     {% if photos.sophomore %}
 
@@ -249,8 +250,15 @@
       </div>
     {% endif %}
 
+     -->
 
-<!-- +++++++++++++++++++++++++++++++ MAIN BLOCK +++++++++++++++++++++++++++++++++++++ -->
+    <button name="sophomore" value="sophomore" class="btn btn-outline-warning btn-lg btn-block loadMoreButton" id="loadMoreButtonSophomore" type="button">Второй Курс</button>
+    <button name="junior" value="junior" class="btn btn-outline-warning btn-lg btn-block loadMoreButton" id="loadMoreButtonJunior" type="button">Третий Курс</button>
+    <button name="senior" value="senior" class="btn btn-outline-warning btn-lg btn-block loadMoreButton" id="loadMoreButtonSenior" type="button">Четвертый Курс</button>
+    <button name="post_graduate" value="post_graduate" class="btn btn-outline-warning btn-lg btn-block loadMoreButton" id="loadMoreButtonPost_graduate" type="button">После Выпуска</button>
+
+
+<!-- +++++++++++++++++++++++++++++++++++++++++++ MAIN BLOCK +++++++++++++++++++++++++++++++++++++++++++++ -->
 
         </div>
       </div>
