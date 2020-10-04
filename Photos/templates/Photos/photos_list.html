@@ -127,9 +127,9 @@
       {% for photo in photos.freshman %}
 
           <div class="col-lg-4 col-sm-6 mb-4">
-              <div class="outer boxShad">
+              <div data-tooltip-text="{{ photo.description }}" class="outer boxShad">
               <a style="text-decoration:none;" href="{% url 'photo-detail' photo.pk %}">
-                <div class="inner" style="background-image: url({{ photo.image.url }})" data-toggle="tooltip" data-placement="bottom" title="Комментарии: {{  photo.comments_set.count  }}">
+                <div class="inner" style="background-image: url({{ photo.image.url }})">
                   <span class="titled">{{ photo.title }}</span>
                 </div>
               </a>
@@ -156,9 +156,9 @@
       {% for photo in photos.sophomore %}
 
           <div class="col-lg-4 col-sm-6 mb-4">
-              <div class="outer boxShad">
+              <div data-tooltip-text="{{ photo.description }}" class="outer boxShad">
               <a style="text-decoration:none;" href="{% url 'photo-detail' photo.pk %}">
-                <div class="inner" style="background-image: url({{ photo.image.url }})" data-toggle="tooltip" data-placement="bottom" title="Комментарии: {{  photo.comments_set.count  }}">
+                <div class="inner" style="background-image: url({{ photo.image.url }})">
                   <span class="titled">{{ photo.title }}</span>
                 </div>
               </a>
@@ -183,9 +183,9 @@
       {% for photo in photos.junior %}
 
           <div class="col-lg-4 col-sm-6 mb-4">
-              <div class="outer boxShad">
+              <div data-tooltip-text="{{ photo.description }}" class="outer boxShad">
               <a style="text-decoration:none;" href="{% url 'photo-detail' photo.pk %}">
-                <div class="inner" style="background-image: url({{ photo.image.url }})" data-toggle="tooltip" data-placement="bottom" title="Комментарии: {{  photo.comments_set.count  }}">
+                <div class="inner" style="background-image: url({{ photo.image.url }})">
                   <span class="titled">{{ photo.title }}</span>
                 </div>
               </a>
@@ -210,9 +210,9 @@
       {% for photo in photos.senior %}
 
           <div class="col-lg-4 col-sm-6 mb-4">
-              <div class="outer boxShad">
+              <div data-tooltip-text="{{ photo.description }}" class="outer boxShad">
               <a style="text-decoration:none;" href="{% url 'photo-detail' photo.pk %}">
-                <div class="inner" style="background-image: url({{ photo.image.url }})" data-toggle="tooltip" data-placement="bottom" title="Комментарии: {{  photo.comments_set.count  }}">
+                <div class="inner" style="background-image: url({{ photo.image.url }})">
                   <span class="titled">{{ photo.title }}</span>
                 </div>
               </a>
@@ -236,13 +236,13 @@
       {% for photo in photos.post_graduate %}
 
           <div class="col-lg-4 col-sm-6 mb-4">
-            <div class="outer boxShad">
+              <div data-tooltip-text="{{ photo.description }}" class="outer boxShad">
               <a style="text-decoration:none;" href="{% url 'photo-detail' photo.pk %}">
-                <div class="inner" style="background-image: url({{ photo.image.url }})" data-toggle="tooltip" data-placement="bottom" title="Комментарии: {{  photo.comments_set.count  }}">
+                <div class="inner" style="background-image: url({{ photo.image.url }})">
                   <span class="titled">{{ photo.title }}</span>
                 </div>
               </a>
-            </div>
+              </div>
           </div>
 
       {% endfor %}

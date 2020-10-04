@@ -1,34 +1,13 @@
 $(document).ready(function(){
 
-
-    $('[data-toggle="tooltip"]').tooltip()
-
-
-    console.log("Hello")
-    $('img').css({"opacity": '0.90', })
-    $('img').hover(function() {
-        $(this).animate({zoom: '110%'}, 'fast')
-        $(this).animate({opacity: '1.0'}, 'fast')
-    });
-    $('img').mouseleave(function() {
-        $(this).animate({zoom: '100%'}, 'fast')
-        $(this).animate({opacity: '0.90'}, 'fast')
-    });
-
+    console.log("Works")
 
     $('#spinBut').click(function(){
-        let fe = $('#inn').val();
-        if(fe !== ''){
+    var files = $('#inn').val();
+        if(files !== ''){
             $('#spin').removeAttr('hidden');
         }
     });
-
-
-    $(document).on('include_by_ajax_all_loaded', function() {
-        console.log('Now all placeholders are loaded and replaced with content');
-    });
-
-
 
     $('#photoButton').hover(function(){
         console.log('Hovered');
@@ -41,20 +20,20 @@ $(document).ready(function(){
     // ======================================   AJAX TRYING  ============================================
 
 
-    function photo_div_creator(image_url, title, description, photo_pk, comments_count){
+    function photo_div_creator(image_url, title, description, photo_pk){
 
         let template = `
-        <div class="row">
+
         <div class="col-lg-4 col-sm-6 mb-4">
-              <div class="outer boxShad">
+              <div data-tooltip-text="`+description+`" class="outer boxShad">
               <a style="text-decoration:none;" href="/photos/detail-photo/`+photo_pk+`">
-                <div class="inner" style="background-image: url(`+image_url+`)" data-toggle="tooltip" data-placement="bottom" title="Комментарии: `+comments_count+`">
+                <div class="inner" style="background-image: url(`+image_url+`)">
                   <span class="titled">`+title+`</span>
                 </div>
               </a>
               </div>
           </div>
-        </div>
+
         `
         let ready_template = template.replace('photo.pk', photo_pk)
 
@@ -67,31 +46,45 @@ $(document).ready(function(){
             url: 'next-photos/',
             data: {next: 'Sophomore Year'},
             success: function(response){
-                console.log(response)
-                var photos_array = $.parseJSON(response['sophomore'])[0]
-                var comments_count_list = $.parseJSON(response['comments_count'])
 
+                var wholeYearSet_Photos
+                var wholeYear_Module
+                var row_FirstTag = `<div class="row">`
+                var row_LastTag = `</div>`
 
-                let photo_url = '/media/' + photos_array['fields']['image']
-                let desctiption = photos_array['fields']['description']
-                let title = photos_array['fields']['title']
-                let photo_id = photos_array['pk']
-                let comments_count = comments_count_list
-                let toPaste = photo_div_creator(photo_url, title, desctiption, photo_id, comments_count)
-                console.log(photo_url)
+                var header_of_Year = `
+                    <div class="card mt-5 mb-4 p-0 shadow" style="background-color:#bfd200;position:sticky;top:50px;z-index:5;">
+                        <div class="card-body p-1">
+                          <h1 class="pl-4" style="color:#fff;">После Выпуска</h1>
+                        </div>
+                    </div>
+                `
+
+                var photos_array = $.parseJSON(response['sophomore'])
+                console.log(photos_array)
+                for (photo of photos_array){
+                    console.log(photo)
+                    let photo_url = '/media/' + photo['fields']['image']
+                    let desctiption = photo['fields']['description']
+                    let title = photo['fields']['title']
+                    let photo_id = photo['pk']
+
+                    let toPaste = photo_div_creator(photo_url, title, desctiption, photo_id)
+                    if (toPaste !== undefined){
+                        wholeYearSet_Photos += toPaste
+                    }
+                }
+
+                wholeYear_Module = header_of_Year + row_FirstTag + wholeYearSet_Photos + row_LastTag + '<br><br>'
+
+                var output = wholeYear_Module.replace(/undefined/g, "");
                 $('#loadMoreButton').after(
-                    toPaste
+                    output
                     )
-
-
             },
             error: function (response) {
-                alert('Error!');
+                console.log(response);
             }
-        })
-    })
-
+        });
+    });
 });
-
-
-
