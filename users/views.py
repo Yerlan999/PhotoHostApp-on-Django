@@ -56,3 +56,13 @@ class UserListView(ListView):
 
 class CustomUserLoginView(auth_views.LoginView):
     form_class = CustomUserLoginForm
+
+
+def cropper_test_view(request):
+    if request.method == "POST":
+        print(request.POST['x[]'])
+        print(request.POST['y[]'])
+        print(request.POST['width[]'])
+        print(request.POST['height[]'])
+
+    return render(request, 'users/test_cropper.html')

@@ -49,6 +49,7 @@ urlpatterns = [
 
     path("photos/", include("Photos.urls")),
     path('users-list/', user_views.UserListView.as_view(), name='users-list'),
+    path('crop/', user_views.cropper_test_view, name='crop'),
 ]
 
 

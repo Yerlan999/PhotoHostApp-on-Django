@@ -1,44 +1,59 @@
 .gradImg{
-    width: 100px;
-    height: 130px;
+    width: 110px;
+    height: 140px;
     position: relative;
-    top: 60px;
+    top: 70px;
 }
 
 #mate{
-    width: 160px;
-    height: 230px;
+    width: 195px;
+    height: 290px;
     background-image: url("frame4.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     margin: 50px 10px 50px 10px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: #aacc00;
 }
 
 #prof{
-    width: 160px;
-    height: 230px;
+    width: 195px;
+    height: 290px;
     background-image: url("frame4prof.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     margin: 50px 10px 50px 10px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: gold;
 }
 
 
 #cap{
-    width: 160px;
-    height: 230px;
+    width: 195px;
+    height: 290px;
     background-image: url("frame4cap.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     margin: 50px 10px 50px 10px;
+    border-width: 3px;
+    border-style: solid;
+    border-color: #aacc00;
 }
 #hh{
     font-size: 14px;
-    background-color: #f9f3c0;
+    background-color: #aacc00;
+    width: 195px;
+    position: relative;
+    left: -3px;
 }
 
 #pp{
     font-size: 12px;
+    width: 195px;
+    position: relative;
+    left: -3px;
 }
 
 .img{

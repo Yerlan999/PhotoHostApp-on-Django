@@ -76,30 +76,31 @@
 
 <!-- +++++++++++++++++++++++++++++++ MAIN BLOCK +++++++++++++++++++++++++++++++++++++ -->
 
-    <img class="img-fluid mx-auto d-block" src="{% static 'users/helper_images/grad.jpg' %}" alt="Oppps">
+    <img class="img-fluid mx-auto d-block" src="{% static 'users/helper_images/grad.png' %}" alt="Oppps">
 
-    <div>
+
         <h1 class="display-4 mt-3 text-center text-black" style="text-shadow: 4px 0px 6px rgba(56,24,15,0.36);font-weight:400;">Выпуск 2019 АТТ-401</h1>
 
 
         <div class="d-flex justify-content-center mb-3">
-        <div id="prof" class="d-inline-block Grad">
+        <div id="prof" class="d-inline-block Grad shadow-lg">
 
-            <img class="rounded-circle z-depth-2 mx-auto d-block mb-0 gradImg img-thumbnail" src="{% static 'users/helper_images/djadich.jpg' %}">
+            <img class="rounded-circle z-depth-2 mx-auto d-block mb-0 gradImg" src="{% static 'users/helper_images/djadich.jpg' %}">
             <br><br><br>
             <div>
-              <h1 id="hh" class="list-group-item list-group-item-action list-group-item-dark rounded text-center mb-0" style="background-color:#aacc00;">Куратор: Кайрат Джадыгерович</h2>
+              <h1 id="hh" class="list-group-item list-group-item-action list-group-item-dark rounded text-center mb-0" style="background-color:gold;">Куратор: Кайрат Джадыгерович</h2>
               <h1 id="pp" class="a list-group-item disabled rounded text-center mt-0">Only in English "Джадыч"</h1>
             </div>
         </div>
         </div>
 
-
+        <div class="">
         {% for user in users %}
             {% if request.user.username == user.username %}
                 {% if user.profile.cap %}
-                  <a class="nav-item nav-link d-inline-block" style="color:#ffffff;margin:0px;" href="{% url 'profile' %}">
-                  <div id="cap" class="d-inline-block Grad">
+
+                  <a class="d-inline-block" style="color:#ffffff;margin:0px;text-decoration:none;" href="{% url 'profile' %}">
+                  <div id="cap" class="d-inline-block Grad shadow-lg">
 
                       <img class="rounded-circle z-depth-2 mx-auto d-block mb-0 gradImg" style="border:solid #111224 1px;" src="{{ user.profile.image.url }}">
                       <br><br><br>
@@ -110,8 +111,8 @@
                   </div>
                   </a>
                 {% else %}
-                  <a class="nav-item nav-link d-inline-block" style="color:#ffffff;margin:0px;" href="{% url 'profile' %}">
-                  <div id="mate" class="d-inline-block Grad">
+                  <a class="d-inline-block" style="color:#ffffff;margin:0px;text-decoration:none;" href="{% url 'profile' %}">
+                  <div id="mate" class="d-inline-block Grad shadow-lg">
 
                       <img class="rounded-circle z-depth-2 mx-auto d-block mb-0 gradImg" style="border:solid #111224 1px;" src="{{ user.profile.image.url }}">
                       <br><br><br>
@@ -124,7 +125,7 @@
                 {% endif %}
             {% else %}
                 {% if user.profile.cap %}
-                  <div id="cap" class="d-inline-block Grad">
+                  <div id="cap" class="d-inline-block Grad shadow-lg">
 
                       <img class="rounded-circle z-depth-2 mx-auto d-block mb-0 gradImg" style="border:solid #111224 1px;" src="{{ user.profile.image.url }}">
                       <br><br><br>
@@ -134,7 +135,7 @@
                       </div>
                   </div>
                 {% else %}
-                  <div id="mate" class="d-inline-block Grad">
+                  <div id="mate" class="d-inline-block Grad shadow-lg">
 
                       <img class="rounded-circle z-depth-2 mx-auto d-block mb-0 gradImg" style="border:solid #111224 1px;" src="{{ user.profile.image.url }}">
                       <br><br><br>
@@ -146,7 +147,7 @@
             {% endif %}
           {% endif %}
         {% endfor %}
-    </div>
+        </div>
 
 <!-- +++++++++++++++++++++++++++++++ MAIN BLOCK +++++++++++++++++++++++++++++++++++++ -->
 

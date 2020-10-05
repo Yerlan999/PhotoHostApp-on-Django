@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 {% load static %}
-{% load include_by_ajax_tags %}
 
 <html lang="en">
 <head>
@@ -142,115 +141,6 @@
     {% endif %}
 
 
-    <!--
-
-    {% if photos.sophomore %}
-
-      <div class="card mt-5 mb-4 p-0 shadow" style="background-color:#bfd200;position:sticky;top:50px;z-index:2;">
-        <div class="card-body p-1">
-          <h1 class="pl-4" style="color:#fff;">Второй Курс</h1>
-        </div>
-      </div>
-
-
-      <div class="row">
-      {% for photo in photos.sophomore %}
-
-          <div class="col-lg-4 col-sm-6 mb-4">
-              <div data-tooltip-text="{{ photo.description }}" class="outer boxShad">
-              <a style="text-decoration:none;" href="{% url 'photo-detail' photo.pk %}">
-                <div class="inner" style="background-image: url({{ photo.image.url }})">
-                  <span class="titled">{{ photo.title }}</span>
-                </div>
-              </a>
-              </div>
-          </div>
-
-      {% endfor %}
-      </div>
-    {% endif %}
-
-
-
-    {% if photos.junior %}
-
-      <div class="card mt-5 mb-4 p-0 shadow" style="background-color:#bfd200;position:sticky;top:50px;z-index:3;">
-        <div class="card-body p-1">
-          <h1 class="pl-4" style="color:#fff;">Третий Курс</h1>
-        </div>
-      </div>
-
-      <div class="row">
-      {% for photo in photos.junior %}
-
-          <div class="col-lg-4 col-sm-6 mb-4">
-              <div data-tooltip-text="{{ photo.description }}" class="outer boxShad">
-              <a style="text-decoration:none;" href="{% url 'photo-detail' photo.pk %}">
-                <div class="inner" style="background-image: url({{ photo.image.url }})">
-                  <span class="titled">{{ photo.title }}</span>
-                </div>
-              </a>
-              </div>
-          </div>
-
-      {% endfor %}
-      </div>
-    {% endif %}
-
-
-
-    {% if photos.senior %}
-
-      <div class="card mt-5 mb-4 p-0 shadow" style="background-color:#bfd200;position:sticky;top:50px;z-index:4;">
-        <div class="card-body p-1">
-          <h1 class="pl-4" style="color:#fff;">Четвертый Курс</h1>
-        </div>
-      </div>
-
-      <div class="row">
-      {% for photo in photos.senior %}
-
-          <div class="col-lg-4 col-sm-6 mb-4">
-              <div data-tooltip-text="{{ photo.description }}" class="outer boxShad">
-              <a style="text-decoration:none;" href="{% url 'photo-detail' photo.pk %}">
-                <div class="inner" style="background-image: url({{ photo.image.url }})">
-                  <span class="titled">{{ photo.title }}</span>
-                </div>
-              </a>
-              </div>
-          </div>
-
-      {% endfor %}
-      </div>
-    {% endif %}
-
-
-    {% if photos.post_graduate %}
-
-      <div class="card mt-5 mb-4 p-0 shadow" style="background-color:#bfd200;position:sticky;top:50px;z-index:5;">
-        <div class="card-body p-1">
-          <h1 class="pl-4" style="color:#fff;">После Выпуска</h1>
-        </div>
-      </div>
-
-      <div class="row">
-      {% for photo in photos.post_graduate %}
-
-          <div class="col-lg-4 col-sm-6 mb-4">
-              <div data-tooltip-text="{{ photo.description }}" class="outer boxShad">
-              <a style="text-decoration:none;" href="{% url 'photo-detail' photo.pk %}">
-                <div class="inner" style="background-image: url({{ photo.image.url }})">
-                  <span class="titled">{{ photo.title }}</span>
-                </div>
-              </a>
-              </div>
-          </div>
-
-      {% endfor %}
-      </div>
-    {% endif %}
-
-     -->
 
     <button name="sophomore" value="sophomore" class="btn btn-outline-warning btn-lg btn-block loadMoreButton" id="loadMoreButtonSophomore" type="button">Второй Курс</button>
     <button name="junior" value="junior" class="btn btn-outline-warning btn-lg btn-block loadMoreButton" id="loadMoreButtonJunior" type="button">Третий Курс</button>
@@ -270,7 +160,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     <script type="text/javascript" src="{% static 'Photos/script_photos_list.js' %}"></script>
-    <script src="{% static 'Photos/include_by_ajax/js/include_by_ajax.js' %}" defer></script>
+
 </body>
 </html>
 
