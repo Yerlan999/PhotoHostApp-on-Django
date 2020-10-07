@@ -4,8 +4,8 @@
 {% load widget_tweaks %}
 
 {% block head %}
-    <link href="{% static 'users/css/rcrop.min.css' %}" rel="stylesheet">
-    <link href="{% static 'users/css/crop.css' %}" rel="stylesheet">
+    <link rel="shortcut icon" href="">
+    <link rel="shortcut icon" href="#">
 {% endblock head %}
 
 
@@ -35,12 +35,19 @@
         </form>
     </div>
 
+
+    <h1>Testing Cropzee</h1>
+    <input id="cropzee-input" type="file" name="">
+    <div id="" class="image-previewer" data-cropzee="cropzee-input"></div>
+    <button onclick="cropzeeGetImage('cropzee-input')">Get Image (as blob / data-url)</button>
+
+
 {% endblock content %}
 
 
 {% block for_scripts %}
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
-    <script type="text/javascript" src="{% static 'users/js/rcrop.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'users/js/cropzee.js' %}"></script>
     <script type="text/javascript" src="{% static 'users/js/crop.js' %}"></script>
 {% endblock for_scripts %}
 
