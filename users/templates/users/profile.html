@@ -1,6 +1,17 @@
 {% extends "BlogApp/base.html" %}
+{% load static %}
 {% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+{% block head %}
+    <link href="{% static 'users/css/rcrop.min.css' %}" rel="stylesheet">
+    <link href="{% static 'users/css/crop.css' %}" rel="stylesheet">
+{% endblock head %}
+
+
+
 {% block content %}
+
     <div class="content-section">
       <div class="media">
         <img class="rounded-circle account-img" src="{{ user.profile.image.url }}">
@@ -23,7 +34,15 @@
             </div>
         </form>
     </div>
+
 {% endblock content %}
+
+
+{% block for_scripts %}
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+    <script type="text/javascript" src="{% static 'users/js/rcrop.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'users/js/crop.js' %}"></script>
+{% endblock for_scripts %}
 
 
 

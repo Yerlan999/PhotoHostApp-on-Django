@@ -114,34 +114,9 @@
 <!-- ++++++++++++++++++++++++++++++++++++++++++++++ MAIN BLOCK ++++++++++++++++++++++++++++++++++++++++++++++ -->
 
 
-    {% if photos.freshman %}
-
-      <div class="card mb-4 p-0 shadow" style="background-color:#bfd200;position:sticky;top:50px;z-index:1;">
-        <div class="card-body p-1">
-          <h1 class="pl-4" style="color:#fff;">Первый Курс</h1>
-        </div>
-      </div>
-
-      <div class="row">
-      {% for photo in photos.freshman %}
-
-          <div class="col-lg-4 col-sm-6 mb-4">
-              <div data-tooltip-text="{{ photo.description }}" class="outer boxShad">
-              <a style="text-decoration:none;" href="{% url 'photo-detail' photo.pk %}">
-                <div class="inner" style="background-image: url({{ photo.image.url }})">
-                  <span class="titled">{{ photo.title }}</span>
-                </div>
-              </a>
-              </div>
-          </div>
 
 
-      {% endfor %}
-      </div>
-    {% endif %}
-
-
-
+    <button name="freshman" value="freshman" class="btn btn-outline-warning btn-lg btn-block loadMoreButton" id="loadMoreButtonFreshman" type="button">Первый Курс</button>
     <button name="sophomore" value="sophomore" class="btn btn-outline-warning btn-lg btn-block loadMoreButton" id="loadMoreButtonSophomore" type="button">Второй Курс</button>
     <button name="junior" value="junior" class="btn btn-outline-warning btn-lg btn-block loadMoreButton" id="loadMoreButtonJunior" type="button">Третий Курс</button>
     <button name="senior" value="senior" class="btn btn-outline-warning btn-lg btn-block loadMoreButton" id="loadMoreButtonSenior" type="button">Четвертый Курс</button>

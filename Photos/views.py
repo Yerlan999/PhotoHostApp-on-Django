@@ -110,20 +110,20 @@ class PhotoListView(ListView):
 
         queryset = {
 
-        'freshman': Photo.objects.filter(Q(
-            date_taken__gte=datetime(2015, 9, 1)) & Q(date_taken__lt=datetime(2016, 9, 1))).order_by('date_taken'),
+        # 'freshman': Photo.objects.filter(Q(
+        #     date_taken__gte=datetime(2015, 9, 1)) & Q(date_taken__lt=datetime(2016, 9, 1))).order_by('date_taken'),
 
-        'sophomore': Photo.objects.filter(Q(
-            date_taken__gte=datetime(2016, 9, 1)) & Q(date_taken__lt=datetime(2017, 9, 1))).order_by('date_taken'),
+        # 'sophomore': Photo.objects.filter(Q(
+        #     date_taken__gte=datetime(2016, 9, 1)) & Q(date_taken__lt=datetime(2017, 9, 1))).order_by('date_taken'),
 
-        'junior': Photo.objects.filter(Q(
-            date_taken__gte=datetime(2017, 9, 1)) & Q(date_taken__lt=datetime(2018, 9, 1))).order_by('date_taken'),
+        # 'junior': Photo.objects.filter(Q(
+        #     date_taken__gte=datetime(2017, 9, 1)) & Q(date_taken__lt=datetime(2018, 9, 1))).order_by('date_taken'),
 
-        'senior': Photo.objects.filter(Q(
-            date_taken__gte=datetime(2018, 9, 1)) & Q(date_taken__lt=datetime(2019, 7, 1))).order_by('date_taken'),
+        # 'senior': Photo.objects.filter(Q(
+        #     date_taken__gte=datetime(2018, 9, 1)) & Q(date_taken__lt=datetime(2019, 7, 1))).order_by('date_taken'),
 
-        'post_graduate': Photo.objects.filter(Q(
-            date_taken__gte=datetime(2019, 7, 1))).order_by('date_taken'),
+        # 'post_graduate': Photo.objects.filter(Q(
+        #     date_taken__gte=datetime(2019, 7, 1))).order_by('date_taken'),
 
         'size': str(size_in_GB) + ' ГБ',
 

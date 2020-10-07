@@ -30,8 +30,9 @@ $(document).ready(function(){
         return template;
     }
 
-    $('.loadMoreButton').click(function(){
+    $('.loadMoreButton').click(function(e){
         console.log("Triggered")
+        e.preventDefault()
         let what_year = $(this).val();
 
         $.ajax({

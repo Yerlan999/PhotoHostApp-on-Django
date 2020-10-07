@@ -23,16 +23,19 @@ def register(request):
         form = UserRegisterForm()
     return render(request, "users/register.html", {"form": form})
 
+
 @login_required
 def profile(request):
     if request.method == "POST":
+
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST,
                                    request.FILES,
                                    instance=request.user.profile)
         if p_form.is_valid() and u_form.is_valid():
-            p_form.save()
+
             u_form.save()
+            p_form.save()
             messages.success(request, f"Профиль был успешно обновлен!")
             return redirect("profile")
 
@@ -60,9 +63,6 @@ class CustomUserLoginView(auth_views.LoginView):
 
 def cropper_test_view(request):
     if request.method == "POST":
-        print(request.POST['x[]'])
-        print(request.POST['y[]'])
-        print(request.POST['width[]'])
-        print(request.POST['height[]'])
+        pass
 
     return render(request, 'users/test_cropper.html')
