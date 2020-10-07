@@ -131,13 +131,14 @@ class ProfileUpdateForm(forms.ModelForm):
         months=MONTHS, empty_label=("Год рождения", "Месяц", "День")), required=False)
     cap = forms.BooleanField(label='Ты был(а) старостой?', help_text='Отметь если ты Жора', required=False)
     nickname = forms.CharField(label='Как тебя все называли?', help_text= _("Пример: Бигсом/Пазик/Герыч"), required=False)
-    image = forms.ImageField(label='<strong>Аватарка</strong>', widget=MyClearableFileInput(), help_text='Картинка будет переформатированна в целях сохранения памяти')
-    x = forms.IntegerField(widget=forms.HiddenInput(), required=False)
-    y = forms.IntegerField(widget=forms.HiddenInput(), required=False)
-    width = forms.IntegerField(widget=forms.HiddenInput(), required=False)
-    height = forms.IntegerField(widget=forms.HiddenInput(), required=False)
+    # image = forms.ImageField(label='<strong>Аватарка</strong>', widget=MyClearableFileInput(), help_text='Картинка будет переформатированна в целях сохранения памяти')
+    left = forms.IntegerField(widget=forms.HiddenInput(), required=False)
+    upper = forms.IntegerField(widget=forms.HiddenInput(), required=False)
+    right = forms.IntegerField(widget=forms.HiddenInput(), required=False)
+    lower = forms.IntegerField(widget=forms.HiddenInput(), required=False)
+
 
     class Meta:
         model = Profile # Model that we are going to work with
-        fields = ["image", 'birthday', 'nickname', 'cap', 'x', 'y', 'width', 'height']
-
+        fields = ['birthday', 'nickname', 'cap']
+        # image, excluded

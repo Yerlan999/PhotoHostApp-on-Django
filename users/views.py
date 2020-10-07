@@ -6,7 +6,10 @@ from django.views.generic import ListView
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from django.contrib.auth import views as auth_views
+from django.http import JsonResponse
+from django.core import serializers
 # Create your views here.
+
 
 
 def register(request):
@@ -61,8 +64,18 @@ class CustomUserLoginView(auth_views.LoginView):
     form_class = CustomUserLoginForm
 
 
-def cropper_test_view(request):
-    if request.method == "POST":
-        pass
 
-    return render(request, 'users/test_cropper.html')
+
+def update_profile_picture(request, *args, **kwargs):
+
+
+        if request.is_ajax and request.method == 'POST':
+            print('Testting POST: ')
+            print(request.POST)
+            username = request.POST['user']
+
+
+            user = User.objects.get(username=username)
+            print(user.profile.image)
+        response = 'Everythins went well!'
+        return JsonResponse({'response': response}, status=200)

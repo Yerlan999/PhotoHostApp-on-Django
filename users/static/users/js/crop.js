@@ -5,50 +5,158 @@ $(document).ready(function(){
 console.log("wooooo")
 
 
-// Catching Input file upload event 'native'
-$('input:file').change(function(){
-    console.log("FFFFF")
-})
 
 
-// Using Cropzee plugin
+ // FOR GETTING IMAGE URL FROM INPUT TAG
 
-$("#cropzee-input").cropzee({
-  allowedInputs: ['png','jpg','jpeg'],
-  imageExtension:'image/jpeg',
-  returnImageMode:'data-url',
+function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
-  // custom aspect radio
-  aspectRatio: null,
-
-  // min/max sizes
-  maxSize: { width: null, height: null },
-  minSize: { width: null, height: null },
-
-  // start size of crop region
-  startSize: { width: 100, height: 100, unit: '%' },
+                reader.onload = function (e) {
 
 
-  // Event handling functions
-  onCropStart: function(data) {
-    console.log(data.x, data.y, data.width, data.height);
-  },
-  onCropMove: function(data) {
-    console.log(data.x, data.y, data.width, data.height);
-  },
-  onCropEnd: function(data) {
-    console.log(data.x, data.y, data.width, data.height);
-  },
-  onInitialize: function(instance) {
-    // do things here
-  }
+                    // SHOW UPLOADED(SELECTED) IMAGE
+
+                    $('#ProfilePicture').removeAttr('hidden');
+                    $('#ProfilePicture').attr('src', e.target.result);
+                    $('#cancelButton').removeAttr('hidden');
+                    $('#cropButton').removeAttr('hidden');
+
+                    // THEN CROPPIE TAKES PLACE
+
+
+                    var user_profile_pic = $('#ProfilePicture').croppie({
+                      // url: '',
+
+
+                      // viewport options
+                      viewport: {
+                        width: 250,
+                        height: 250,
+                        type: 'square' // or 'circle' square
+                      },
+
+                      update: function (data) {
+
+                            var [left, upper, right, lower] = data['points'];
+
+                            $('#id_left').val(left)
+                            $('#id_right').val(right)
+                            $('#id_lower').val(lower)
+                            $('#id_upper').val(upper)
+                      },
+                      // boundary options
+                      boundary: {
+                        width: 500,
+                        height: 500
+                      },
+
+                      // orientation controls
+                      orientationControls: {
+                        enabled: true,
+                        leftClass: '',
+                        rightClass: ''
+                      },
+
+                      // resize controls
+                      resizeControls: {
+                        width: true,
+                        height: true
+                      },
+
+                      // addiontal CSS class
+                      customClass: '',
+
+                      // enable image zoom
+
+                      // enable image resize
+                      enableResize: false,
+
+                      // show image zoom control
+                      showZoomer: true,
+
+                      // image zoom with mouse wheel
+                      mouseWheelZoom: true,
+
+                      // enable exif orientation reading
+                      enableExif: true,
+
+                      // restrict zoom so image cannot be smaller than viewport
+                      enforceBoundary: true,
+
+                      // enable orientation
+                      enableOrientation: true,
+
+                      // enable key movement
+                      enableKeyMovement: true,
+
+
+                    });
+
+                    $('#cropButton').click(function(){
+                        user_profile_pic.croppie('result', 'canvas').then(function(canvas) {
+                        console.log(canvas)
+                        console.log("Showing Preview and Unhiding AJAX Button");
+                    });
+
+
+                    });
+
+                    // TEST SCOPE FOR AJAX HERE
+
+
+
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        // IF INPUT FIELD CHANGES
+        $("#id_image").change(function(){
+            readURL(this);
+        });
+
+
+
+// Using Croppie plugin
+
+
+$('#profileImageUpload').click(function(e){
+        e.preventDefault()
+
+        var userName = $('h2.account-heading').text()
+
+        var left = $('#id_left').val()
+        var right = $('#id_right').val()
+        var lower = $('#id_lower').val()
+        var upper = $('#id_upper').val()
+
+
+        $.ajax({
+            type: 'POST',
+            url: 'profile-image-update/',
+            data: {
+                user: userName,
+                coordinates: [left, upper, right, lower],
+                csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken').val(),
+                },
+
+            success: function(response){
+                console.log('SUCCESS');
+                console.log(response)
+
+            },
+            error: function (response) {
+                console.log('ERROR');
+                console.log(response);
+            }
+});
 
 
 });
 
+
 });
-
-
 
 
 
