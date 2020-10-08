@@ -20,21 +20,24 @@ class Profile(models.Model):
         return f"{self.user.username} Профиль"
 
     def save(self, *args, **kwargs):
-
+        super().save(*args, **kwargs)
         if ((self.left or self.upper or self.right or self.lower) and (type(self.left)==int) ):
-            print("FROM FORM: ")
-            print(self.left , self.upper , self.right , self.lower)
 
-            super().save(*args, **kwargs)
             img = Image.open(self.image.path)
-            img_cropped = img.crop((self.left, self.upper, self.right, self.lower))
-            # if img_cropped.height > 300 or img_cropped.width > 300:
-            #     output_size = (300, 300)
-            #     img_cropped.thumbnail(output_size)
-            #     img_cropped.save(self.image.path)
-            img_cropped.save(self.image.path)
+
+
+            img = img.transpose(method=Image.ROTATE_270)
+
+            img = img.crop((self.left, self.upper, self.right, self.lower))
+            if img.height > 300 or img.width > 300:
+                output_size = (300, 300)
+                img.thumbnail(output_size)
+                img.save(self.image.path)
+            img.load()
+
+            img.save(self.image.path)
         else:
-            super().save(*args, **kwargs)
+
             img = Image.open(self.image.path)
             if img.height > 300 or img.width > 300:
                 output_size = (300, 300)

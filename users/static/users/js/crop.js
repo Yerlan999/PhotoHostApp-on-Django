@@ -6,7 +6,7 @@ console.log("wooooo")
 
 
 var fff = $('a').eq(-1)[0].href
-console.log(fff)
+
 
 
 
@@ -23,7 +23,7 @@ var user_profile_pic = $('#demo').croppie({
   update: function (data) {
 
         var [left, upper, right, lower] = data['points'];
-        console.log(data['points'])
+
         $('#id_left').val(left)
         $('#id_right').val(right)
         $('#id_lower').val(lower)
@@ -80,7 +80,6 @@ var user_profile_pic = $('#demo').croppie({
 
 $('#demo').croppie('bind', {
     url: fff,
-    orientation: 1,
 });
 
 
@@ -96,9 +95,11 @@ function readURL(input) {
 
         // $('#ProfilePicture').attr('src', e.target.result);
 
+        window.uploaded_image = e.target.result
+
         $('#demo').croppie('bind', {
             url: e.target.result,
-            orientation: 1,
+
 
         });
 
@@ -134,7 +135,23 @@ $("#id_image").change(function(){
 });
 
 
+$('#Button1').click(function(){
+$('#demo').croppie('bind', {
+    url: window.uploaded_image,
+    orientation: 2,
 
+});
+
+})
+
+$('#Button2').click(function(){
+$('#demo').croppie('bind', {
+    url: window.uploaded_image,
+    orientation: 3,
+
+});
+
+})
 
 
 });

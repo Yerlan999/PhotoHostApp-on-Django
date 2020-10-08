@@ -31,15 +31,19 @@ def register(request):
 @login_required
 def profile(request):
     if request.method == "POST":
-
+        # print('Form: ')
+        # print(request.FILES)
         u_form = UserUpdateForm(request.POST, instance=request.user)
         p_form = ProfileUpdateForm(request.POST,
                                    request.FILES,
                                    instance=request.user.profile)
         if p_form.is_valid() and u_form.is_valid():
-
+            # print('profile: ')
+            # print(dir(p_form))
+            # print(dir(p_form.fields['left']))
+            # print(dir(p_form.hidden_fields()))
             u_form.save()
-            p_form.save()
+            p_form.save(commit=False)
             messages.success(request, f"Профиль был успешно обновлен!")
             return redirect("profile")
 
