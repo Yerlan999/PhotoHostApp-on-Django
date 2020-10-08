@@ -1,7 +1,6 @@
 {% extends "BlogApp/base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
-{% load widget_tweaks %}
 
 {% block head %}
     <meta name="csrf-token" content="{% csrf_token %}">
@@ -42,7 +41,8 @@
         </form>
     </div>
 
-    <img id="ProfilePicture" src="" alt="Profile Picture" hidden="true">
+    <div id="demo"></div>
+    <img id="ProfilePicture" src="" alt="Profile Picture">
     <button type="button" id="cancelButton" hidden="true">Cancel</button>
     <button type="button" id="cropButton" hidden="true">Crop and Save</button>
 
