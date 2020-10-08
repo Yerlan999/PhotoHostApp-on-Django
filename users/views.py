@@ -8,6 +8,7 @@ from django.core.exceptions import ValidationError
 from django.contrib.auth import views as auth_views
 from django.http import JsonResponse
 from django.core import serializers
+
 # Create your views here.
 
 
@@ -71,7 +72,7 @@ def update_profile_picture(request, *args, **kwargs):
 
         if request.is_ajax and request.method == 'POST':
             print('Testting POST: ')
-            print(request.POST)
+            print(request.POST['image_bin'])
             username = request.POST['user']
 
 

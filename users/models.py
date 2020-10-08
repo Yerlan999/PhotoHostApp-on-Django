@@ -10,6 +10,10 @@ class Profile(models.Model):
     nickname = models.CharField(max_length=100, null=True, blank=True)
     birthday = models.DateField(null=True, blank=True)
     cap = models.BooleanField(null=True, blank=True)
+    left = models.IntegerField(null=True, blank=True)
+    upper = models.IntegerField(null=True, blank=True)
+    right = models.IntegerField(null=True, blank=True)
+    lower = models.IntegerField(null=True, blank=True)
 
 
     def __str__(self):
@@ -17,25 +21,18 @@ class Profile(models.Model):
 
     def save(self, *args, **kwargs):
 
-        if ((self.x and self.y and self.width and self.height) and (type(self.x)==int) ):
+        if ((self.left or self.upper or self.right or self.lower) and (type(self.left)==int) ):
             print("FROM FORM: ")
-            print(self.x, self.y, self.width, self.height)
+            print(self.left , self.upper , self.right , self.lower)
 
             super().save(*args, **kwargs)
             img = Image.open(self.image.path)
-            print('Image Size: ')
-            print(img.width, img.height)
-            left = self.x
-            upper = self.y + img.height
-            right =  self.width + left
-            lower = img.height + upper
-
-            print('EDITED: ')
-            print(left, upper, right, lower)
-
-            # img = img.crop((left, upper, right, lower))
-            img.save(self.image.path)
-
+            img_cropped = img.crop((self.left, self.upper, self.right, self.lower))
+            # if img_cropped.height > 300 or img_cropped.width > 300:
+            #     output_size = (300, 300)
+            #     img_cropped.thumbnail(output_size)
+            #     img_cropped.save(self.image.path)
+            img_cropped.save(self.image.path)
         else:
             super().save(*args, **kwargs)
             img = Image.open(self.image.path)
