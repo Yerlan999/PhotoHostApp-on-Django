@@ -137,6 +137,7 @@ class ProfileUpdateForm(forms.ModelForm):
     right = forms.IntegerField(widget=forms.HiddenInput(), required=False)
     lower = forms.IntegerField(widget=forms.HiddenInput(), required=False)
 
+
     class Meta:
         model = Profile # Model that we are going to work with
         fields = ['birthday', 'nickname', 'cap', 'image', 'left', 'upper', 'right', 'lower']

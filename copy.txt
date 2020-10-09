@@ -106,42 +106,43 @@
 
 
 
-// $('#profileImageUpload').click(function(e){
-//         e.preventDefault()
+$('#profileImageUpload').click(function(e){
+         e.preventDefault()
 
-//         var userName = $('h2.account-heading').text()
+         var userName = $('h2.account-heading').text()
 
-//         var image_binary = $('#id_binary').val()
+         var image_binary = $('#id_binary').val()
 
-//         var left = $('#id_left').val()
-//         var right = $('#id_right').val()
-//         var lower = $('#id_lower').val()
-//         var upper = $('#id_upper').val()
-
-
-//         $.ajax({
-//             type: 'POST',
-//             url: 'profile-image-update/',
-//             data: {
-//                 user: userName,
-//                 image_bin: image_binary,
-//                 coordinates: [left, upper, right, lower],
-//                 csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken').val(),
-//                 },
-
-//             success: function(response){
-//                 console.log('SUCCESS');
-//                 console.log(response)
-
-//             },
-//             error: function (response) {
-//                 console.log('ERROR');
-//                 console.log(response);
-//             }
-// });
+         var left = $('#id_left').val()
+         var right = $('#id_right').val()
+         var lower = $('#id_lower').val()
+         var upper = $('#id_upper').val()
 
 
-// });
+         $.ajax({
+             type: 'POST',
+             url: 'profile-image-update/',
+             data: {
+                 user: userName,
+                 image_bin: image_binary,
+                 coordinates: [left, upper, right, lower],
+                 csrfmiddlewaretoken:$('input[name=csrfmiddlewaretoken').val(),
+                 },
+
+             success: function(response){
+                 console.log('SUCCESS');
+                 console.log(response)
+
+             },
+             error: function (response) {
+                 console.log('ERROR');
+                 console.log(response);
+             }
+ });
+
+
+ });
+
 
 
 

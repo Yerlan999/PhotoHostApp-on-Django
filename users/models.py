@@ -16,25 +16,32 @@ class Profile(models.Model):
     lower = models.IntegerField(null=True, blank=True)
 
 
+
     def __str__(self):
         return f"{self.user.username} Профиль"
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
+        img = Image.open(self.image.path)
+
+        if img.getexif().get(274):
+            orientation = img.getexif()[274]
+        else:
+            orientation = 0
+
         if ((self.left or self.upper or self.right or self.lower) and (type(self.left)==int) ):
-
-            img = Image.open(self.image.path)
-
-
-            img = img.transpose(method=Image.ROTATE_270)
-
+            if orientation == 6:
+                img = img.transpose(method=Image.ROTATE_270)
+            elif orientation == 3:
+                img = img.transpose(method=Image.ROTATE_180)
+            elif orientation == 8:
+                img = img.transpose(method=Image.ROTATE_90)
             img = img.crop((self.left, self.upper, self.right, self.lower))
             if img.height > 300 or img.width > 300:
                 output_size = (300, 300)
                 img.thumbnail(output_size)
                 img.save(self.image.path)
             img.load()
-
             img.save(self.image.path)
         else:
 

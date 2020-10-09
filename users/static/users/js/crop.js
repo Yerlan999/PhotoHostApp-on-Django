@@ -1,14 +1,10 @@
 $(document).ready(function(){
 
-
 // Checking if js is loaded properly
 console.log("wooooo")
 
 
-var fff = $('a').eq(-1)[0].href
-
-
-
+// window.current_image = $('a').eq(-1)[0].href
 
 // THEN CROPPIE TAKES PLACE
 var user_profile_pic = $('#demo').croppie({
@@ -22,12 +18,12 @@ var user_profile_pic = $('#demo').croppie({
 
   update: function (data) {
 
-        var [left, upper, right, lower] = data['points'];
+      var [left, upper, right, lower] = data['points'];
 
-        $('#id_left').val(left)
-        $('#id_right').val(right)
-        $('#id_lower').val(lower)
-        $('#id_upper').val(upper)
+      $('#id_left').val(left)
+      $('#id_right').val(right)
+      $('#id_lower').val(lower)
+      $('#id_upper').val(upper)
   },
   // boundary options
   boundary: {
@@ -63,7 +59,7 @@ var user_profile_pic = $('#demo').croppie({
   mouseWheelZoom: true,
 
   // enable exif orientation reading
-  enableExif: true,
+  enableExif:true,                                               // !!!!!!!!!!!!!!
 
   // restrict zoom so image cannot be smaller than viewport
   enforceBoundary: true,
@@ -74,13 +70,15 @@ var user_profile_pic = $('#demo').croppie({
   // enable key movement
   enableKeyMovement: true,
 
-
 });
 
 
-$('#demo').croppie('bind', {
-    url: fff,
-});
+
+// SHOWING CURRENT IMAGE
+
+// $('#demo').croppie('bind', {
+//     url: window.current_image,
+// });
 
 
  // FOR GETTING IMAGE URL FROM INPUT TAG
@@ -88,70 +86,61 @@ $('#demo').croppie('bind', {
 function readURL(input) {
 
     if (input.files && input.files[0]) {
-    var reader = new FileReader();
 
-    reader.onload = function (e) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
 
+            window.uploaded_image = e.target.result
 
-        // $('#ProfilePicture').attr('src', e.target.result);
-
-        window.uploaded_image = e.target.result
-
-        $('#demo').croppie('bind', {
-            url: e.target.result,
-
-
-        });
-
-        // $('#cancelButton').removeAttr('hidden');
-        // $('#cropButton').removeAttr('hidden');
-
-
-
-
-
-        // $('#cropButton').click(function(){
-        //     user_profile_pic.croppie('result', 'base64').then(function(base64) {
-
-        //     console.log("Showing Preview and Unhiding AJAX Button");
-        // });
-
-
-        // });
-
-                    // TEST SCOPE FOR AJAX HERE
-
-
-
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
+            $('#demo').croppie('bind', {
+                url: e.target.result,
+            });
         }
+        reader.readAsDataURL(input.files[0]);
+    }
+}
 
 
 // IF INPUT FIELD CHANGES
 $("#id_image").change(function(){
     readURL(this);
+    $('#ModalHiddenButton').trigger( "click" );
+
 });
 
 
 $('#Button1').click(function(){
-$('#demo').croppie('bind', {
-    url: window.uploaded_image,
-    orientation: 2,
-
-});
-
+    if(window.uploaded_image === undefined){
+        $('#demo').croppie('bind', {
+            url: window.current_image,
+            orientation: 2,
+        });
+    }
+    else{
+        $('#demo').croppie('bind', {
+            url: window.uploaded_image,
+            orientation: 2,
+        });
+    }
 })
+
 
 $('#Button2').click(function(){
-$('#demo').croppie('bind', {
-    url: window.uploaded_image,
-    orientation: 3,
-
-});
-
+    if(window.uploaded_image === undefined){
+        $('#demo').croppie('bind', {
+            url: window.current_image,
+            orientation: 3,
+        });
+    }
+    else{
+        $('#demo').croppie('bind', {
+            url: window.uploaded_image,
+            orientation: 3,
+        });
+    }
 })
+
+
 
 
 });
