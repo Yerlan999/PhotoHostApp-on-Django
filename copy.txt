@@ -1,4 +1,6 @@
 ### FOR TEMPLATES ###
+### SUPER USER == Yerlan ###
+
 
 {% extends 'Simple/base.html' %}
 {% load static %}
