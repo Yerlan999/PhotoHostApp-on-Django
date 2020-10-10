@@ -106,9 +106,6 @@ class UserUpdateForm(forms.ModelForm):
         fields = ["username", "email"]
 
 
-
-
-
 class MyClearableFileInput(ClearableFileInput):
     initial_text = 'Текущая картинка'
     input_text = 'Изменить на:'
@@ -139,6 +136,6 @@ class ProfileUpdateForm(forms.ModelForm):
 
 
     class Meta:
-        model = Profile # Model that we are going to work with
+        model = Profile
         fields = ['birthday', 'nickname', 'cap', 'image', 'left', 'upper', 'right', 'lower']
-        # 'image', excluded
+

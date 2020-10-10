@@ -19,7 +19,7 @@ $(document).ready(function(){
         $(window).scrollTop($('#commentForm').position().top);
     }
 
-    console.log("Works");
+
     $('h5.comment').click(function(){
 
         var name = $(this)[0].innerText;

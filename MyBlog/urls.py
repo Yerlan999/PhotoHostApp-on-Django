@@ -49,7 +49,6 @@ urlpatterns = [
 
     path("photos/", include("Photos.urls")),
     path('users-list/', user_views.UserListView.as_view(), name='users-list'),
-    path('profile/profile-image-update/', user_views.update_profile_picture, name='piu'),
 ]
 
 

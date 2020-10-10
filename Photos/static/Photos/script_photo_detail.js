@@ -21,7 +21,7 @@ $(document).ready(function(){
     }
 
 
-    console.log("Works");
+
     $('h5.comment').click(function(){
 
         var name = $(this)[0].innerText;

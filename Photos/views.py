@@ -60,6 +60,7 @@ class ImageFieldView(FormView):
             size_in_GB = get_size(absMedia)
         except:
             print('Error happeded')
+            size_in_GB = 404
         finally:
             os.chdir(starting_point)
 
@@ -101,6 +102,7 @@ class PhotoListView(ListView):
             size_in_GB = get_size(absMedia)
         except:
             print('Error happeded')
+            size_in_GB = 404
         finally:
             os.chdir(starting_point)
 
@@ -199,8 +201,6 @@ class PhotoDetailView(DetailView):
 
         elif request.POST.get("datetime"):
             new_date_taken = request.POST["datetime"]
-            print(new_date_taken)
-            print(type(new_date_taken))
             this_photo.date_taken = new_date_taken
             this_photo.meta = True
             this_photo.save()

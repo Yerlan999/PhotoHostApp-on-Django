@@ -1,6 +1,5 @@
 $(document).ready(function(){
 
-    console.log("Works")
 
     $('#spinBut').click(function(){
     var files = $('#inn').val();
@@ -31,7 +30,7 @@ $(document).ready(function(){
     }
 
     $('.loadMoreButton').click(function(e){
-        console.log("Triggered")
+
         e.preventDefault()
         let what_year = $(this).val();
 
@@ -42,7 +41,7 @@ $(document).ready(function(){
             success: function(response){
 
                 var what_year = response['what_year']
-                console.log(what_year)
+
                 var wholeYearSet_Photos
                 var wholeYear_Module
                 var row_FirstTag = `<div class="row">`

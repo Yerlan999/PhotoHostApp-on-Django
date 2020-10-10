@@ -135,12 +135,21 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 LOGIN_REDIRECT_URL = "blog-home"
 LOGIN_URL = "login"
 
-EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-EMAIL_HOST = "smtp.gmail.com"
+EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
+SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
+
+SENDGRID_USERNAME= os.getenv("USER")
+SENDGRID_PASSWORD= os.getenv("PASS")
+
+EMAIL_HOST = 'smtp.sendgrid.net'
+#EMAIL_HOST_USER = os.getenv("USER")
+EMAIL_HOST_USER = 'apikey'
+EMAIL_HOST_PASSWORD = os.getenv("PASS")
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = "fcbayernmunchenerlan999@gmail.com"
-EMAIL_HOST_PASSWORD = "ufvxcsjidzkyhzrp"
+DEFAULT_FROM_EMAIL = os.getenv("USER")
 
+#SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 

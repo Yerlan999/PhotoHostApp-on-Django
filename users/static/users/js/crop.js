@@ -1,8 +1,10 @@
 $(document).ready(function(){
 
 // Checking if js is loaded properly
-console.log("wooooo")
-
+$('#id_left').val(0)
+$('#id_right').val(0)
+$('#id_lower').val(0)
+$('#id_upper').val(0)
 
 // window.current_image = $('a').eq(-1)[0].href
 
@@ -113,39 +115,6 @@ $("#id_image").change(function(){
 });
 
 
-$('#Button1').click(function(){
-    if(window.uploaded_image === undefined){
-        $('#demo').croppie('bind', {
-            url: window.current_image,
-            orientation: 2,
-        });
-    }
-    else{
-        $('#demo').croppie('bind', {
-            url: window.uploaded_image,
-            orientation: 2,
-        });
-    }
-})
-
-
-$('#Button2').click(function(){
-    if(window.uploaded_image === undefined){
-        $('#demo').croppie('bind', {
-            url: window.current_image,
-            orientation: 3,
-        });
-    }
-    else{
-        $('#demo').croppie('bind', {
-            url: window.uploaded_image,
-            orientation: 3,
-        });
-    }
-})
-
-
-
 $('#cancelButton').click(function(){
   $('#id_image').val('')
 })
@@ -153,7 +122,7 @@ $('#cancelButton').click(function(){
 
 $('#cutButton').click(function(){
   user_profile_pic.croppie('result', 'base64').then(function(base64) {
-    console.log(base64)
+
     var imgg = `
       <div class="d-block m-3">
         <img class="d-block" src="place" alt="Fuck" style="display:block;border-radius: 50%;border-color:#aacc00;;border-style:solid;border-width:3px">
@@ -162,7 +131,7 @@ $('#cutButton').click(function(){
     var sub_imgg = imgg.replace('place', base64)
     $('label').eq(-1).append(sub_imgg)
     // $('.croppie-result').css('transform', 'scale(0.3)')
-    console.log($('.croppie-result'))
+
   });
 
 });
