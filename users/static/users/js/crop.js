@@ -11,8 +11,8 @@ var user_profile_pic = $('#demo').croppie({
 
   // viewport options
   viewport: {
-    width: 250,
-    height: 250,
+    width: 200,
+    height: 200,
     type: 'square' // or 'circle' square
   },
 
@@ -27,8 +27,8 @@ var user_profile_pic = $('#demo').croppie({
   },
   // boundary options
   boundary: {
-    width: 500,
-    height: 500
+    width: 400,
+    height: 400
   },
 
   // orientation controls
@@ -40,8 +40,8 @@ var user_profile_pic = $('#demo').croppie({
 
   // resize controls
   resizeControls: {
-    width: true,
-    height: true
+    width: false,
+    height: false,
   },
 
   // addiontal CSS class
@@ -59,7 +59,7 @@ var user_profile_pic = $('#demo').croppie({
   mouseWheelZoom: true,
 
   // enable exif orientation reading
-  enableExif:true,                                               // !!!!!!!!!!!!!!
+  enableExif:true,
 
   // restrict zoom so image cannot be smaller than viewport
   enforceBoundary: true,
@@ -92,9 +92,15 @@ function readURL(input) {
 
             window.uploaded_image = e.target.result
 
+            // Binding an Image to div tag
             $('#demo').croppie('bind', {
                 url: e.target.result,
+                points: [0,0,200,200],
+                zoom: 1,
             });
+
+            // Showing a Modal
+            $('#ModalHiddenButton').trigger( "click" );
         }
         reader.readAsDataURL(input.files[0]);
     }
@@ -104,8 +110,6 @@ function readURL(input) {
 // IF INPUT FIELD CHANGES
 $("#id_image").change(function(){
     readURL(this);
-    $('#ModalHiddenButton').trigger( "click" );
-
 });
 
 
@@ -142,14 +146,27 @@ $('#Button2').click(function(){
 
 
 
+$('#cancelButton').click(function(){
+  $('#id_image').val('')
+})
+
+
+$('#cutButton').click(function(){
+  user_profile_pic.croppie('result', 'base64').then(function(base64) {
+    console.log(base64)
+    var imgg = `
+      <div class="d-block m-3">
+        <img class="d-block" src="place" alt="Fuck" style="display:block;border-radius: 50%;border-color:#aacc00;;border-style:solid;border-width:3px">
+      </div>
+      `
+    var sub_imgg = imgg.replace('place', base64)
+    $('label').eq(-1).append(sub_imgg)
+    // $('.croppie-result').css('transform', 'scale(0.3)')
+    console.log($('.croppie-result'))
+  });
 
 });
 
 
 
-
-
-
-
-
-
+});

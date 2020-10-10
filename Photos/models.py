@@ -9,9 +9,10 @@ from PIL import Image
 class Photo(models.Model):
     author = models.ForeignKey(User, on_delete=models.DO_NOTHING)
     image = models.ImageField(upload_to='photos')
-    date_taken = models.DateTimeField(null=True, blank=True)
+    date_taken = models.DateTimeField(default=timezone.now)
     description = models.TextField(blank=True, default="Описание")
     title = models.CharField(max_length=100, null=True, blank=True, default="Заголовок")
+    meta = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title + " " + self.description
@@ -24,8 +25,8 @@ class Photo(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         img = Image.open(self.image.path)
-        if img.height > 300 or img.width > 500:
-            img.thumbnail((500, 300))
+        if img.height > 800 or img.width > 800:
+            img.thumbnail((800, 800))
             img.save(self.image.path)
 
 

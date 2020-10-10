@@ -8,6 +8,7 @@ from django.contrib import messages
 from django.db.models import Q
 from datetime import datetime
 from .forms import PhotoForm
+from django.utils import timezone
 from .models import Photo, Comments
 from django.views.generic import (
     ListView,
@@ -66,18 +67,14 @@ class ImageFieldView(FormView):
             for image in files:
 
                 pil_image = Image.open(image)
-                if pil_image._getexif():
-                    info = pil_image._getexif()
-                else:
-                    continue
-                if info.get(36867):
-                    photo_datetime = info[36867]
+                if pil_image.getexif().get(36867):
+                    photo_datetime = pil_image.getexif().get(36867)
                     converted_dt = datetime.strptime(photo_datetime, sample)
-
-                    image_object = Photo.objects.create(author=request.user, image=image, date_taken=converted_dt)
+                    image_object = Photo.objects.create(author=request.user, image=image, date_taken=converted_dt, meta=True)
                     image_object.save()
                 else:
-                    continue
+                    image_object = Photo.objects.create(author=request.user, image=image)
+                    image_object.save()
 
             messages.success(request, message)
             return self.form_valid(form)
@@ -140,28 +137,33 @@ def get_next_photos(request, *args, **kwargs):
 
             if request.GET.get('next') == 'freshman':
                 requested_year = Photo.objects.filter(Q(
-                date_taken__gte=datetime(2015, 9, 1)) & Q(date_taken__lt=datetime(2016, 9, 1))).order_by('date_taken')
+                date_taken__gte=datetime(2015, 9, 1)) & Q(date_taken__lt=datetime(2016, 9, 1)) & Q(meta=True)).order_by('date_taken')
                 year = 'freshman'
 
             if request.GET.get('next') == 'sophomore':
                 requested_year = Photo.objects.filter(Q(
-                date_taken__gte=datetime(2016, 9, 1)) & Q(date_taken__lt=datetime(2017, 9, 1))).order_by('date_taken')
+                date_taken__gte=datetime(2016, 9, 1)) & Q(date_taken__lt=datetime(2017, 9, 1)) & Q(meta=True)).order_by('date_taken')
                 year = 'sophomore'
 
             if request.GET.get('next') == 'junior':
                 requested_year = Photo.objects.filter(Q(
-                date_taken__gte=datetime(2017, 9, 1)) & Q(date_taken__lt=datetime(2018, 9, 1))).order_by('date_taken')
+                date_taken__gte=datetime(2017, 9, 1)) & Q(date_taken__lt=datetime(2018, 9, 1)) & Q(meta=True)).order_by('date_taken')
                 year = 'junior'
 
             if request.GET.get('next') == 'senior':
                 requested_year = Photo.objects.filter(Q(
-                date_taken__gte=datetime(2018, 9, 1)) & Q(date_taken__lt=datetime(2019, 7, 1))).order_by('date_taken')
+                date_taken__gte=datetime(2018, 9, 1)) & Q(date_taken__lt=datetime(2019, 7, 1)) & Q(meta=True)).order_by('date_taken')
                 year = 'senior'
 
             if request.GET.get('next') == 'post_graduate':
                 requested_year = Photo.objects.filter(Q(
-                date_taken__gte=datetime(2019, 7, 1))).order_by('date_taken')
+                date_taken__gte=datetime(2019, 7, 1)) & Q(meta=True)).order_by('date_taken')
                 year = 'post_graduate'
+
+            if request.GET.get('next') == 'with_no_meta':
+
+                requested_year = Photo.objects.filter(meta=False)
+                year = 'with_no_meta'
 
             ser_requested_year = serializers.serialize('json', requested_year)
             return JsonResponse({'requested_year': ser_requested_year,
@@ -194,6 +196,15 @@ class PhotoDetailView(DetailView):
             this_photo.description = new_description
             this_photo.save()
             message = 'Описание фотографии было успешно обновлено!'
+
+        elif request.POST.get("datetime"):
+            new_date_taken = request.POST["datetime"]
+            print(new_date_taken)
+            print(type(new_date_taken))
+            this_photo.date_taken = new_date_taken
+            this_photo.meta = True
+            this_photo.save()
+            message = 'Дата фотографии была успешно обновлена!'
 
         if request.POST.get("comment"):
             this_photo = Photo.objects.get(pk=kwargs["pk"])

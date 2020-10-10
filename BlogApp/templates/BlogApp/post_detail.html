@@ -14,7 +14,7 @@ h5.comment:hover{
 
 {% block content %}
     <article class="media content-section" style="background-color:#f5f5f5;">
-        <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}" style="border:solid #dddddd 1px;">
+        <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}" style="border:solid #aacc00 2px;">
       <div class="media-body">
         <div class="article-metadata">
           <a class="mr-2" href="{% url 'user-posts' object.author.username %}">{{ object.author|cutter }}</a>

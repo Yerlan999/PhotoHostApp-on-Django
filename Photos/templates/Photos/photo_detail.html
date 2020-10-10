@@ -34,18 +34,51 @@ h5.comment:hover{
 
         <div class="media mt-3">
 
-            <img class="rounded-circle img-thumbnail" src="{{object.author.profile.image.url}}" style="width:5em;height:5em;display:inline-block;">
+            <img class="rounded-circle mr-2" src="{{object.author.profile.image.url}}" style="border:solid #aacc00 2px;width:5em;height:5em;display:inline-block;">
             <div class="media-body">
                 <h5 class="mt-0">Поделился(-ась): {{ object.author|cutter }}</h5>
                 <h5 class="mt-0">{{ object.date_taken|date:"F d. Y" }}</h5>
                 <h6 class="mt-0 text-muted">Общ.кол.фоток: {{ object.author.photo_set.count }}</h6>
             </div>
 
+            {% if object.meta == False %}
+
+              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal4">Изменить дату</button>
+
+              <!-- Photo Date Update Modal -->
+              <div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModal4Label" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModal4Label">Дата фото</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <h3>Обновление даты фотографии</h3>
+
+                        <form method="post" class="col-form-label-lg">
+                            {% csrf_token %}
+                            <input class="form-control" placeholder='{{ object.date_taken|date:"F d. Y" }}' type="datetime-local" name="datetime">
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                      <input class="btn btn-danger" type="submit" value="Изменить">
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            {% endif %}
+
             {% if request.user == object.author %}
 
-              <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#exampleModal2">Удалить</button>
+              <button type="button" class="btn btn-danger ml-1" data-toggle="modal" data-target="#exampleModal2">Удалить</button>
 
-              <!-- Modal -->
+              <!-- Photo Delete Modal -->
               <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModal2Label" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                   <div class="modal-content">
@@ -73,7 +106,7 @@ h5.comment:hover{
 
         </div>
 
-        <p class="card-text border-top mt-3">{{ object.description }}</p>
+        <p class="card-text border-top mt-3" style="font-size:18px;">{{ object.description }}</p>
 
 
 

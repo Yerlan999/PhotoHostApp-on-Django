@@ -99,6 +99,16 @@ $(document).ready(function(){
                       </div>
                 `
                 }
+                if (what_year == 'with_no_meta'){
+
+                    var header_of_Year = `
+                    <div class="card mt-5 mb-4 p-0 shadow" style="background-color:#bfd200;position:sticky;top:50px;z-index:2;">
+                        <div class="card-body p-1">
+                          <h1 class="pl-4" style="color:#fff;">Фотки без даты</h1>
+                        </div>
+                      </div>
+                `
+                }
 
 
                 var photos_array = $.parseJSON(response['requested_year'])
@@ -145,6 +155,10 @@ $(document).ready(function(){
                     $('#loadMoreButtonPost_graduate').after(output)
                 }
 
+                if (what_year == 'with_no_meta'){
+                    $('#loadMoreButtonWithNoMeta').hide();
+                    $('#loadMoreButtonWithNoMeta').after(output)
+                }
 
 
 
