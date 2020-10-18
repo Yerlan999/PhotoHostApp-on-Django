@@ -10,9 +10,14 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'BlogApp/main.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'users/css/graduates.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
 
 
 <style type="text/css">
+
+  *{
+    font-family: 'Comfortaa', cursive, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
 
   body{
     background-color: #f1e1c8;
@@ -23,6 +28,30 @@
   }
   #pp{
       font-size: 12px;
+  }
+
+  /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+  @media screen and (max-width: 500px) {
+    div.GraduatesSet {
+      display: block;
+      justify-content: center !important;
+    }
+    a.d-inline-block {
+      display: block !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+    div#cap {
+      display: block !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+    }
+    div#mate {
+      display: block !important;
+      margin-left: auto !important;
+      margin-right: auto !important;
+
+    }
   }
 </style>
 
@@ -94,7 +123,7 @@
         </div>
         </div>
 
-        <div class="">
+        <div class="GraduatesSet">
         {% for user in users %}
             {% if request.user.username == user.username %}
                 {% if user.profile.cap %}

@@ -112,18 +112,34 @@ $(document).ready(function(){
 
                 var photos_array = $.parseJSON(response['requested_year'])
 
-                for (photo of photos_array){
+                if (photos_array.length == 0){
 
-                    let photo_url = '/media/' + photo['fields']['image']
-                    let desctiption = photo['fields']['description']
-                    let title = photo['fields']['title']
-                    let photo_id = photo['pk']
+                    wholeYearSet_Photos = `
+                    <div class="d-flex col-lg-4 col-sm-6 mb-4">
+                        <div class="justify-content-center">
+                             <h1 class="text-muted">Пока пусто</h1>
+                        </div>
+                    </div>
+                    `
 
-                    let toPaste = photo_div_creator(photo_url, title, desctiption, photo_id)
-                    if (toPaste !== undefined){
-                        wholeYearSet_Photos += toPaste
+                }
+                else{
+
+                    for (photo of photos_array){
+
+                        let photo_url = '/media/' + photo['fields']['image']
+                        let desctiption = photo['fields']['description']
+                        let title = photo['fields']['title']
+                        let photo_id = photo['pk']
+
+                        let toPaste = photo_div_creator(photo_url, title, desctiption, photo_id)
+                        if (toPaste !== undefined){
+                            wholeYearSet_Photos += toPaste
                     }
                 }
+                }
+
+
 
                 wholeYear_Module = header_of_Year + row_FirstTag + wholeYearSet_Photos + row_LastTag + '<br><br>'
 

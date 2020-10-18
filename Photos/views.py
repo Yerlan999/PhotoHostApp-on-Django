@@ -74,7 +74,7 @@ class ImageFieldView(FormView):
                     image_object = Photo.objects.create(author=request.user, image=image, date_taken=converted_dt, meta=True)
                     image_object.save()
                 else:
-                    image_object = Photo.objects.create(author=request.user, image=image)
+                    image_object = Photo.objects.create(author=request.user, image=image, changeable=True)
                     image_object.save()
 
             messages.success(request, message)
@@ -185,7 +185,7 @@ class PhotoDetailView(DetailView):
             this_photo.description = new_description
             this_photo.title = new_title
             this_photo.save()
-            message = 'Заголовок и Описание фотографии былы успешно обновлены!'
+            message = 'Заголовок и Описание фотографии были успешно обновлены!'
 
         elif request.POST.get("title"):
             new_title = request.POST["title"]

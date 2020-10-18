@@ -56,7 +56,7 @@ class UserRegisterForm(UserCreationForm):
         widget=forms.PasswordInput(attrs={'autocomplete': 'new-password'}),
         help_text="""<ul>
                         <li>Твой пароль должен состоять как минимум из 8-и символов</li>
-                        <li>Твой пароль должен состоять исключительно из цифр</li>
+                        <li>Твой пароль должен содержать цифры</li>
                     </ul>""",)
 
     password2 = forms.CharField(

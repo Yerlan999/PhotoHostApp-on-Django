@@ -1,12 +1,16 @@
 {% extends "BlogApp/base.html" %}
+{% load static %}
 {% block content %}
 
 <div class="jumbotron">
-    <h1>Инфо Страницы!</h1>
+    <div class="d-flex justify-content-center">
+        <img class="mt-0 border-bottom" src="{% static 'users/helper_images/logo1.png' %}" alt="logo2.png">
+    </div>
+    <h1 class="mt-5">Инфо Страницы!</h1>
     <p>Дання веб-страница предназначена для пользования моими одногруппниками АТТ-401</p>
-    <p>Приятного пользования!</p>
-
-    <p>Выражаю особую благодарность Corey Schafer-у и его каналу!</p>
+    <p style="display:inline;">Приятного пользования! И не пропадайте!</p>
+    <p style="font-size:25px;display:inline;">&#128540;</p>
+    <p class="mt-3">Выражаю особую благодарность Corey Schafer-у и его каналу!</p>
     <p>Deep appreciation to Corey Schafer and his outstanding tutorials!</p>
     <a href="https://www.youtube.com/channel/UCCezIgC97PvUuR4_gbFUs5g" target="_blank">His YouTube Chanel</a>
 </div>

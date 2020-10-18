@@ -13,6 +13,7 @@ class Photo(models.Model):
     description = models.TextField(blank=True, default="Описание")
     title = models.CharField(max_length=100, null=True, blank=True, default="Заголовок")
     meta = models.BooleanField(default=False)
+    changeable = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title + " " + self.description

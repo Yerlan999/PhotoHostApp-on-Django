@@ -6,21 +6,27 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import json
+
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+with open('MyBlog/main.json') as file:
+    data = json.load(file)
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = ''
+SECRET_KEY = data['secret_key']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -135,21 +141,15 @@ CRISPY_TEMPLATE_PACK = "bootstrap4"
 LOGIN_REDIRECT_URL = "blog-home"
 LOGIN_URL = "login"
 
-EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
-SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY")
 
-SENDGRID_USERNAME= os.getenv("USER")
-SENDGRID_PASSWORD= os.getenv("PASS")
-
-EMAIL_HOST = 'smtp.sendgrid.net'
-#EMAIL_HOST_USER = os.getenv("USER")
-EMAIL_HOST_USER = 'apikey'
-EMAIL_HOST_PASSWORD = os.getenv("PASS")
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-DEFAULT_FROM_EMAIL = os.getenv("USER")
+EMAIL_HOST_USER = data['mail']
+EMAIL_HOST_PASSWORD = data['password']
 
-#SENDGRID_SANDBOX_MODE_IN_DEBUG = False
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST_USER = 'fcbayernmunchenerlan999@gmail.com'
+# EMAIL_HOST_PASSWORD = 'onzebmhpbmgsnvxz'
 
 

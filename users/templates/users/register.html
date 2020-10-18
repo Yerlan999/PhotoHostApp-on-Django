@@ -1,4 +1,5 @@
 {% extends "BlogApp/base.html" %}
+{% load static %}
 {% load crispy_forms_tags %}
 {% block content %}
     <div class="content-section">
@@ -6,6 +7,9 @@
             {% csrf_token %}
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4">Форма Регистрации</legend>
+                <div class="d-flex justify-content-center">
+                    <img src="{% static 'users/helper_images/logo1.png' %}" alt="logo1" style="width:auto;">
+                </div>
                 {{ form|crispy }}
             </fieldset>
             <div class="form-group">

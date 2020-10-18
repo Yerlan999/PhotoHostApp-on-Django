@@ -41,42 +41,15 @@ h5.comment:hover{
                 <h6 class="mt-0 text-muted">Общ.кол.фоток: {{ object.author.photo_set.count }}</h6>
             </div>
 
-            {% if object.meta == False %}
 
-              <button type="button" class="btn btn-info" data-toggle="modal" data-target="#exampleModal4">Изменить дату</button>
 
-              <!-- Photo Date Update Modal -->
-              <div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModal4Label" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModal4Label">Дата фото</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      <h3>Обновление даты фотографии</h3>
+        </div>
 
-                        <form method="post" class="col-form-label-lg">
-                            {% csrf_token %}
-                            <input class="form-control" placeholder='{{ object.date_taken|date:"F d. Y" }}' type="datetime-local" name="datetime">
-
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-                      <input class="btn btn-danger" type="submit" value="Изменить">
-                      </form>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-            {% endif %}
+        <div class="justify-content-between">
 
             {% if request.user == object.author %}
 
-              <button type="button" class="btn btn-danger ml-1" data-toggle="modal" data-target="#exampleModal2">Удалить</button>
+              <button type="button" class="btn btn-danger ml-1 mt-3" data-toggle="modal" data-target="#exampleModal2">Удалить</button>
 
               <!-- Photo Delete Modal -->
               <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModal2Label" aria-hidden="true">
@@ -104,7 +77,49 @@ h5.comment:hover{
 
             {% endif %}
 
-        </div>
+
+            {% if object.meta == False or object.changeable == True and  user.is_authenticated %}
+
+              <button type="button" class="btn btn-info mt-3" data-toggle="modal" data-target="#exampleModal4">Изменить дату</button>
+
+              <!-- Photo Date Update Modal -->
+              <div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModal4Label" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModal4Label">Дата фото</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      <h3>Обновление даты фотографии</h3>
+
+                      <div class="alert alert-danger" role="alert">
+                        <h4 class="alert-heading self-align-center">Замечание!</h4>
+                        Дату можно изменять сколько угодно.
+                      </div>
+
+
+                        <form method="post" class="col-form-label-lg">
+                            {% csrf_token %}
+                            <p class="text-muted" style="float:right;">Выбери дату:</p>
+                            <p class="text-muted" style="float:left;">Формат: <strong>месяц/день/год</strong></p>
+                            <input class="form-control" placeholder='{{ object.date_taken|date:"F d. Y" }}' type="date" name="datetime">
+
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                      <input class="btn btn-danger" type="submit" value="Изменить">
+                      </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            {% endif %}
+
+            </div>
 
         <p class="card-text border-top mt-3" style="font-size:18px;">{{ object.description }}</p>
 

@@ -3,10 +3,17 @@
 {% load crispy_forms_tags %}
 
 {% block head %}
-    <meta name="csrf-token" content="{% csrf_token %}">
     <link rel="shortcut icon" href="">
     <link rel="shortcut icon" href="#">
     <link rel="stylesheet" href="{% static 'users/css/croppie.css' %}">
+    <style>
+    /* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+    @media screen and (max-width: 400px) {
+      h2.account-heading {
+        font-size: 17px;
+      }
+    }
+    </style>
 {% endblock head %}
 
 
@@ -17,7 +24,7 @@
       <div class="media">
         <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" style="border-color:#aacc00;;border-style:solid;border-width:3px">
         <div class="media-body">
-          <h2 class="account-heading">{{ user.username }}</h2>
+          <h2 class="account-heading mt-4" style="word-wrap:break-word;">{{ user.username }}</h2>
           <p class="text-secondary">{{ user.email }}</p>
         </div>
       </div>

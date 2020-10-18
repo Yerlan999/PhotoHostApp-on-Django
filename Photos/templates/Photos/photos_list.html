@@ -14,6 +14,25 @@
     <link rel="stylesheet" type="text/css" href="{% static 'Photos/photo.css' %}">
     <link rel="shortcut icon" href="">
     <link rel="shortcut icon" href="#">
+    <link href="https://fonts.googleapis.com/css2?family=Comfortaa&display=swap" rel="stylesheet">
+
+<!--
+    <style>
+      .loadMoreButton{
+        border-color: #aacc00;
+        color: #aacc00;
+      }
+      .loadMoreButton:hover{
+        background-color: #aacc00;!important;
+        border-color: #aacc00;
+      }
+    </style>
+-->
+    <style>
+      *{
+        font-family: 'Comfortaa', cursive, 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      }
+    </style>
 </head>
 <body>
 
@@ -70,7 +89,7 @@
         <div class="modal-body">
           <form method="post" enctype="multipart/form-data" action="{% url 'photo-add' %}">
               {% csrf_token %}
-              <h5 class="alert alert-warning">Фотки должны быть фотмата jpg/jpeg!</h5>
+              <h5 class="alert alert-warning">Фотки должны быть формата jpg/jpeg!</h5>
               <input id="inn" class="form-control-file" type="file" name="image" accept="image/*" multiple required>
 
               <div class="d-flex justify-content-center mt-3">
