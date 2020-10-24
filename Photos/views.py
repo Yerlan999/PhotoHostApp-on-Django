@@ -7,6 +7,7 @@ from django.core import serializers
 from django.contrib import messages
 from django.db.models import Q
 from datetime import datetime
+import datetime as dt
 from .forms import PhotoForm
 from django.utils import timezone
 from .models import Photo, Comments
@@ -46,6 +47,7 @@ class ImageFieldView(FormView):
         form_class = self.get_form_class()
         form = self.get_form(form_class)
         files = request.FILES.getlist('image')
+        check_date = dt.date(2015,9,1)
 
         if len(files) > 1:
             message = 'Фотографии были успешно загружены!'
@@ -71,8 +73,11 @@ class ImageFieldView(FormView):
                 if pil_image.getexif().get(36867):
                     photo_datetime = pil_image.getexif().get(36867)
                     converted_dt = datetime.strptime(photo_datetime, sample)
-                    image_object = Photo.objects.create(author=request.user, image=image, date_taken=converted_dt, meta=True)
-                    image_object.save()
+                    if converted_dt < check_date:
+                        continue
+                    else:
+                        image_object = Photo.objects.create(author=request.user, image=image, date_taken=converted_dt, meta=True)
+                        image_object.save()
                 else:
                     image_object = Photo.objects.create(author=request.user, image=image, changeable=True)
                     image_object.save()
@@ -133,7 +138,6 @@ class PhotoListView(ListView):
 
 
 def get_next_photos(request, *args, **kwargs):
-
 
         if request.is_ajax and request.method == 'GET':
 
