@@ -76,7 +76,6 @@ class ImageFieldView(FormView):
                     print(check_date.date())
                     if converted_dt.date() < check_date.date():
                         continue
-                        print(True)
                     else:
                         image_object = Photo.objects.create(author=request.user, image=image, date_taken=converted_dt, meta=True)
                         image_object.save()
