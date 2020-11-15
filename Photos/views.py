@@ -22,6 +22,7 @@ import os
 
 #from exif import Image
 sample = "%Y:%m:%d %H:%M:%S"
+sample_2 = "%Y-%m-%d"
 
 
 def get_size(start_path = '.'):
@@ -72,8 +73,6 @@ class ImageFieldView(FormView):
                 if pil_image.getexif().get(36867):
                     photo_datetime = pil_image.getexif().get(36867)
                     converted_dt = datetime.strptime(photo_datetime, sample)
-                    print(converted_dt.date())
-                    print(check_date.date())
                     if converted_dt.date() < check_date.date():
                         continue
                     else:
@@ -183,6 +182,8 @@ class PhotoDetailView(DetailView):
 
     def post(self, request, *args, **kwargs):
 
+        check_date = datetime(2015,9,1)
+
         this_photo = Photo.objects.get(pk=kwargs["pk"])
         if request.POST.get("description") and request.POST.get("title"):
             new_description = request.POST["description"]
@@ -206,10 +207,14 @@ class PhotoDetailView(DetailView):
 
         elif request.POST.get("datetime"):
             new_date_taken = request.POST["datetime"]
-            this_photo.date_taken = new_date_taken
-            this_photo.meta = True
-            this_photo.save()
-            message = 'Дата фотографии была успешно обновлена!'
+            converted_dt = datetime.strptime(new_date_taken, sample_2)
+            if converted_dt.date() < check_date.date():
+                message = 'Дата должна быть не раньше 1го сентября 2015 года!'
+            else:
+                this_photo.date_taken = converted_dt
+                this_photo.meta = True
+                this_photo.save()
+                message = 'Дата фотографии была успешно обновлена!'
 
         if request.POST.get("comment"):
             this_photo = Photo.objects.get(pk=kwargs["pk"])

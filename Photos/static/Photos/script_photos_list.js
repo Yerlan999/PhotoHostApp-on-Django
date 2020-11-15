@@ -53,7 +53,7 @@ $(document).ready(function(){
                     var header_of_Year = `
                     <div class="card mt-5 mb-4 p-0 shadow" style="background-color:#bfd200;position:sticky;top:50px;z-index:2;">
                         <div class="card-body p-1">
-                          <h1 class="pl-4" style="color:#fff;">Первый Курс</h1>
+                          <h1 class="pl-4 mt-2" style="color:#fff;">Первый Курс</h1>
                         </div>
                       </div>
                 `
@@ -63,7 +63,7 @@ $(document).ready(function(){
                     var header_of_Year = `
                     <div class="card mt-5 mb-4 p-0 shadow" style="background-color:#bfd200;position:sticky;top:50px;z-index:2;">
                         <div class="card-body p-1">
-                          <h1 class="pl-4" style="color:#fff;">Второй Курс</h1>
+                          <h1 class="pl-4 mt-2" style="color:#fff;">Второй Курс</h1>
                         </div>
                       </div>
                 `
@@ -73,7 +73,7 @@ $(document).ready(function(){
                     var header_of_Year = `
                     <div class="card mt-5 mb-4 p-0 shadow" style="background-color:#bfd200;position:sticky;top:50px;z-index:2;">
                         <div class="card-body p-1">
-                          <h1 class="pl-4" style="color:#fff;">Третий Курс</h1>
+                          <h1 class="pl-4 mt-2" style="color:#fff;">Третий Курс</h1>
                         </div>
                       </div>
                 `
@@ -83,7 +83,7 @@ $(document).ready(function(){
                     var header_of_Year = `
                     <div class="card mt-5 mb-4 p-0 shadow" style="background-color:#bfd200;position:sticky;top:50px;z-index:2;">
                         <div class="card-body p-1">
-                          <h1 class="pl-4" style="color:#fff;">Четвертый Курс</h1>
+                          <h1 class="pl-4 mt-2" style="color:#fff;">Четвертый Курс</h1>
                         </div>
                       </div>
                 `
@@ -93,7 +93,7 @@ $(document).ready(function(){
                     var header_of_Year = `
                     <div class="card mt-5 mb-4 p-0 shadow" style="background-color:#bfd200;position:sticky;top:50px;z-index:2;">
                         <div class="card-body p-1">
-                          <h1 class="pl-4" style="color:#fff;">После Выпуска</h1>
+                          <h1 class="pl-4 mt-2" style="color:#fff;">После Выпуска</h1>
                         </div>
                       </div>
                 `
@@ -103,7 +103,7 @@ $(document).ready(function(){
                     var header_of_Year = `
                     <div class="card mt-5 mb-4 p-0 shadow" style="background-color:#bfd200;position:sticky;top:50px;z-index:2;">
                         <div class="card-body p-1">
-                          <h1 class="pl-4" style="color:#fff;">Фотки без даты</h1>
+                          <h1 class="pl-4 mt-2" style="color:#fff;">Фотки без даты</h1>
                         </div>
                       </div>
                 `

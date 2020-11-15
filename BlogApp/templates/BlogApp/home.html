@@ -2,6 +2,22 @@
 {% load name_filter %}
 {% load l10n %}
 
+{% block head %}
+  <style>
+      @media screen and (max-width: 400px) {
+      a.article-title {
+        word-break: break-all !important;
+      }
+      p.article-content {
+        word-break: break-all !important;
+      }
+      small.text-muted {
+        font-size: 12px !important;
+      }
+    }
+  </style>
+{% endblock head %}
+
 {% block content %}
     {% for post in posts %}
             <article class="media content-section" style="background-color:#f5f5f5;">

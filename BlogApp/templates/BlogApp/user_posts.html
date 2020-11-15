@@ -1,6 +1,23 @@
 {% extends "BlogApp/base.html" %}
 {% load name_filter %}
 
+{% block head %}
+  <style>
+      @media screen and (max-width: 400px) {
+      a.article-title {
+        word-break: break-all !important;
+      }
+      p.article-content {
+        word-break: break-all !important;
+      }
+      small.text-muted {
+        font-size: 12px !important;
+      }
+    }
+  </style>
+{% endblock head %}
+
+
 {% block content %}
 
     <h1 class="mb-3">Новости от: {{ view.kwargs.username|cutter }} ({{ page_obj.paginator.count }})</h1>

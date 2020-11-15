@@ -16,6 +16,7 @@ class Profile(models.Model):
     upper = models.IntegerField(null=True, blank=True)
     right = models.IntegerField(null=True, blank=True)
     lower = models.IntegerField(null=True, blank=True)
+    old_image = models.TextField(null=True, blank=True)
 
 
     def __str__(self):
