@@ -84,3 +84,31 @@ a.article-title:hover {
   font-size: 2.5rem;
 }
 
+#logo1:hover {
+  transform: rotateY(360deg);
+  transition: transform 2s;
+  transform-style: preserve-3d;
+}
+
+#logo2:hover {
+  transform: rotateY(360deg);
+  transition: transform 2s;
+  transform-style: preserve-3d;
+}
+
+
+img#post_image {
+  -moz-transition: transform 1s, opacity 0.8s;
+  -webkit-transition: transform 1s, opacity 0.8s;
+  transition: transform 1s, opacity 1s;
+  opacity: 0.8;
+}
+
+.flip {
+  transform: rotate(-180deg);
+}
+
+img#post_image:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}

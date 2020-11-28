@@ -8,8 +8,8 @@ user_image_path = ''
 # Create your models here.
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(default="default.jpg", upload_to="profile_pics")
-    nickname = models.CharField(max_length=100, null=True, blank=True)
+    image = models.ImageField(default="default.jpg")
+    nickname = models.CharField(max_length=100, default="Никак")
     birthday = models.DateField(null=True, blank=True)
     cap = models.BooleanField(null=True, blank=True)
     left = models.IntegerField(null=True, blank=True)
@@ -17,6 +17,7 @@ class Profile(models.Model):
     right = models.IntegerField(null=True, blank=True)
     lower = models.IntegerField(null=True, blank=True)
     old_image = models.TextField(null=True, blank=True)
+    current_image_name = models.TextField(null=True, blank=True)
 
 
     def __str__(self):

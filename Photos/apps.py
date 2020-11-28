@@ -5,4 +5,4 @@ class PhotosConfig(AppConfig):
     name = 'Photos'
 
     def ready(self):
-        import Photos.signals  # noqa
+        import Photos.signals

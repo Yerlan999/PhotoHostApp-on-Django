@@ -29,5 +29,9 @@ $(document).ready(function(){
         $('textarea').focus();
     });
 
+    $('#90').click(function(){
+    $('img#post_image').toggleClass('flip')
+
+    });
 
 });

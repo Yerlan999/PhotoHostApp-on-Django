@@ -1,3 +1,21 @@
+.popout {
+    animation: popout 1.5s ease;
+    -webkit-animation: popout 1.5s ease;
+
+}
+@keyframes popout {
+    from{transform:scale(0)}
+    80%{transform:scale(1.1)}
+    to{transform:scale(1)}
+}
+@-webkit-keyframes popout {
+    from{-webkit-transform:scale(0)}
+    80%{-webkit-transform:scale(1.1)}
+    to{-webkit-transform:scale(1)}
+}
+
+
+
 * {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -126,8 +144,6 @@ span.titled {
   word-wrap: break-word;
   z-index: 5;
 }
-
-
 
 
 

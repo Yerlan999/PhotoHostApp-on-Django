@@ -31,6 +31,9 @@
                 </div>
                 <h2><a class="article-title" href="{% url 'post-detail' post.id %}">{{ post.title }}</a></h2>
                 <p class="article-content">{{ post.content }}</p>
+                {% if post.image %}
+                  <img class="img-thumbnail mb-3" src="{{ post.image.url }}" alt="Post Image Here" style="width:150px;height:100px;">
+                {% endif %}
                 <p class="article-content border-top"><a href="{% url 'post-detail' post.id %}">Комментарии: {{ post.commentsonpost_set.count }}</a></p>
               </div>
             </article>

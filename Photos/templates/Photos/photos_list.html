@@ -108,7 +108,11 @@
           </div>
           <div>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
-            <input id="spinBut" class="btn btn-primary" type="submit" value="Загрузить">
+            {% if photos.size == "0 ГБ" or photos.size == "404 ГБ" %}
+              <input id="spinBut" class="btn btn-primary" type="submit" value="Загрузить" disabled="True">
+            {% else %}
+              <input id="spinBut" class="btn btn-primary" type="submit" value="Загрузить">
+            {% endif %}
           </div>
           </form>
         </div>

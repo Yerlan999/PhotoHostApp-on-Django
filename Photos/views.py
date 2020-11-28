@@ -171,6 +171,7 @@ def get_next_photos(request, *args, **kwargs):
                 requested_year = Photo.objects.filter(meta=False)
                 year = 'with_no_meta'
 
+            print(len(requested_year))
             ser_requested_year = serializers.serialize('json', requested_year)
             return JsonResponse({'requested_year': ser_requested_year,
                                     'what_year': year}, status=200)

@@ -39,6 +39,27 @@
         </div>
         <h2 class="article-title">{{ object.title }}</h2>
         <p class="article-content">{{ object.content }}</p>
+        {% if post.image %}
+          <img id="post_image" class="img-thumbnail mb-3" src="{{ post.image.url }}" alt="Post Image Here">
+
+          <button id="90" type="button" class="mt-2 btn btn-outline-info d-block">Перевернуть</button>
+        {% endif %}
+        {% if user.is_superuser %}
+          <form action="" method="post">
+              {% csrf_token %}
+              {% if post.pinned == False %}
+                <input type="text" name="pinned" value="True" hidden="true">
+                <button id="PinPost" type="submit" class="mt-2 btn btn-outline-danger">Закрепить</button>
+              {% else %}
+                <input type="text" name="pinned" value="False" hidden="true">
+                <button id="PinPost" type="submit" class="mt-2 btn btn-outline-danger">Открепить</button>
+              {% endif %}
+          </form>
+
+        {% endif %}
+
+
+
       </div>
     </article>
 

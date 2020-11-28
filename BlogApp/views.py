@@ -19,8 +19,15 @@ class PostListView(ListView):
     model = Post
     template_name = "BlogApp/home.html" # <app>/<model>_<viewtype>.html
     context_object_name = "posts"
-    ordering = ["-date_posted"]
+    ordering = ["-pinned", "-date_posted"]
     paginate_by = 5
+
+    # def get_queryset(self):
+    #     queryset = {
+    #         'pinned': Post.objects.filter(pinned=True),
+    #         'unpinned': Post.objects.filter(pinned=False),
+    #     }
+    #     return queryset
 
 
 class UserPostListView(ListView):
@@ -41,7 +48,7 @@ class PostDetailView(DetailView):
     def post(self, request, *args, **kwargs):
 
         this_post = Post.objects.get(pk=kwargs["pk"])
-
+        message = "Обновление контента!"
         if request.POST.get("comment"):
             this_post = Post.objects.get(pk=kwargs["pk"])
             comment_context = request.POST["comment"]
@@ -49,10 +56,21 @@ class PostDetailView(DetailView):
                 author=self.request.user,
                 content=comment_context,
                 post=this_post)
-
+            message = "Коммент был успешно добавлен!"
             comment.save()
+        elif request.POST.get("pinned"):
+            this_post = Post.objects.get(pk=kwargs["pk"])
+            if request.POST["pinned"] == "True":
+                this_post.pinned = True
+                message = "Новость закреплена!"
+            else:
+                this_post.pinned = False
+                message = "Новость откреплена!"
 
-        messages.success(request, "Коммент был успешно добавлен!")
+            this_post.save()
+
+
+        messages.success(request, message)
         return redirect('post-detail', **kwargs)
 
     def test_func(self):
@@ -79,7 +97,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    fields = ["title", "content"]
+    fields = ["title", "content", "image"]
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -88,7 +106,7 @@ class PostCreateView(LoginRequiredMixin, CreateView):
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    fields = ["title", "content"]
+    fields = ["title", "content", "image"]
 
     def form_valid(self, form):
         form.instance.author = self.request.user

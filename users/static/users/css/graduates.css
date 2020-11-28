@@ -1,3 +1,19 @@
+.popout {
+    animation: popout 1s ease;
+    -webkit-animation: popout 1s ease;
+}
+@keyframes popout {
+    from{transform:scale(0)}
+    80%{transform:scale(1.1)}
+    to{transform:scale(1)}
+}
+@-webkit-keyframes popout {
+    from{-webkit-transform:scale(0)}
+    80%{-webkit-transform:scale(1.1)}
+    to{-webkit-transform:scale(1)}
+}
+
+
 .gradImg{
     width: 110px;
     height: 140px;

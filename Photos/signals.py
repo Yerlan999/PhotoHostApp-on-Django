@@ -5,6 +5,6 @@ import os
 
 
 @receiver(post_delete, sender=Photo)
-def create_user_profile(sender, instance, **kwargs):
+def delete_photo(sender, instance, **kwargs):
     os.remove(os.path.abspath(instance.image.path))
 
