@@ -36,7 +36,7 @@ class Post(models.Model):
 
 
 class CommentsOnPost(models.Model):
-    author = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)
     content = models.TextField()
     date_added = models.DateTimeField(default=timezone.now)

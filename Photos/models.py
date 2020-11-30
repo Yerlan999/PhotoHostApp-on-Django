@@ -7,7 +7,7 @@ from PIL import Image
 
 # Create your models here.
 class Photo(models.Model):
-    author = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='photos')
     date_taken = models.DateTimeField(default=timezone.now)
     description = models.TextField(blank=True, default="Описание")
@@ -32,7 +32,7 @@ class Photo(models.Model):
 
 
 class Comments(models.Model):
-    author = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ForeignKey(Photo, on_delete=models.CASCADE)
     content = models.TextField()
     date_added = models.DateTimeField(default=timezone.now)

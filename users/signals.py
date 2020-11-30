@@ -1,4 +1,4 @@
-from django.db.models.signals import post_save, pre_save
+from django.db.models.signals import post_save, pre_save, pre_delete
 from django.contrib.auth.models import User
 from django.dispatch import receiver
 from .models import Profile
@@ -33,3 +33,13 @@ def save_post(sender, instance, **kwargs):
             except:
                 print("Error when deleting old profile image")
     instance.current_image_name = instance.image.path
+
+
+
+@receiver(pre_delete, sender=Profile)
+def delete_profile(sender, instance, **kwargs):
+    if instance.current_image_name[-11:] != 'default.jpg':
+        try:
+            os.remove(os.path.abspath(instance.current_image_name))
+        except:
+            print("Error when deleting old profile image 2")

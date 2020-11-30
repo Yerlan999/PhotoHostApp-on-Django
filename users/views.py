@@ -63,3 +63,12 @@ class UserListView(ListView):
 class CustomUserLoginView(auth_views.LoginView):
     form_class = CustomUserLoginForm
 
+
+def delete_user(request, **kwargs):
+    if request.method == "POST":
+        User.objects.get(**kwargs).delete()
+        return redirect("login")
+
+    return render(request, "users/delete_user.html")
+
+
